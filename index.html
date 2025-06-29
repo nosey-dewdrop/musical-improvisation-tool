@@ -18,8 +18,36 @@
 
 
             <div class = "pick-button"> 
-                  <button class="pick piano">🎹 Piano</button>
-                  <button class="pick guitar ">🎸 Guitar</button>
+                  <button class="pick tab-piano">🎹 Piano</button>
+                  <button class="pick tab-guitar ">🎸 Guitar</button>
+            </div>
+
+            <!--seçtiğine göre devam edelim, piano ise bir bölme. gitar ise diğer bölme olacak.-->
+            <div class = "piano-section">
+                  <h4> 🎹 select the notes you hear! </h4>
+
+                  <div class = "piano-container">
+                        <div class = "keys">
+                              <!--only one octave now. i will add more optional octaves in the future.-->
+                              <div class ="white-keys"> 
+                                    <button class="white-key">C</button>
+                                    <button class="white-key">D</button>
+                                    <button class="white-key">E</button>
+                                    <button class="white-key">F</button>
+                                    <button class="white-key">G</button>
+                                    <button class="white-key">A</button>
+                                    <button class="white-key">B</button>
+                              </div>
+
+                              <div class = "black-keys">  
+                                    <button class="black-key">C#</button>
+                                    <button class="black-key">D#</button>
+                                    <button class="black-key">F#</button>
+                                    <button class="black-key">G#</button>
+                                    <button class="black-key">A#</button>
+                              </div>
+                        </div>
+                  </div>
             </div>
       </div>
 </body>

@@ -96,9 +96,8 @@
       font-size: 14px;
   }
 
-  .white-keys {
-      display: flex;
-      flex-wrap: nowrap;
+  .white-key:hover {
+      background: #6c6c71;
   }
   
   .black-keys {
@@ -124,9 +123,137 @@
       pointer-events: auto;
   }
   
-  /* Siyah tuşların pozisyonları */
+  .black-key:hover {
+      background: #a6a6a8;
+  }
   .black-key:nth-child(1) { left: 46px; }   /* C# */
   .black-key:nth-child(2) { left: 106px; }  /* D# */
   .black-key:nth-child(3) { left: 226px; }  /* F# */
   .black-key:nth-child(4) { left: 286px; }  /* G# */
   .black-key:nth-child(5) { left: 346px; }  /* A# */
+  /*burada işler 0'dan değil 1'den başlıyor. */
+
+  /* .guitar-section {
+    background: #374151;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+} */
+
+
+.guitar-section{
+      text-align: center;
+}
+
+/* .guitar-neck {
+    background: linear-gradient(90deg, #8B4513, #CD853F, #8B4513);
+    border: 3px solid #654321;
+    border-radius: 10px;
+    position: relative;
+    width: 700px;
+    height: 350px;
+    margin: 0 auto;
+    overflow: hidden;
+} */
+
+.fret-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.fret-line {
+    position: absolute;
+    width: 3px;
+    height: 90%;
+    background: #C0C0C0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.fret-line:nth-child(1) { left: 100px; }
+.fret-line:nth-child(2) { left: 180px; }
+.fret-line:nth-child(3) { left: 260px; }
+.fret-line:nth-child(4) { left: 340px; }
+.fret-line:nth-child(5) { left: 420px; }
+.fret-line:nth-child(6) { left: 500px; }
+
+.guitar-strings {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.guitar-string {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.string-name {
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    font-style: italic;
+    color: black;
+    padding: 5px;
+    border-radius: 3px;
+    z-index: 10;
+}
+
+.string-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: black;
+    top: 30px;
+    transform: translateY(-50%);
+}
+
+.fret-dot {
+
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+
+    border: 2px solid #333;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.fret-dot[data-fret="0"] { left: 50px; }
+.fret-dot[data-fret="1"] { left: 120px; }
+.fret-dot[data-fret="2"] { left: 190px; }
+
+.fret-dot[data-fret="3"] { left: 260px; }
+.fret-dot[data-fret="4"] { left: 330px; }
+.fret-dot[data-fret="5"] { left: 400; }
+
+.fret-dot[data-fret="6"] { left: 470; }
+.fret-dot[data-fret="7"] { left: 540; }
+.fret-dot[data-fret="8"] { left: 610; }
+
+.fret-dot[data-fret="9"] { left: 680; }
+.fret-dot[data-fret="10"] { left: 750; }
+.fret-dot[data-fret="11"] { left: 820; }
+
+.fret-dot[data-fret="12"] { left: 890; }
+
+.fret-dot:hover {
+    background: #514f4f;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}

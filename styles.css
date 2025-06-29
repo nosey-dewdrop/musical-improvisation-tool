@@ -1,0 +1,54 @@
+.container {
+      max-width: 1000px;
+      margin: 0 auto;
+  }
+  
+  .header {
+      text-align: center;
+      margin-bottom: 30px;
+  }
+  
+  /*yani header sınıfının içindeki h1 ve p'den bahsediyor. 
+  header html yapısından değil. */
+
+  .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+  }
+  
+  .header p {
+      color: #312e2e;
+      font-size: 1.1rem;
+      font-style: italic;
+  }
+
+  /*özel bir sınıf yok. tüm tablar*/
+  .pick-button {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+  }
+  
+  /*sadece tab etiketli verileri değiştirdim.*/
+  .pick {
+      padding: 5px 10px;
+      background: #374151;
+      border: none;
+      border-radius: 4px;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1rem;
+  }
+  
+  /* hem tab hem active etiketli ürünleri değiştirdim. */
+
+  .pick.guitar {
+      background: #bbbbbc;
+      border-width: 1px;
+  }
+  
+  .pick:hover {
+      background: #bbbbbc;
+  }

@@ -157,6 +157,16 @@
     overflow: hidden;
 } */
 
+.guitar-neck {
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      position: relative;
+      width: 900px;
+      height: 250px;
+      margin: 0 auto;
+      background: #f5f5f5;
+  }
+
 .fret-lines {
     position: absolute;
     width: 100%;
@@ -165,8 +175,8 @@
 
 .fret-line {
     position: absolute;
-    width: 3px;
-    height: 90%;
+    width: 2px;
+    height: 100%;
     background: #C0C0C0;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
@@ -237,17 +247,17 @@
 
 .fret-dot[data-fret="3"] { left: 260px; }
 .fret-dot[data-fret="4"] { left: 330px; }
-.fret-dot[data-fret="5"] { left: 400; }
+.fret-dot[data-fret="5"] { left: 400px; }
 
-.fret-dot[data-fret="6"] { left: 470; }
-.fret-dot[data-fret="7"] { left: 540; }
-.fret-dot[data-fret="8"] { left: 610; }
+.fret-dot[data-fret="6"] { left: 470px; }
+.fret-dot[data-fret="7"] { left: 540px; }
+.fret-dot[data-fret="8"] { left: 610px; }
 
-.fret-dot[data-fret="9"] { left: 680; }
-.fret-dot[data-fret="10"] { left: 750; }
-.fret-dot[data-fret="11"] { left: 820; }
+.fret-dot[data-fret="9"] { left: 680px; }
+.fret-dot[data-fret="10"] { left: 750px; }
+.fret-dot[data-fret="11"] { left: 820px; }
 
-.fret-dot[data-fret="12"] { left: 890; }
+.fret-dot[data-fret="12"] { left: 890px; }
 
 .fret-dot:hover {
     background: #514f4f;
@@ -256,4 +266,65 @@
 
 .hidden {
     display: none;
+}
+
+.theme-toggle {
+      text-align: center;
+      margin-bottom: 20px;
+}
+  
+.theme-btn {
+      padding: 8px 16px;
+      background: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Times New Roman', Times, serif;
+}
+
+.theme-btn:hover {
+      background: #f0f0f0;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+      background: #1a1a1a;
+      color: #ffffff;
+}
+
+.dark-mode .header h1 {
+      color: #ffffff;
+}
+
+.dark-mode .header p {
+      color: #cccccc;
+}
+
+.dark-mode .theme-btn {
+      background: #333;
+      color: #fff;
+      border-color: #555;
+}
+
+.dark-mode .theme-btn:hover {
+      background: #444;
+}
+
+.dark-mode .piano-container {
+      background: #333;
+}
+
+.dark-mode .guitar-neck {
+      background: #2a2a2a;
+      border-color: #555;
+}
+
+.dark-mode .string-line {
+      background: #ccc;
+}
+
+.dark-mode .fret-line {
+      background: #666;
 }

@@ -289,10 +289,10 @@
       display: flex;
       align-items: center;
       margin-bottom: 5px;
-      min-width: 900px; /* Minimum width to maintain fret spacing */
+      min-width: 800px; /* Minimum width to maintain fret spacing */
 }
 
-.string-name {
+/* .string-name {
       position: absolute;
       left: 0;
       width: 40px;
@@ -301,18 +301,18 @@
       color: black;
       background: rgba(255, 255, 255, 0.9);
       padding: 5px;
-      border-radius: 3px;
+      border-radius: 50%;
       z-index: 10;
       text-align: center;
       border: 1px solid #ccc;
-}
+} */
 
 .string-line {
       position: absolute;
       width: calc(100% - 60px);
       left: 50px;
       height: 2px;
-      background: #333;
+      background: #000000;
       top: 50%;
       transform: translateY(-50%);
 }
@@ -337,19 +337,19 @@
       transition: all 0.2s ease;
 }
 
-/* Open string (fret 0) */
 .fret-dot[data-fret="0"] {
-      left: 50px;
-      background: #333;
+      left: 10px;
+      background: #000000;
       color: white;
-      border-radius: 4px;
-      width: 35px;
+      border-radius: 50%;
+      width: 28px;
       height: 28px;
       font-weight: bold;
       font-family: 'Times New Roman', Times, serif;
 }
 
 /* Fret positions using percentage-based positioning */
+.fret-dot[data-fret="0"] { left: 5%; }
 .fret-dot[data-fret="1"] { left: 12%; }
 .fret-dot[data-fret="2"] { left: 20%; }
 .fret-dot[data-fret="3"] { left: 28%; }
@@ -405,10 +405,11 @@
       }
       
       .fret-dot[data-fret="0"] {
-            width: 30px;
+            width: 25px;
             height: 25px;
+            color: white;
       }
-      
+
       .string-name {
             width: 35px;
             font-size: 14px;

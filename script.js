@@ -65,7 +65,6 @@ function toggleNote(noteName) {
     }
     
     console.log("all the notes: " + selectedNotes.join(", "))
-    findPossibleScales();
     updateVisualDisplay();
 }
 

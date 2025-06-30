@@ -292,6 +292,177 @@ edadc7 : pink
     color: white;
 }
 
+/*result implification: */
+ 
+ .results {
+      background: #fef0f7; /* super light pink */
+      padding: 20px;
+      border-radius: 3px;
+      margin: 20px 0;
+      border: 0.5px solid #ffb6d2; /* pink */
+      position: relative;
+  }
+  
+  .selected-notes {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+  }
+  
+  .notes-display {
+      color: #c11c65; /* fushia - zaten kullanıyorsun */
+      font-weight: bold;
+      margin: 0 10px;
+  }
+  
+  .clear-btn {
+      position: absolute; 
+      top:25px; 
+      right: 25px; 
+      font-family: 'Times New Roman', Times, serif;
+      font-size: medium;
+      background: #1c1e21; /* so dark blue */
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 2px;
+      cursor: pointer;
+      margin-left: 10px;
+  }
+  
+  .clear-btn:hover {
+      background: #c1608b; /* darker blue */
+  }
+  
+  .keys-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+  }
+  
+  .key-btn {
+      padding: 15px;
+      background: #b7cce0; /* light blue */
+      border: 1px solid #95c0ea; /* mid blue */
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      color: #213f65; /* dark text */
+      font-weight: bold;
+  }
+  
+  .key-btn:hover {
+      background: #95c0ea; /* mid blue */
+  }
+  
+  .key-btn.active {
+      background: #c11c65; /* fushia */
+      color: white;
+  }
+  
+  .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+  }
+  
+  .mode-btn {
+      padding: 10px;
+      background: #d2bfd2; /* lilac */
+      border: 1px solid #edadc7; /* pink */
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      color: #213f65; /* dark text */
+      font-weight: bold;
+  }
+  
+  .mode-btn:hover {
+      background: #edadc7; /* pink */
+  }
+  
+  .mode-btn.active {
+      background: #70a5e2; /* darker blue */
+      color: white;
+  }
+  
+  .scale-info {
+      background: #ffecfd; /* light pink */
+      padding: 15px;
+      border: 1px solid #edadc7; /* pink */
+      border-radius: 8px;
+      text-align: center;
+  }
+  
+  .scale-notes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0;
+  }
+  
+  .scale-note {
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: white;
+  }
+  
+  .scale-note.normal { 
+      background: #70a5e2; /* darker blue - scale notları için */
+  }
+  
+  .scale-note.root-note { 
+      background: #c11c65; /* fushia - root için */
+  }
+  
+  .scale-note.selected-note { 
+      background: #213f65; /* so dark blue - selected için */
+  }
+  
+  .white-key.root, .black-key.root, .fret-dot.root {
+      background: #c11c65 !important; /* fushia - root */
+      color: white !important;
+  }
+  
+  .white-key.scale, .black-key.scale, .fret-dot.scale {
+      background: #70a5e2 !important; /* darker blue - scale */
+      color: white !important;
+  }
+  
+  .dark-mode .results {
+      background: #2a2a2a;
+      border-color: #555;
+  }
+  
+  .dark-mode .key-btn {
+      background: #333;
+      border-color: #555;
+      color: #b7cce0; /* light blue text */
+  }
+  
+  .dark-mode .key-btn:hover {
+      background: #444;
+  }
+  
+  .dark-mode .mode-btn {
+      background: #333;
+      border-color: #555;
+      color: #d2bfd2; /* lilac text */
+  }
+  
+  .dark-mode .mode-btn:hover {
+      background: #444;
+  }
+  
+  .dark-mode .scale-info {
+      background: #333;
+      border-color: #555;
+  }
+
 /* dark mode */
 
 .theme-toggle {
@@ -371,7 +542,6 @@ body.dark-mode {
       color: white;
 }
 
-/* MOBİL İÇİN GUITAR KÜÇÜLTME */
 @media (max-width: 768px) {
       .guitar-strings {
           width: 95% !important;

@@ -209,6 +209,33 @@
                         </div>
                         </div>
             </div>
+            
+            <div class="results" id="results" >
+
+                  <button class="clear-btn" onclick="clearNotes()"> clear choices! </button>
+
+                  <div class="selected-notes">
+                      <span> selected notes: </span>
+                      <span class="notes-display" id="notes-display"></span>
+                  </div>
+              
+                  <h3>🎵 Choose Your Key (<span id="key-count">0</span> found)</h3>
+                  <div class="keys-grid" id="keys-grid"></div>
+              
+                  <div id="modes-section" class="hidden">
+                      <h3>Choose Mode:</h3>
+                      <div class="modes-grid" id="modes-grid"></div>
+                  </div>
+              
+                  <div id="scale-info" class="scale-info hidden">
+                      <h4 id="scale-title">🎵 Scale</h4>
+                      <div class="scale-notes" id="scale-notes"></div>
+                      <div>
+                          <div>🎸 <strong>For improvisation:</strong> Play any green notes freely!</div>
+                          <div>🎹 <strong>Root note (red):</strong> Start and end phrases here</div>
+                      </div>
+                  </div>
+              </div>
       </div>
 </body>
 <script src="script.js"></script>

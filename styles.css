@@ -1,7 +1,9 @@
+/* GENEL YAPILAR */
 .container {
       max-width: 1000px;
       margin: 0 auto;
-}
+      padding: 0 20px;
+  }
   
   .header {
       text-align: center;
@@ -9,9 +11,6 @@
       font-style: italic;
   }
   
-  /*yani header sınıfının içindeki h1 ve p'den bahsediyor. 
-  header html yapısından değil. */
-
   .header h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
@@ -22,8 +21,12 @@
       font-size: 1.1rem;
       font-style: italic;
   }
-
-  /*özel bir sınıf yok. tüm tablar*/
+  
+  .hidden {
+      display: none;
+  }
+  
+  /* TAB BUTONLARI */
   .pick-button {
       display: flex;
       justify-content: center;
@@ -31,38 +34,31 @@
       gap: 10px;
   }
   
-  /*sadece tab etiketli verileri değiştirdim.*/
   .pick {
-      padding: 2px 8px;
+      padding: 8px 16px;
       background: #ffffff;
-
-      border: 0.1px solid #6b7280;  
+      border: 0.1px solid #6b7280;
       border-radius: 3px;
-
       color: rgb(0, 0, 0);
       cursor: pointer;
-
       font-family: 'Times New Roman', Times, serif;
       font-size: 1rem;
   }
   
-  /* hem tab hem active etiketli ürünleri değiştirdim. */
-
-  
   .pick:hover {
       background: #5d5d5f;
+      color: white;
   }
-
-  /* .piano-section {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 0px;
-      margin-bottom: 20px;
-      text-align: center;
-  } */
-
+  
+  .pick.active {
+      background: #4b5563;
+      color: white;
+  }
+  
+  /* PIANO BÖLÜMÜ */
   .piano-section {
       text-align: center;
+      margin-bottom: 30px;
   }
   
   .piano-container {
@@ -71,6 +67,7 @@
       background: #222;
       padding: 20px;
       border-radius: 4px;
+      overflow-x: auto;
   }
   
   .keys {
@@ -78,13 +75,14 @@
       display: flex;
       width: 420px;
       height: 180px;
+      min-width: 420px;
   }
   
   .white-keys {
       display: flex;
       flex-wrap: nowrap;
   }
-
+  
   .white-key {
       width: 60px;
       height: 180px;
@@ -95,7 +93,7 @@
       font-weight: bold;
       font-size: 14px;
   }
-
+  
   .white-key:hover {
       background: #6c6c71;
   }
@@ -126,152 +124,24 @@
   .black-key:hover {
       background: #a6a6a8;
   }
+  
   .black-key:nth-child(1) { left: 46px; }   /* C# */
   .black-key:nth-child(2) { left: 106px; }  /* D# */
   .black-key:nth-child(3) { left: 226px; }  /* F# */
   .black-key:nth-child(4) { left: 286px; }  /* G# */
   .black-key:nth-child(5) { left: 346px; }  /* A# */
-  /*burada işler 0'dan değil 1'den başlıyor. */
-
-
-  .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px; /* Add padding for mobile */
-}
   
-.header {
+  /* GUITAR BÖLÜMÜ */
+  .guitar-section {
       text-align: center;
       margin-bottom: 30px;
-      font-style: italic;
-}
-
-.header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;
-    }
-}
+  }
   
-.header p {
-      color: #312e2e;
-      font-size: 1.1rem;
-      font-style: italic;
-}
-
-.pick-button {
-      display: flex;
-      justify-content: center;
+  .guitar-section h4 {
       margin-bottom: 20px;
-      gap: 10px;
-}
+  }
   
-.pick {
-      padding: 8px 16px;
-      background: #ffffff;
-      border: 0.1px solid #6b7280;  
-      border-radius: 3px;
-      color: rgb(0, 0, 0);
-      cursor: pointer;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 1rem;
-}
-  
-.pick:hover {
-      background: #5d5d5f;
-      color: white;
-}
-
-.piano-section {
-      text-align: center;
-      margin-bottom: 30px;
-}
-  
-.piano-container {
-      display: inline-block;
-      position: relative;
-      background: #222;
-      padding: 20px;
-      border-radius: 4px;
-      overflow-x: auto; /* Allow horizontal scroll on mobile */
-}
-  
-.keys {
-      position: relative;
-      display: flex;
-      width: 420px;
-      height: 180px;
-      min-width: 420px; /* Prevent shrinking */
-}
-  
-.white-keys {
-      display: flex;
-      flex-wrap: nowrap;
-}
-
-.white-key {
-      width: 60px;
-      height: 180px;
-      background: white;
-      border: 1.5px solid #333;
-      color: #333;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-}
-
-.white-key:hover {
-      background: #6c6c71;
-}
-  
-.black-keys {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      pointer-events: none;
-}
-  
-.black-key {
-      position: absolute;
-      width: 25px;
-      height: 100px;
-      background: #111;
-      border: 2px solid #333;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      border-radius: 0 0 5px 5px;
-      pointer-events: auto;
-}
-  
-.black-key:hover {
-      background: #a6a6a8;
-}
-
-.black-key:nth-child(1) { left: 46px; }   /* C# */
-.black-key:nth-child(2) { left: 106px; }  /* D# */
-.black-key:nth-child(3) { left: 226px; }  /* F# */
-.black-key:nth-child(4) { left: 286px; }  /* G# */
-.black-key:nth-child(5) { left: 346px; }  /* A# */
-
-/* GUITAR SECTION - RESPONSIVE DESIGN */
-.guitar-section {
-      text-align: center;
-      margin-bottom: 30px;
-}
-
-.guitar-section h4 {
-      margin-bottom: 20px;
-}
-
-.guitar-strings {
+  .guitar-strings {
       position: relative;
       width: 100%;
       max-width: 1000px;
@@ -280,34 +150,19 @@
       border: 2px solid #ddd;
       border-radius: 4px;
       padding: 20px;
-      overflow-x: auto; /* Allow horizontal scroll on small screens */
-}
-
-.guitar-string {
+      overflow-x: auto;
+  }
+  
+  .guitar-string {
       position: relative;
       height: 45px;
       display: flex;
       align-items: center;
       margin-bottom: 5px;
-      min-width: 800px; /* Minimum width to maintain fret spacing */
-}
-
-/* .string-name {
-      position: absolute;
-      left: 0;
-      width: 40px;
-      font-weight: bold;
-      font-style: italic;
-      color: black;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 5px;
-      border-radius: 50%;
-      z-index: 10;
-      text-align: center;
-      border: 1px solid #ccc;
-} */
-
-.string-line {
+      min-width: 800px;
+  }
+  
+  .string-line {
       position: absolute;
       width: calc(100% - 60px);
       left: 50px;
@@ -315,10 +170,9 @@
       background: #000000;
       top: 50%;
       transform: translateY(-50%);
-}
-
-/* RESPONSIVE FRET POSITIONING */
-.fret-dot {
+  }
+  
+  .fret-dot {
       position: absolute;
       width: 25px;
       height: 25px;
@@ -335,9 +189,9 @@
       top: 50%;
       transform: translateY(-50%);
       transition: all 0.2s ease;
-}
-
-.fret-dot[data-fret="0"] {
+  }
+  
+  .fret-dot[data-fret="0"] {
       left: 10px;
       background: #000000;
       color: white;
@@ -346,114 +200,40 @@
       height: 28px;
       font-weight: bold;
       font-family: 'Times New Roman', Times, serif;
-}
-
-/* Fret positions using percentage-based positioning */
-.fret-dot[data-fret="0"] { left: 5%; }
-.fret-dot[data-fret="1"] { left: 12%; }
-.fret-dot[data-fret="2"] { left: 20%; }
-.fret-dot[data-fret="3"] { left: 28%; }
-.fret-dot[data-fret="4"] { left: 36%; }
-.fret-dot[data-fret="5"] { left: 44%; }
-.fret-dot[data-fret="6"] { left: 52%; }
-.fret-dot[data-fret="7"] { left: 60%; }
-.fret-dot[data-fret="8"] { left: 68%; }
-.fret-dot[data-fret="9"] { left: 76%; }
-.fret-dot[data-fret="10"] { left: 84%; }
-.fret-dot[data-fret="11"] { left: 92%; }
-.fret-dot[data-fret="12"] { left: 96%; }
-
-.fret-dot:hover {
+  }
+  
+  /* Fret pozisyonları */
+  .fret-dot[data-fret="0"] { left: 5%; }
+  .fret-dot[data-fret="1"] { left: 12%; }
+  .fret-dot[data-fret="2"] { left: 20%; }
+  .fret-dot[data-fret="3"] { left: 28%; }
+  .fret-dot[data-fret="4"] { left: 36%; }
+  .fret-dot[data-fret="5"] { left: 44%; }
+  .fret-dot[data-fret="6"] { left: 52%; }
+  .fret-dot[data-fret="7"] { left: 60%; }
+  .fret-dot[data-fret="8"] { left: 68%; }
+  .fret-dot[data-fret="9"] { left: 76%; }
+  .fret-dot[data-fret="10"] { left: 84%; }
+  .fret-dot[data-fret="11"] { left: 92%; }
+  .fret-dot[data-fret="12"] { left: 96%; }
+  
+  .fret-dot:hover {
       background: #007bff;
       color: white;
       transform: translateY(-50%) scale(1.1);
-}
-
-.fret-dot[data-fret="0"]:hover {
+  }
+  
+  .fret-dot[data-fret="0"]:hover {
       background: #555;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-      .guitar-strings {
-            padding: 15px;
-      }
-      
-      .guitar-string {
-            min-width: 800px;
-      }
-}
-
-@media (max-width: 768px) {
-      .container {
-            padding: 0 10px;
-      }
-      
-      .guitar-strings {
-            padding: 10px;
-      }
-      
-      .guitar-string {
-            height: 40px;
-            min-width: 700px;
-      }
-      
-      .fret-dot {
-            width: 22px;
-            height: 22px;
-            font-size: 9px;
-      }
-      
-      .fret-dot[data-fret="0"] {
-            width: 25px;
-            height: 25px;
-            color: white;
-      }
-
-      .string-name {
-            width: 35px;
-            font-size: 14px;
-      }
-}
-
-@media (max-width: 480px) {
-      .header h1 {
-            font-size: 1.8rem;
-      }
-      
-      .pick {
-            padding: 6px 12px;
-            font-size: 0.9rem;
-      }
-      
-      .guitar-string {
-            height: 35px;
-            min-width: 600px;
-      }
-      
-      .fret-dot {
-            width: 20px;
-            height: 20px;
-            font-size: 8px;
-      }
-      
-      .fret-dot[data-fret="0"] {
-            width: 28px;
-            height: 22px;
-            font-size: 9px;
-      }
-}
-
-.hidden {
-      display: none;
-}
-
-.theme-toggle {
+  }
+  
+  /* THEME TOGGLE */
+  .theme-toggle {
       text-align: center;
       margin-bottom: 20px;
-}
+  }
   
-.theme-btn {
+  .theme-btn {
       padding: 8px 16px;
       background: #ffffff;
       border: 1px solid #ccc;
@@ -462,66 +242,119 @@
       cursor: pointer;
       font-size: 14px;
       font-family: 'Times New Roman', Times, serif;
-}
-
-.theme-btn:hover {
+  }
+  
+  .theme-btn:hover {
       background: #f0f0f0;
-}
-
-/* Dark Mode Styles */
-body.dark-mode {
+  }
+  
+  /* DARK MODE */
+  body.dark-mode {
       background: #1a1a1a;
       color: #ffffff;
-}
-
-.dark-mode .header h1 {
+  }
+  
+  .dark-mode .header h1 {
       color: #ffffff;
-}
-
-.dark-mode .header p {
+  }
+  
+  .dark-mode .header p {
       color: #cccccc;
-}
-
-.dark-mode .theme-btn {
+  }
+  
+  .dark-mode .theme-btn {
       background: #333;
       color: #fff;
       border-color: #555;
-}
-
-.dark-mode .theme-btn:hover {
+  }
+  
+  .dark-mode .theme-btn:hover {
       background: #444;
-}
-
-.dark-mode .piano-container {
+  }
+  
+  .dark-mode .piano-container {
       background: #333;
-}
-
-.dark-mode .guitar-strings {
+  }
+  
+  .dark-mode .guitar-strings {
       background: #2a2a2a;
       border-color: #555;
-}
-
-.dark-mode .string-line {
+  }
+  
+  .dark-mode .string-line {
       background: #ccc;
-}
-
-.dark-mode .string-name {
-      background: rgba(40, 40, 40, 0.9);
-      color: #fff;
-      border-color: #666;
-}
-
-.dark-mode .fret-dot {
+  }
+  
+  .dark-mode .fret-dot {
       background: rgba(200, 200, 200, 0.9);
       border-color: #666;
-}
-
-.dark-mode .fret-dot[data-fret="0"] {
+  }
+  
+  .dark-mode .fret-dot[data-fret="0"] {
       background: #666;
       color: white;
-}
-
-.dark-mode .fret-dot:hover {
+  }
+  
+  .dark-mode .fret-dot:hover {
       background: #007bff;
       color: white;
-}
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+      .header h1 {
+          font-size: 2rem;
+      }
+      
+      .container {
+          padding: 0 10px;
+      }
+      
+      .guitar-strings {
+          padding: 10px;
+      }
+      
+      .guitar-string {
+          height: 40px;
+          min-width: 700px;
+      }
+      
+      .fret-dot {
+          width: 22px;
+          height: 22px;
+          font-size: 9px;
+      }
+      
+      .fret-dot[data-fret="0"] {
+          width: 25px;
+          height: 25px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+      .header h1 {
+          font-size: 1.8rem;
+      }
+      
+      .pick {
+          padding: 6px 12px;
+          font-size: 0.9rem;
+      }
+      
+      .guitar-string {
+          height: 35px;
+          min-width: 600px;
+      }
+      
+      .fret-dot {
+          width: 20px;
+          height: 20px;
+          font-size: 8px;
+      }
+      
+      .fret-dot[data-fret="0"] {
+          width: 28px;
+          height: 22px;
+          font-size: 9px;
+      }
+  }

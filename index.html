@@ -26,12 +26,12 @@
             </div>
 
             <div class = "pick-button"> 
-                  <button class="pick tab-piano">🎹 Piano</button>
-                  <button class="pick tab-guitar ">🎸 Guitar</button>
+                  <button class="pick tab-piano" onclick="showTab('piano')">🎹 Piano</button>
+                  <button class="pick tab-guitar" onclick="showTab('guitar')">🎸 Guitar</button>
             </div>
 
             <!--seçtiğine göre devam edelim, piano ise bir bölme. gitar ise diğer bölme olacak.-->
-            <div class = "piano-section">
+            <div class = "piano-section" id="piano-tab">
                   <h4> 🎹 select the notes you hear! </h4>
 
                   <div class = "piano-container">
@@ -60,7 +60,7 @@
             
             </div>
 
-            <div class = "guitar-section" id = "guitar-tab">
+            <div class = "guitar-section hidden" id = "guitar-tab">
 
                   <h4> 🎹 select the notes you hear! </h4>
 

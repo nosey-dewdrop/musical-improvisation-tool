@@ -48,6 +48,11 @@ header html yapısından değil. */
 
 /* hem tab hem active etiketli ürünleri değiştirdim. */
 
+.pick.active {
+      background: #000000;
+      color: white;
+}
+
 
 .pick:hover {
       background: #5d5d5f;
@@ -212,28 +217,28 @@ background: #6c6c71;
 
 .fret-dot[data-fret="0"] {
       left: 10px; 
-      background: #000000;
+      background: #090909;
       color: white;
-      border-radius: 50%;
-      width: 25px;
-      height: 25px;
+      border-radius: 20%;
+      width: 35px;
+      height: 20px;
       font-weight: bold;
       font-family: 'Times New Roman', Times, serif;
 }
 
-.fret-dot[data-fret="0"] { left: 3%; }
-.fret-dot[data-fret="1"] { left: 13%; }
-.fret-dot[data-fret="2"] { left: 20%; }
-.fret-dot[data-fret="3"] { left: 27%; }
-.fret-dot[data-fret="4"] { left: 34%; }
-.fret-dot[data-fret="5"] { left: 41%; }
-.fret-dot[data-fret="6"] { left: 48%; }
-.fret-dot[data-fret="7"] { left: 55%; }
-.fret-dot[data-fret="8"] { left: 62%; }
-.fret-dot[data-fret="9"] { left: 69%; }
-.fret-dot[data-fret="10"] { left: 76%; }
-.fret-dot[data-fret="11"] { left: 83%; }
-.fret-dot[data-fret="12"] { left: 90%; }
+.fret-dot[data-fret="0"] { left: 2%; }
+.fret-dot[data-fret="1"] { left: 14%; }
+.fret-dot[data-fret="2"] { left: 22%; }
+.fret-dot[data-fret="3"] { left: 29%; }
+.fret-dot[data-fret="4"] { left: 36%; }
+.fret-dot[data-fret="5"] { left: 43%; }
+.fret-dot[data-fret="6"] { left: 50%; }
+.fret-dot[data-fret="7"] { left: 57%; }
+.fret-dot[data-fret="8"] { left: 64%; }
+.fret-dot[data-fret="9"] { left: 71%; }
+.fret-dot[data-fret="10"] { left: 78%; }
+.fret-dot[data-fret="11"] { left: 85%; }
+.fret-dot[data-fret="12"] { left: 92%; }
 
 .fret-dot:hover {
       background: #007bff; /*change it it looks so bas.*/
@@ -243,6 +248,13 @@ background: #6c6c71;
 
 .fret-dot[data-fret="0"]:hover {
       background: #555;
+}
+
+.white-key.selected,
+.black-key.selected,
+.fret-dot.selected {
+    background: #3b82f6 !important; /* Mavi */
+    color: white !important;
 }
 
 /* dark mode */
@@ -310,13 +322,13 @@ body.dark-mode {
 }
 
 .dark-mode .fret-dot {
-      background: rgba(200, 200, 200, 0.9);
-      border-color: #666;
+      background: rgba(255, 255, 255, 0.9);
+      border-color: #000000;
 }
 
 .dark-mode .fret-dot[data-fret="0"] {
-      background: #666;
-      color: white;
+      background: #000000;
+      color: rgb(255, 255, 255);
 }
 
 .dark-mode .fret-dot:hover {

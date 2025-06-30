@@ -36,21 +36,21 @@
                         <div class = "keys">
                               <!--only one octave now. i will add more optional octaves in the future.-->
                               <div class ="white-keys"> 
-                                    <button class="white-key">C</button>
-                                    <button class="white-key">D</button>
-                                    <button class="white-key">E</button>
-                                    <button class="white-key">F</button>
-                                    <button class="white-key">G</button>
-                                    <button class="white-key">A</button>
-                                    <button class="white-key">B</button>
+                                    <button class="white-key" onclick="toggleNote('C')">C</button>
+                                    <button class="white-key" onclick="toggleNote('D')">D</button>
+                                    <button class="white-key" onclick="toggleNote('E')">E</button>
+                                    <button class="white-key" onclick="toggleNote('F')" >F</button>
+                                    <button class="white-key" onclick="toggleNote('G')">G</button>
+                                    <button class="white-key" onclick="toggleNote('A')">A</button>
+                                    <button class="white-key" onclick="toggleNote('B')">B</button>
                               </div>
 
                               <div class = "black-keys">  
-                                    <button class="black-key">C#</button>
-                                    <button class="black-key">D#</button>
-                                    <button class="black-key">F#</button>
-                                    <button class="black-key">G#</button>
-                                    <button class="black-key">A#</button>
+                                    <button class="black-key" onclick="toggleNote('C#')">C#</button>
+                                    <button class="black-key" onclick="toggleNote('D#')">D#</button>
+                                    <button class="black-key" onclick="toggleNote('F#')">F#</button>
+                                    <button class="black-key" onclick="toggleNote('G#')">G#</button>
+                                    <button class="black-key" onclick="toggleNote('A#')">A#</button>
                               </div>
                         </div>
                   </div>
@@ -67,22 +67,23 @@
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">E</button>
-                              <button class="fret-dot" data-fret="1">F</button>
-                              <button class="fret-dot" data-fret="2">F#</button>
-                              <button class="fret-dot" data-fret="3">G</button>
-                              <button class="fret-dot" data-fret="4">G#</button>
-                              <button class="fret-dot" data-fret="5">A</button>
 
-                              <button class="fret-dot" data-fret="6">A#</button>
-                              <button class="fret-dot" data-fret="7">B</button>
-                              <button class="fret-dot" data-fret="8">C</button>
-
-                              <button class="fret-dot" data-fret="9">C#</button>
-                              <button class="fret-dot" data-fret="10">D</button>
-                              <button class="fret-dot" data-fret="11">D#</button>
-
-                              <button class="fret-dot" data-fret="12">E</button>
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('E')">E</button>
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('F')">F</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('F#')">F#</button>
+                              
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('G')">G</button>
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('G#')">G#</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('A')">A</button>
+                              
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('A#')">A#</button>
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('B')">B</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('C')">C</button>
+                              
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('C#')">C#</button>
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('D')">D</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('D#')">D#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('E')">E</button>
 
                         </div>
                         
@@ -90,45 +91,48 @@
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">A</button>
-                              <button class="fret-dot" data-fret="1">A#</button>
-                              <button class="fret-dot" data-fret="2">B</button>
-                              <button class="fret-dot" data-fret="3">C</button>
-                              <button class="fret-dot" data-fret="4">C#</button>
-                              <button class="fret-dot" data-fret="5">D</button>
 
-                              <button class="fret-dot" data-fret="6">D#</button>
-                              <button class="fret-dot" data-fret="7">E</button>
-                              <button class="fret-dot" data-fret="8">F</button>
-
-                              <button class="fret-dot" data-fret="9">F#</button>
-                              <button class="fret-dot" data-fret="10">G</button>
-                              <button class="fret-dot" data-fret="11">G#</button>
-
-                              <button class="fret-dot" data-fret="12">A</button>
-
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('A')">A</button>
+                              
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('A#')">A#</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('B')">B</button>
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('C')">C</button>
+                              
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('C#')">C#</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('D')">D</button>
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('D#')">D#</button>
+                              
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('E')">E</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('F')">F</button> 
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('F#')">F#</button>
+                              
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('G')">G</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('G#')">G#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('A')">A</button>
                         </div>
                         
                         <div class="guitar-string" data-string="D">
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">D</button>
-                              <button class="fret-dot" data-fret="1">D#</button>
-                              <button class="fret-dot" data-fret="2">E</button>
-                              <button class="fret-dot" data-fret="3">F</button>
-                              <button class="fret-dot" data-fret="4">F#</button>
-                              <button class="fret-dot" data-fret="5">G</button>
 
-                              <button class="fret-dot" data-fret="6">G#</button>
-                              <button class="fret-dot" data-fret="7">A</button>
-                              <button class="fret-dot" data-fret="8">A#</button>
-
-                              <button class="fret-dot" data-fret="9">B</button>
-                              <button class="fret-dot" data-fret="10">C</button>
-                              <button class="fret-dot" data-fret="11">C#</button>
-
-                              <button class="fret-dot" data-fret="12">D</button>
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('D')">D</button>
+                              
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('D#')">D#</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('E')">E</button>
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('F')">F</button>
+                              
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('F#')">F#</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('G')">G</button>
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('G#')">G#</button>
+                              
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('A')">A</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('A#')">A#</button>
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('B')">B</button>
+                              
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('C')">C</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('C#')">C#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('D')">D</button>
 
 
                         </div>
@@ -137,44 +141,46 @@
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">G</button>
-                              <button class="fret-dot" data-fret="1">G#</button>
-                              <button class="fret-dot" data-fret="2">A</button>
-                              <button class="fret-dot" data-fret="3">A#</button>
-                              <button class="fret-dot" data-fret="4">B</button>
-                              <button class="fret-dot" data-fret="5">C</button>
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('G')">G</button>
 
-                              <button class="fret-dot" data-fret="6">C#</button>
-                              <button class="fret-dot" data-fret="7">D</button>
-                              <button class="fret-dot" data-fret="8">D#</button>
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('G#')">G#</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('A')">A</button>
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('A#')">A#</button>
 
-                              <button class="fret-dot" data-fret="9">E</button>
-                              <button class="fret-dot" data-fret="10">F</button>
-                              <button class="fret-dot" data-fret="11">F#</button>
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('B')">B</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('C')">C</button>
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('C#')">C#</button>
 
-                              <button class="fret-dot" data-fret="12">G</button>
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('D')">D</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('D#')">D#</button>
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('E')">E</button>
+
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('F')">F</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('F#')">F#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('G')">G</button>
                         </div>
                         
                         <div class="guitar-string" data-string="B">
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">B</button>
-                              <button class="fret-dot" data-fret="1">C</button>
-                              <button class="fret-dot" data-fret="2">C#</button>
-                              <button class="fret-dot" data-fret="3">D</button>
-                              <button class="fret-dot" data-fret="4">D#</button>
-                              <button class="fret-dot" data-fret="5">E</button>
-
-                              <button class="fret-dot" data-fret="6">F</button>
-                              <button class="fret-dot" data-fret="7">F#</button>
-                              <button class="fret-dot" data-fret="8">G</button>
-
-                              <button class="fret-dot" data-fret="9">G#</button>
-                              <button class="fret-dot" data-fret="10">A</button>
-                              <button class="fret-dot" data-fret="11">A#</button>
-
-                              <button class="fret-dot" data-fret="12">B</button>
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('B')">B</button>
+                              
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('C')">C</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('C#')">C#</button>
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('D')">D</button>
+                              
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('D#')">D#</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('E')">E</button>
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('F')">F</button>
+                              
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('F#')">F#</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('G')">G</button>
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('G#')">G#</button>
+                              
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('A')">A</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('A#')">A#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('B')">B</button>
 
                         </div>
                         
@@ -182,22 +188,23 @@
                               <div class="string-name"></div>
 
                               <div class="string-line"></div>
-                              <button class="fret-dot" data-fret="0">E</button>
-                              <button class="fret-dot" data-fret="1">F</button>
-                              <button class="fret-dot" data-fret="2">F#</button>
-                              <button class="fret-dot" data-fret="3">G</button>
-                              <button class="fret-dot" data-fret="4">G#</button>
-                              <button class="fret-dot" data-fret="5">A</button>
-
-                              <button class="fret-dot" data-fret="6">A#</button>
-                              <button class="fret-dot" data-fret="7">B</button>
-                              <button class="fret-dot" data-fret="8">C</button>
-
-                              <button class="fret-dot" data-fret="9">C#</button>
-                              <button class="fret-dot" data-fret="10">D</button>
-                              <button class="fret-dot" data-fret="11">D#</button>
-
-                              <button class="fret-dot" data-fret="12">E</button>
+                              <button class="fret-dot" data-fret="0" onclick="toggleNote('E')">E</button>
+                              
+                              <button class="fret-dot" data-fret="1" onclick="toggleNote('F')">F</button>
+                              <button class="fret-dot" data-fret="2" onclick="toggleNote('F#')">F#</button>
+                              <button class="fret-dot" data-fret="3" onclick="toggleNote('G')">G</button>
+                              
+                              <button class="fret-dot" data-fret="4" onclick="toggleNote('G#')">G#</button>
+                              <button class="fret-dot" data-fret="5" onclick="toggleNote('A')">A</button>
+                              <button class="fret-dot" data-fret="6" onclick="toggleNote('A#')">A#</button>
+                              
+                              <button class="fret-dot" data-fret="7" onclick="toggleNote('B')">B</button>
+                              <button class="fret-dot" data-fret="8" onclick="toggleNote('C')">C</button>
+                              <button class="fret-dot" data-fret="9" onclick="toggleNote('C#')">C#</button>
+                              
+                              <button class="fret-dot" data-fret="10" onclick="toggleNote('D')">D</button>
+                              <button class="fret-dot" data-fret="11" onclick="toggleNote('D#')">D#</button>
+                              <button class="fret-dot" data-fret="12" onclick="toggleNote('E')">E</button>
 
                         </div>
                         </div>

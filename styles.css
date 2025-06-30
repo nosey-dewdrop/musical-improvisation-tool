@@ -133,139 +133,318 @@
   .black-key:nth-child(5) { left: 346px; }  /* A# */
   /*burada işler 0'dan değil 1'den başlıyor. */
 
-  /* .guitar-section {
-    background: #374151;
-    padding: 30px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    text-align: center;
-} */
 
-
-.guitar-section{
-      text-align: center;
-}
-
-/* .guitar-neck {
-    background: linear-gradient(90deg, #8B4513, #CD853F, #8B4513);
-    border: 3px solid #654321;
-    border-radius: 10px;
-    position: relative;
-    width: 700px;
-    height: 350px;
-    margin: 0 auto;
-    overflow: hidden;
-} */
-
-.guitar-neck {
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      position: relative;
-      width: 900px;
-      height: 250px;
+  .container {
+      max-width: 1000px;
       margin: 0 auto;
-      background: #f5f5f5;
-  }
-
-.fret-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+      padding: 0 20px; /* Add padding for mobile */
+}
+  
+.header {
+      text-align: center;
+      margin-bottom: 30px;
+      font-style: italic;
 }
 
-.fret-line {
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background: #C0C0C0;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+.header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
 }
 
-.fret-line:nth-child(1) { left: 100px; }
-.fret-line:nth-child(2) { left: 180px; }
-.fret-line:nth-child(3) { left: 260px; }
-.fret-line:nth-child(4) { left: 340px; }
-.fret-line:nth-child(5) { left: 420px; }
-.fret-line:nth-child(6) { left: 500px; }
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+}
+  
+.header p {
+      color: #312e2e;
+      font-size: 1.1rem;
+      font-style: italic;
+}
+
+.pick-button {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+}
+  
+.pick {
+      padding: 8px 16px;
+      background: #ffffff;
+      border: 0.1px solid #6b7280;  
+      border-radius: 3px;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1rem;
+}
+  
+.pick:hover {
+      background: #5d5d5f;
+      color: white;
+}
+
+.piano-section {
+      text-align: center;
+      margin-bottom: 30px;
+}
+  
+.piano-container {
+      display: inline-block;
+      position: relative;
+      background: #222;
+      padding: 20px;
+      border-radius: 4px;
+      overflow-x: auto; /* Allow horizontal scroll on mobile */
+}
+  
+.keys {
+      position: relative;
+      display: flex;
+      width: 420px;
+      height: 180px;
+      min-width: 420px; /* Prevent shrinking */
+}
+  
+.white-keys {
+      display: flex;
+      flex-wrap: nowrap;
+}
+
+.white-key {
+      width: 60px;
+      height: 180px;
+      background: white;
+      border: 1.5px solid #333;
+      color: #333;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+}
+
+.white-key:hover {
+      background: #6c6c71;
+}
+  
+.black-keys {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      pointer-events: none;
+}
+  
+.black-key {
+      position: absolute;
+      width: 25px;
+      height: 100px;
+      background: #111;
+      border: 2px solid #333;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 0 0 5px 5px;
+      pointer-events: auto;
+}
+  
+.black-key:hover {
+      background: #a6a6a8;
+}
+
+.black-key:nth-child(1) { left: 46px; }   /* C# */
+.black-key:nth-child(2) { left: 106px; }  /* D# */
+.black-key:nth-child(3) { left: 226px; }  /* F# */
+.black-key:nth-child(4) { left: 286px; }  /* G# */
+.black-key:nth-child(5) { left: 346px; }  /* A# */
+
+/* GUITAR SECTION - RESPONSIVE DESIGN */
+.guitar-section {
+      text-align: center;
+      margin-bottom: 30px;
+}
+
+.guitar-section h4 {
+      margin-bottom: 20px;
+}
 
 .guitar-strings {
-    position: relative;
-    width: 100%;
-    height: 100%;
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #f8f8f8;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      padding: 20px;
+      overflow-x: auto; /* Allow horizontal scroll on small screens */
 }
 
 .guitar-string {
-    position: relative;
-    height: 40px;
-    display: flex;
-    align-items: center;
+      position: relative;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      min-width: 900px; /* Minimum width to maintain fret spacing */
 }
 
 .string-name {
-    position: absolute;
-    left: 10px;
-    font-weight: bold;
-    font-style: italic;
-    color: black;
-    padding: 5px;
-    border-radius: 3px;
-    z-index: 10;
+      position: absolute;
+      left: 0;
+      width: 40px;
+      font-weight: bold;
+      font-style: italic;
+      color: black;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px;
+      border-radius: 3px;
+      z-index: 10;
+      text-align: center;
+      border: 1px solid #ccc;
 }
 
 .string-line {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: black;
-    top: 30px;
-    transform: translateY(-50%);
+      position: absolute;
+      width: calc(100% - 60px);
+      left: 50px;
+      height: 2px;
+      background: #333;
+      top: 50%;
+      transform: translateY(-50%);
 }
 
+/* RESPONSIVE FRET POSITIONING */
 .fret-dot {
-
-    position: absolute;
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-    background: rgba(255,255,255,0.8);
-
-    border: 2px solid #333;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #333;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all 0.2s ease;
 }
 
-.fret-dot[data-fret="0"] { left: 50px; }
-.fret-dot[data-fret="1"] { left: 120px; }
-.fret-dot[data-fret="2"] { left: 190px; }
+/* Open string (fret 0) */
+.fret-dot[data-fret="0"] {
+      left: 50px;
+      background: #333;
+      color: white;
+      border-radius: 4px;
+      width: 35px;
+      height: 28px;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+}
 
-.fret-dot[data-fret="3"] { left: 260px; }
-.fret-dot[data-fret="4"] { left: 330px; }
-.fret-dot[data-fret="5"] { left: 400px; }
-
-.fret-dot[data-fret="6"] { left: 470px; }
-.fret-dot[data-fret="7"] { left: 540px; }
-.fret-dot[data-fret="8"] { left: 610px; }
-
-.fret-dot[data-fret="9"] { left: 680px; }
-.fret-dot[data-fret="10"] { left: 750px; }
-.fret-dot[data-fret="11"] { left: 820px; }
-
-.fret-dot[data-fret="12"] { left: 890px; }
+/* Fret positions using percentage-based positioning */
+.fret-dot[data-fret="1"] { left: 12%; }
+.fret-dot[data-fret="2"] { left: 20%; }
+.fret-dot[data-fret="3"] { left: 28%; }
+.fret-dot[data-fret="4"] { left: 36%; }
+.fret-dot[data-fret="5"] { left: 44%; }
+.fret-dot[data-fret="6"] { left: 52%; }
+.fret-dot[data-fret="7"] { left: 60%; }
+.fret-dot[data-fret="8"] { left: 68%; }
+.fret-dot[data-fret="9"] { left: 76%; }
+.fret-dot[data-fret="10"] { left: 84%; }
+.fret-dot[data-fret="11"] { left: 92%; }
+.fret-dot[data-fret="12"] { left: 96%; }
 
 .fret-dot:hover {
-    background: #514f4f;
-    color: white;
+      background: #007bff;
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+}
+
+.fret-dot[data-fret="0"]:hover {
+      background: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+      .guitar-strings {
+            padding: 15px;
+      }
+      
+      .guitar-string {
+            min-width: 800px;
+      }
+}
+
+@media (max-width: 768px) {
+      .container {
+            padding: 0 10px;
+      }
+      
+      .guitar-strings {
+            padding: 10px;
+      }
+      
+      .guitar-string {
+            height: 40px;
+            min-width: 700px;
+      }
+      
+      .fret-dot {
+            width: 22px;
+            height: 22px;
+            font-size: 9px;
+      }
+      
+      .fret-dot[data-fret="0"] {
+            width: 30px;
+            height: 25px;
+      }
+      
+      .string-name {
+            width: 35px;
+            font-size: 14px;
+      }
+}
+
+@media (max-width: 480px) {
+      .header h1 {
+            font-size: 1.8rem;
+      }
+      
+      .pick {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+      }
+      
+      .guitar-string {
+            height: 35px;
+            min-width: 600px;
+      }
+      
+      .fret-dot {
+            width: 20px;
+            height: 20px;
+            font-size: 8px;
+      }
+      
+      .fret-dot[data-fret="0"] {
+            width: 28px;
+            height: 22px;
+            font-size: 9px;
+      }
 }
 
 .hidden {
-    display: none;
+      display: none;
 }
 
 .theme-toggle {
@@ -316,7 +495,7 @@ body.dark-mode {
       background: #333;
 }
 
-.dark-mode .guitar-neck {
+.dark-mode .guitar-strings {
       background: #2a2a2a;
       border-color: #555;
 }
@@ -325,6 +504,23 @@ body.dark-mode {
       background: #ccc;
 }
 
-.dark-mode .fret-line {
+.dark-mode .string-name {
+      background: rgba(40, 40, 40, 0.9);
+      color: #fff;
+      border-color: #666;
+}
+
+.dark-mode .fret-dot {
+      background: rgba(200, 200, 200, 0.9);
+      border-color: #666;
+}
+
+.dark-mode .fret-dot[data-fret="0"] {
       background: #666;
+      color: white;
+}
+
+.dark-mode .fret-dot:hover {
+      background: #007bff;
+      color: white;
 }

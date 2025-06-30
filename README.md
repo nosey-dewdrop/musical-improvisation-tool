@@ -12,7 +12,8 @@ for instance, *Sails of Charon by Scorpions* starts with:
 
 1. C D E F# G A B C  
 2. C# D E F# G A B C#
-then, it continues with C.
+
+***then, it continues with C.***
 
 confirming option (1): **B Phrygian**.
 
@@ -25,6 +26,8 @@ Now, you can play it really fast without trying to guess the notes and the scale
 - Enhance improvisation and composing speed
 - I am cooking the **JavaScript version**!
 - **Java and Swift** versions coming soon!
+
+## ️For musicians or anyone who is willing to compose.
 
 ### 🎧 Happy improvising!
 

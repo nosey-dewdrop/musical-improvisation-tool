@@ -96,6 +96,8 @@ header html yapısından değil. */
       cursor: pointer;
       font-weight: bold;
       font-size: 14px;
+      font-family: 'Times New Roman', Times, serif;
+
 }
 
 .white-key:hover {
@@ -135,10 +137,12 @@ edadc7 : pink
       border: 2px solid #333;
       color: white;
       cursor: pointer;
-      font-weight: bold;
       font-size: 12px;
       border-radius: 0 0 5px 5px;
       pointer-events: auto;
+
+      font-family: 'Times New Roman', Times, serif;
+
 }
 
 .black-key:hover {
@@ -286,13 +290,11 @@ edadc7 : pink
 
 
 .white-key.selected,
-.black-key.selected{
+.black-key.selected, .fret-dot.selected {
       background: #c11c65 !important; /* Mavi */
       color: white !important;
-}
-.fret-dot.selected {
-    background: #c11c65;
-    color: white;
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
 }
 
 /*result implification: */
@@ -314,7 +316,7 @@ edadc7 : pink
   }
   
   .notes-display {
-      color: #c11c65; /* fushia - zaten kullanıyorsun */
+      color: #000000; /* fushia - zaten kullanıyorsun */
       font-weight: bold;
       margin: 0 10px;
   }
@@ -325,17 +327,23 @@ edadc7 : pink
       right: 25px; 
       font-family: 'Times New Roman', Times, serif;
       font-size: medium;
+
       background: #1c1e21; /* so dark blue */
-      border: none;
+
       color: white;
       padding: 5px 15px;
-      border-radius: 2px;
+
+      border: 1px solid #25282c; 
+      border-radius: 3px; 
+
       cursor: pointer;
       margin-left: 10px;
+
+      
   }
   
   .clear-btn:hover {
-      background: #787878; /* darker blue */
+      background: #fbf4f8; /* darker blue */
       color: black;
   }
   
@@ -348,17 +356,20 @@ edadc7 : pink
   
   .key-btn {
       padding: 15px;
-      background: #b7cce0; /* light blue */
-      border: 1px solid #95c0ea; /* mid blue */
-      border-radius: 8px;
+      background: #f9fcff; 
+      border: 1px solid #25282c; /* mid blue */
+      border-radius: 3px;
       cursor: pointer;
       text-align: center;
       color: #213f65; /* dark text */
       font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
   }
   
   .key-btn:hover {
-      background: #505254; /* mid blue */
+      background: #fbf4f8; /* mid blue */
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
   }
   
   .key-btn.active {
@@ -430,7 +441,7 @@ edadc7 : pink
   
   .white-key.root, .black-key.root, .fret-dot.root {
       background: #c11c65 !important; /* fushia - root */
-      color: white !important;
+      color: rgb(255, 255, 255) !important;
   }
   
   .white-key.scale, .black-key.scale, .fret-dot.scale {

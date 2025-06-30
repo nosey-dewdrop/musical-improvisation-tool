@@ -47,6 +47,7 @@ function showTab(choice) {
 
 let selectedNotes = []; 
 
+// in html, onclick's were labeled with toggleNote
 function toggleNote(noteName) {
     console.log(noteName + " picked!!");
     
@@ -69,16 +70,18 @@ function toggleNote(noteName) {
 
 function updateVisualDisplay() {
     document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(element => {
-   element.classList.remove('selected');
+    element.classList.remove('selected');
     });
-   document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(element => {
-   const noteName = element.textContent.trim();
-   if (selectedNotes.includes(noteName)) {
-   element.classList.add('selected');
+
+    document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(element => {
+    const noteName = element.textContent.trim();
+
+    if (selectedNotes.includes(noteName)) {
+        element.classList.add('selected');
     }
     });
-   console.log("🎨 updated!!");
-   }
+    console.log("🎨 updated!!");
+}
 
 function testNotes() {
     console.log("testing: ");

@@ -65,6 +65,7 @@ function toggleNote(noteName) {
     }
     
     console.log("all the notes: " + selectedNotes.join(", "))
+    findPossibleScales();
     updateVisualDisplay();
 }
 
@@ -90,3 +91,13 @@ function testNotes() {
     toggleNote('G');
     console.log('🎹 C major note picked!!');
 }
+
+let majorScales = {
+    "C": ["C", "D", "E", "F", "G", "A", "B"],
+    "G": ["G", "A", "B", "C", "D", "E", "F#"],
+    "D": ["D", "E", "F#", "G", "A", "B", "C#"],
+    "A": ["A", "B", "C#", "D", "E", "F#", "G#"],
+    "E": ["E", "F#", "G#", "A", "B", "C#", "D#"],
+    "F": ["F", "G", "A", "Bb", "C", "D", "E"],
+    "Bb": ["Bb", "C", "D", "Eb", "F", "G", "A"]
+};

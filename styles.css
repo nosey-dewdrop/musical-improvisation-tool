@@ -36,7 +36,7 @@ header html yapısından değil. */
       padding: 2px 8px;
       background: #ffffff;
 
-      border: 0.1px solid #6b7280;  
+      border: 0.1px solid #c4e5f6;  
       border-radius: 3px;
 
       color: rgb(0, 0, 0);
@@ -55,7 +55,7 @@ header html yapısından değil. */
 
 
 .pick:hover {
-      background: #5d5d5f;
+      background: #c4e5f6;
 }
 
 .hidden {
@@ -98,8 +98,23 @@ header html yapısından değil. */
 }
 
 .white-key:hover {
-background: #6c6c71;
+background: #ffecfd;
 }
+
+/*
+#b7cce0 : light blue
+#95c0ea : mid blue 
+#70a5e2 : darker bluse
+#213f65 so dark
+
+#f7d6e7 super light pink
+#ffecfd : light pinkk
+edadc7 : pink
+#c11c65 fushia
+#d2bfd2 lilac
+
+*/
+
 
 .black-keys {
       position: absolute;
@@ -241,20 +256,40 @@ background: #6c6c71;
 .fret-dot[data-fret="12"] { left: 92%; }
 
 .fret-dot:hover {
-      background: #007bff; /*change it it looks so bas.*/
-      color: white;
+      background: #ffecfd; /*change it it looks so bas.*/
+      color: black;
       transform: translateY(-50%) scale(1.1);
 }
 
 .fret-dot[data-fret="0"]:hover {
-      background: #555;
+      background: #ffecfd;
+      color: black;
 }
 
+
+/*
+#b7cce0 : light blue
+#95c0ea : mid blue 
+#70a5e2 : darker bluse
+#213f65 so dark
+
+#f7d6e7 super light pink
+#ffecfd : light pinkk
+edadc7 : pink
+#c11c65 fushia
+#d2bfd2 lilac
+
+*/
+
+
 .white-key.selected,
-.black-key.selected,
+.black-key.selected{
+      background: #c11c65 !important; /* Mavi */
+      color: white !important;
+}
 .fret-dot.selected {
-    background: #3b82f6 !important; /* Mavi */
-    color: white !important;
+    background: #c11c65;
+    color: white;
 }
 
 /* dark mode */

@@ -55,7 +55,8 @@ header html yapısından değil. */
 
 
 .pick:hover {
-      background: #c4e5f6;
+      background: #ffecfd;
+      color: black;
 }
 
 .hidden {
@@ -98,7 +99,8 @@ header html yapısından değil. */
 }
 
 .white-key:hover {
-background: #ffecfd;
+      background: #ffecfd;
+      color: black;
 }
 
 /*
@@ -140,7 +142,8 @@ edadc7 : pink
 }
 
 .black-key:hover {
-      background: #a6a6a8;
+      background: #ffecfd;
+      color: black;
 }
 
 .black-key:nth-child(1) { left: 46px; }   /* C# */
@@ -307,6 +310,7 @@ edadc7 : pink
       text-align: center;
       margin-bottom: 20px;
       font-size: 1.2rem;
+      font-style: italic;
   }
   
   .notes-display {
@@ -331,7 +335,8 @@ edadc7 : pink
   }
   
   .clear-btn:hover {
-      background: #c1608b; /* darker blue */
+      background: #787878; /* darker blue */
+      color: black;
   }
   
   .keys-grid {
@@ -353,7 +358,7 @@ edadc7 : pink
   }
   
   .key-btn:hover {
-      background: #95c0ea; /* mid blue */
+      background: #505254; /* mid blue */
   }
   
   .key-btn.active {
@@ -538,8 +543,8 @@ body.dark-mode {
 }
 
 .dark-mode .fret-dot:hover {
-      background: #007bff;
-      color: white;
+      background: #ffecfd;
+      color: black;
 }
 
 @media (max-width: 768px) {

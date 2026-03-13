@@ -14,7 +14,7 @@
             <div class="nav-right">
                   <a href="#" class="nav-link active" onclick="showPage('detector'); return false;">scale detector</a>
                   <a href="#" class="nav-link" onclick="showPage('progressions'); return false;">chord progressions</a>
-                  <a href="#" class="nav-link" onclick="showPage('philosophy'); return false;">music philosophy</a>
+                  <a href="#" class="nav-link" onclick="showPage('philosophy'); return false;">music theory</a>
                   <button class="theme-btn" id="theme-toggle">🌙</button>
             </div>
       </nav>
@@ -23,12 +23,16 @@
       
       <div class="container">
 
-            <div class="header">
-                  <h1>🎵 Music Scale Detector 🎶</h1>
-                  <p>find your scale & start jamming fluently!</p>
-                  <p> <b>note: </b> there is not much to see at the moment. <br> <b>but there will be, it is like stairway to heaven. i did all in two days. <br> only a little algorithm left. i planned this project 3 years ago with my music teacher.</b></p>
-                  
-                  <p>🎸🎹🪗🎻🎵🎶🎼</p>
+            <div class="header-row">
+                  <div class="header">
+                        <h1>🎵 Music Scale Detector 🎶</h1>
+                        <p>find your scale & start jamming fluently!</p>
+                        <p> <b>note: </b> there is not much to see at the moment. <br> <b>but there will be, it is like stairway to heaven. i did all in two days. <br> only a little algorithm left. i planned this project 3 years ago with my music teacher.</b></p>
+                        <p>🎸🎹🪗🎻🎵🎶🎼</p>
+                  </div>
+                  <div class="damla-radio-header">
+                        <iframe src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                  </div>
             </div>
 
             <div class="instrument-panel">
@@ -258,8 +262,18 @@
                               <div class="modes-grid" id="modes-grid"></div>
                         </div>
 
+                        <!-- iPod müzik çalar — JS tarafından doldurulacak -->
+                        <div class="panel ipod-panel" id="now-playing">
+                              <div class="player-idle">
+                                    <div class="player-vinyl">🎵</div>
+                                    <p>select a scale to see<br>song suggestions here</p>
+                              </div>
+                        </div>
+
                   </div>
             </div>
+
+
       </div>
       </div> <!-- /page-detector -->
 

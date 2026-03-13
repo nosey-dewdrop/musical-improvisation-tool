@@ -744,12 +744,14 @@ function generatePiano(numOctaves) {
     blackKeysDiv.className = 'black-keys';
     blackKeysDiv.style.height = bh + 'px';
 
+    // başlangıç oktavı 4 (middle C), her tekrar +1
     for (let oct = 0; oct < numOctaves; oct++) {
+        const octaveNum = 4 + oct;
         whiteNotes.forEach(note => {
             const btn = document.createElement('button');
             btn.className = 'white-key';
             btn.textContent = note;
-            btn.onclick = () => toggleNote(note);
+            btn.onclick = () => { _nextPlayOctave = octaveNum; toggleNote(note); _nextPlayOctave = 4; };
             btn.style.width = ww + 'px';
             btn.style.height = wh + 'px';
             btn.style.fontSize = fs + 'px';
@@ -760,7 +762,7 @@ function generatePiano(numOctaves) {
             const btn = document.createElement('button');
             btn.className = 'black-key';
             btn.textContent = note;
-            btn.onclick = () => toggleNote(note);
+            btn.onclick = () => { _nextPlayOctave = octaveNum; toggleNote(note); _nextPlayOctave = 4; };
             btn.style.left = (blackOffsets[i] + oct * octaveWidth) + 'px';
             btn.style.width = bw + 'px';
             btn.style.height = bh + 'px';
@@ -868,7 +870,7 @@ function loadState() {
             selectedNotes = state.selectedNotes || [];
             selectedKey = state.selectedKey || null;
             selectedMode = state.selectedMode || 'Ionian';
-            currentOctaves = state.octaves || 1;
+            currentOctaves = state.octaves || 2;
         } catch(e) {
             console.log('state parse error', e);
         }
@@ -902,6 +904,258 @@ function loadState() {
         document.getElementById('results').classList.add('hidden');
     }
 }
+
+// ═══════════════════════════════════════════
+// WEB AUDIO — tuşa basınca nota sesi çal
+// ═══════════════════════════════════════════
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+const noteFrequencies = {
+    'C': 261.63, 'C#': 277.18, 'Db': 277.18,
+    'D': 293.66, 'D#': 311.13, 'Eb': 311.13,
+    'E': 329.63, 'F': 349.23,
+    'F#': 369.99, 'Gb': 369.99,
+    'G': 392.00, 'G#': 415.30, 'Ab': 415.30,
+    'A': 440.00, 'A#': 466.16, 'Bb': 466.16,
+    'B': 493.88
+};
+
+// hangi enstrüman aktifse ona göre ses çal
+let _nextPlayOctave = 4;
+
+function isGuitarActive() {
+    const guitarTab = document.getElementById('guitar-tab');
+    return guitarTab && !guitarTab.classList.contains('hidden');
+}
+
+// piyano sesi — sine wave, yumuşak decay
+function playPianoSound(freq) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.8);
+}
+
+// gitar sesi — karışık harmonikler, hızlı attack, uzun sustain
+function playGuitarSound(freq) {
+    const t = audioCtx.currentTime;
+
+    // temel frekans — triangle (gitara daha yakın)
+    const osc1 = audioCtx.createOscillator();
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(freq, t);
+
+    // 2. harmonik
+    const osc2 = audioCtx.createOscillator();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 2, t);
+
+    // 3. harmonik — hafif
+    const osc3 = audioCtx.createOscillator();
+    osc3.type = 'sine';
+    osc3.frequency.setValueAtTime(freq * 3, t);
+
+    const gain1 = audioCtx.createGain();
+    const gain2 = audioCtx.createGain();
+    const gain3 = audioCtx.createGain();
+
+    // gitar tını — hızlı attack, yavaş decay
+    gain1.gain.setValueAtTime(0.35, t);
+    gain1.gain.exponentialRampToValueAtTime(0.01, t + 1.5);
+
+    gain2.gain.setValueAtTime(0.12, t);
+    gain2.gain.exponentialRampToValueAtTime(0.01, t + 0.8);
+
+    gain3.gain.setValueAtTime(0.05, t);
+    gain3.gain.exponentialRampToValueAtTime(0.01, t + 0.5);
+
+    osc1.connect(gain1); gain1.connect(audioCtx.destination);
+    osc2.connect(gain2); gain2.connect(audioCtx.destination);
+    osc3.connect(gain3); gain3.connect(audioCtx.destination);
+
+    osc1.start(t); osc1.stop(t + 1.5);
+    osc2.start(t); osc2.stop(t + 0.8);
+    osc3.start(t); osc3.stop(t + 0.5);
+}
+
+function playNote(noteName, octave) {
+    const baseFreq = noteFrequencies[noteName];
+    if (!baseFreq) return;
+
+    const oct = (octave !== undefined) ? octave : _nextPlayOctave;
+    const freq = baseFreq * Math.pow(2, oct - 4);
+
+    if (isGuitarActive()) {
+        playGuitarSound(freq);
+    } else {
+        playPianoSound(freq);
+    }
+}
+
+// ═══════════════════════════════════════════
+// KEYBOARD — QWERTY ile piyano çalma
+// ═══════════════════════════════════════════
+
+const keyboardMap = {
+    'a': 'C', 'w': 'C#', 's': 'D', 'e': 'D#', 'd': 'E',
+    'f': 'F', 't': 'F#', 'g': 'G', 'y': 'G#', 'h': 'A',
+    'u': 'A#', 'j': 'B'
+};
+
+document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.repeat) return;
+
+    const note = keyboardMap[e.key.toLowerCase()];
+    if (note) {
+        playNote(note, 4);
+        // sadece ilk eşleşen tuşu yak (ilk oktav)
+        const firstKey = document.querySelector(`.white-key, .black-key`);
+        const allKeys = document.querySelectorAll('.white-key, .black-key');
+        for (const el of allKeys) {
+            if (el.textContent.trim() === note) {
+                el.classList.add('keyboard-active');
+                setTimeout(() => el.classList.remove('keyboard-active'), 200);
+                break; // sadece ilkini
+            }
+        }
+    }
+});
+
+// ═══════════════════════════════════════════
+// SONG SUGGESTIONS — dizi bazlı şarkı önerileri
+// ═══════════════════════════════════════════
+
+const songDatabase = {
+    'C': [
+        { title: 'Imagine', artist: 'John Lennon' },
+        { title: 'Let It Be', artist: 'The Beatles' },
+        { title: 'No Woman No Cry', artist: 'Bob Marley' },
+    ],
+    'G': [
+        { title: 'Wonderwall', artist: 'Oasis' },
+        { title: 'Sweet Home Alabama', artist: 'Lynyrd Skynyrd' },
+        { title: 'Wish You Were Here', artist: 'Pink Floyd' },
+        { title: 'Brown Eyed Girl', artist: 'Van Morrison' },
+    ],
+    'D': [
+        { title: 'Summer of 69', artist: 'Bryan Adams' },
+        { title: 'Cant Help Falling in Love', artist: 'Elvis' },
+    ],
+    'A': [
+        { title: 'Someone Like You', artist: 'Adele' },
+        { title: 'Here Comes The Sun', artist: 'The Beatles' },
+    ],
+    'E': [
+        { title: 'Back in Black', artist: 'AC/DC' },
+        { title: 'Purple Haze', artist: 'Jimi Hendrix' },
+        { title: 'Roadhouse Blues', artist: 'The Doors' },
+    ],
+    'F': [
+        { title: 'Hey Jude', artist: 'The Beatles' },
+        { title: 'Piano Man', artist: 'Billy Joel' },
+        { title: 'Free Fallin', artist: 'Tom Petty' },
+    ],
+    'Bb': [
+        { title: 'Fly Me to the Moon', artist: 'Frank Sinatra' },
+    ],
+    'Eb': [
+        { title: 'Unchained Melody', artist: 'Righteous Brothers' },
+    ],
+    'Ab': [
+        { title: 'Perfect', artist: 'Ed Sheeran' },
+        { title: 'All of Me', artist: 'John Legend' },
+    ],
+};
+
+function updateSongSuggestions() {
+    const nowPlaying = document.getElementById('now-playing');
+    if (!nowPlaying) return;
+
+    if (!selectedKey) {
+        nowPlaying.innerHTML = `<div class="player-idle"><div class="player-vinyl">🎵</div><p>select a scale to see<br>song suggestions here</p></div>`;
+        return;
+    }
+
+    const songs = songDatabase[selectedKey] || [];
+    if (songs.length === 0) {
+        nowPlaying.innerHTML = `<div class="player-header">now playing — ${selectedKey}</div><div class="player-idle"><div class="player-vinyl">🎵</div><p>no suggestions for ${selectedKey} yet</p></div>`;
+        return;
+    }
+
+    const icons = ['🎵', '🎶', '🎸', '🎹', '🎷', '🎺', '🎻', '🥁'];
+    let html = `<div class="player-header">now playing — ${selectedKey} major</div><div class="player-video" id="player-video"></div><div class="player-tracks">`;
+    songs.forEach((song, i) => {
+        const icon = icons[i % icons.length];
+        html += `<div class="player-track" onclick="playSong('${song.title.replace(/'/g, "\\'")}', '${song.artist.replace(/'/g, "\\'")}', this)">
+            <div class="track-art">${icon}</div>
+            <div class="track-info">
+                <div class="track-title">${song.title}</div>
+                <div class="track-artist">${song.artist}</div>
+            </div>
+            <div class="track-play-btn">▶</div>
+        </div>`;
+    });
+    html += '</div>';
+    nowPlaying.innerHTML = html;
+}
+
+// şarkı seçimi — sadece highlight
+function playSong(title, artist, trackEl) {
+    document.querySelectorAll('.player-track').forEach(t => t.classList.remove('playing'));
+    if (trackEl) trackEl.classList.add('playing');
+}
+
+// gitar teli → başlangıç oktavı (standart akort)
+const guitarStringOctaves = { 0: 2, 1: 2, 2: 3, 3: 3, 4: 3, 5: 4 };
+// her telin açık nota pitch'i
+const guitarOpenPitches = [4, 9, 2, 7, 11, 4]; // E2, A2, D3, G3, B3, E4
+
+function getGuitarOctave(stringIndex, fretNum) {
+    const openPitch = guitarOpenPitches[stringIndex];
+    const baseOctave = guitarStringOctaves[stringIndex];
+    const currentPitch = (openPitch + fretNum) % 12;
+    // eğer fret ekleyince pitch wrap olduysa (12'yi geçtiyse) oktav artar
+    const octaveOffset = Math.floor((openPitch + fretNum) / 12);
+    return baseOctave + octaveOffset;
+}
+
+// gitar fret tıklamalarını yakala — onclick'ten ÖNCE çalışır (capture phase)
+document.addEventListener('click', function(e) {
+    const fretDot = e.target.closest('.fret-dot');
+    if (!fretDot) return;
+
+    const guitarString = fretDot.closest('.guitar-string');
+    if (!guitarString) return;
+
+    const allStrings = Array.from(document.querySelectorAll('.guitar-string'));
+    const stringIndex = allStrings.indexOf(guitarString);
+    const fretNum = parseInt(fretDot.getAttribute('data-fret')) || 0;
+
+    _nextPlayOctave = getGuitarOctave(stringIndex, fretNum);
+}, true); // capture phase — onclick'ten önce çalışır
+
+// toggleNote'a ses ekle
+const _originalToggleNote = toggleNote;
+toggleNote = function(noteName) {
+    playNote(noteName);
+    _originalToggleNote(noteName);
+    _nextPlayOctave = 4; // reset
+};
+
+// updateScaleInfo'ya song suggestions ekle
+const _prevUpdateScaleInfo = updateScaleInfo;
+updateScaleInfo = function() {
+    _prevUpdateScaleInfo();
+    updateSongSuggestions();
+};
 
 // sayfa yüklendiğinde state'i yükle
 document.addEventListener('DOMContentLoaded', function() {

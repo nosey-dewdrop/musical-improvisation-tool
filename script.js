@@ -37,17 +37,63 @@ function showPage(page) {
     }
 }
 
+// progression page için ayrı key/mode state
+let progKey = null;
+let progMode = 'Ionian';
+
 function updateProgressionPage() {
+    // key butonları oluştur
+    const keyContainer = document.getElementById('prog-key-buttons');
+    if (keyContainer) {
+        keyContainer.innerHTML = '';
+        Object.keys(majorScales).forEach(key => {
+            const btn = document.createElement('button');
+            btn.className = 'prog-key-btn' + (key === progKey ? ' active' : '');
+            btn.textContent = key;
+            btn.onclick = () => { progKey = key; updateProgressionPage(); };
+            keyContainer.appendChild(btn);
+        });
+    }
+
+    // mode butonları oluştur
+    const modeContainer = document.getElementById('prog-mode-buttons');
+    if (modeContainer) {
+        modeContainer.innerHTML = '';
+        Object.entries(modes).forEach(([modeKey, modeData]) => {
+            const btn = document.createElement('button');
+            btn.className = 'prog-mode-btn' + (modeKey === progMode ? ' active' : '');
+            btn.textContent = modeData.name;
+            btn.onclick = () => { progMode = modeKey; updateProgressionPage(); };
+            modeContainer.appendChild(btn);
+        });
+    }
+
+    // available chords
     const container = document.getElementById('prog-available-chords');
-    if (!selectedKey) {
-        container.innerHTML = '<span class="prog-hint">no scale selected yet — go to scale detector first</span>';
+    if (!progKey) {
+        // detector'dan seçilmiş key varsa onu kullan
+        if (selectedKey) {
+            progKey = selectedKey;
+            progMode = selectedMode;
+            updateProgressionPage();
+            return;
+        }
+        container.innerHTML = '<span class="prog-hint">select a key above</span>';
         return;
     }
-    const currentScale = getCurrentScale();
-    const qualities = chordQualities[selectedMode];
+
+    // progKey ve progMode ile scale hesapla
+    const baseScale = majorScales[progKey];
+    const mode = modes[progMode];
+    const scale = [];
+    for (let i = 0; i < 7; i++) {
+        scale.push(baseScale[(mode.degree + i) % 7]);
+    }
+    const qualities = chordQualities[progMode];
+
     container.innerHTML = '';
     for (let i = 0; i < 7; i++) {
-        const chordRoot = currentScale[i];
+        const chordRoot = scale[i];
         const quality = qualities[i];
         const symbol = getChordSymbol(chordRoot, quality);
         const btn = document.createElement('button');
@@ -57,13 +103,13 @@ function updateProgressionPage() {
         container.appendChild(btn);
     }
 
-    // common progressions listesini güncelle
+    // common progressions
     const commonList = document.getElementById('common-progressions-list');
     if (commonList) {
         commonList.innerHTML = '';
         commonProgressions.forEach(prog => {
             const chordNames = prog.indices.map(idx => {
-                const root = currentScale[idx % 7];
+                const root = scale[idx % 7];
                 const q = qualities[idx % 7];
                 return getChordSymbol(root, q);
             });

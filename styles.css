@@ -773,6 +773,50 @@ body {
       margin: 16px 0 10px;
 }
 
+.prog-key-select {
+      margin-bottom: 16px;
+      padding: 12px;
+      background: #fafafa;
+      border: 2px solid #9b59b6;
+}
+
+.prog-key-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+}
+
+.prog-key-row:last-child { margin-bottom: 0; }
+
+.prog-key-row span {
+      min-width: 50px;
+      font-family: 'Quicksand', sans-serif;
+      color: #9b59b6;
+}
+
+.prog-key-btn, .prog-mode-btn {
+      padding: 5px 12px;
+      background: #fff;
+      border: 2px solid #9b59b6;
+      color: #9b59b6;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+}
+
+.prog-key-btn.active, .prog-mode-btn.active {
+      background: #9b59b6;
+      color: #fff;
+}
+
+.prog-key-btn:hover, .prog-mode-btn:hover {
+      background: #f3e5f5;
+}
+
 .prog-builder { margin-bottom: 16px; }
 
 .prog-available-chords {

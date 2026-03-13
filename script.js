@@ -9,14 +9,75 @@ themeToggle.addEventListener("click",
         body.classList.toggle("dark-mode");
 
         if (body.classList.contains("dark-mode")) {
-            themeToggle.textContent = "☀️ Light Mode";
+            themeToggle.textContent = "☀️";
         }
         else {
-            themeToggle.textContent = "🌙 Dark Mode";
+            themeToggle.textContent = "🌙";
         }
 
     }
 );
+
+// ═══════════════════════════════════════════
+// PAGE NAVIGATION — navbar sayfa geçişi
+// ═══════════════════════════════════════════
+
+function showPage(page) {
+    // tüm sayfaları gizle
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+    // seçilen sayfayı göster
+    document.getElementById('page-' + page).classList.remove('hidden');
+    // nav linklerini güncelle
+    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // progression sayfasındaysa available chords güncelle
+    if (page === 'progressions') {
+        updateProgressionPage();
+    }
+}
+
+function updateProgressionPage() {
+    const container = document.getElementById('prog-available-chords');
+    if (!selectedKey) {
+        container.innerHTML = '<span class="prog-hint">no scale selected yet — go to scale detector first</span>';
+        return;
+    }
+    const currentScale = getCurrentScale();
+    const qualities = chordQualities[selectedMode];
+    container.innerHTML = '';
+    for (let i = 0; i < 7; i++) {
+        const chordRoot = currentScale[i];
+        const quality = qualities[i];
+        const symbol = getChordSymbol(chordRoot, quality);
+        const btn = document.createElement('button');
+        btn.className = 'prog-chord-btn';
+        btn.textContent = symbol;
+        btn.onclick = () => addChordToProgression(symbol);
+        container.appendChild(btn);
+    }
+
+    // common progressions listesini güncelle
+    const commonList = document.getElementById('common-progressions-list');
+    if (commonList) {
+        commonList.innerHTML = '';
+        commonProgressions.forEach(prog => {
+            const chordNames = prog.indices.map(idx => {
+                const root = currentScale[idx % 7];
+                const q = qualities[idx % 7];
+                return getChordSymbol(root, q);
+            });
+            const item = document.createElement('div');
+            item.className = 'prog-common-item';
+            item.innerHTML = `<div>${chordNames.join(' → ')}</div><span class="prog-common-label">${prog.name} (${prog.numerals.join('-')})</span>`;
+            item.onclick = () => {
+                currentProgression = [...chordNames];
+                renderProgressionBar();
+            };
+            commonList.appendChild(item);
+        });
+    }
+}
 
 
 // a function where i can switch between two instruments.
@@ -67,6 +128,7 @@ function toggleNote(noteName) {
     console.log("all the notes: " + selectedNotes.join(", "))
     updateVisualDisplay();
     findKeys();
+    saveState();
 }
 
 function updateVisualDisplay() {
@@ -189,6 +251,12 @@ function clearNotes() {
     updateVisualDisplay();
 
     document.getElementById('results').classList.add('hidden');
+    // chords ve progressions temizle
+    const chords = document.getElementById('chords-section-dynamic');
+    const progs = document.getElementById('progressions-section-dynamic');
+    if (chords) chords.remove();
+    if (progs) progs.remove();
+    saveState();
 }
 
 function getCurrentScale() {
@@ -261,6 +329,14 @@ function updateResults(possibleKeys = []) {
     if (selectedKey) {
         updateModes();
         updateScaleInfo();
+    } else {
+        // 0 key bulundu — eski sonuçları gizle
+        document.getElementById('modes-section').classList.add('hidden');
+        document.getElementById('scale-info').classList.add('hidden');
+        const chords = document.getElementById('chords-section-dynamic');
+        const progs = document.getElementById('progressions-section-dynamic');
+        if (chords) chords.remove();
+        if (progs) progs.remove();
     }
 }
 
@@ -269,6 +345,7 @@ function selectKey(key) {
     selectedMode = 'Ionian';
     updateVisualDisplay();
     findKeys();
+    saveState();
 }
 
 // ═══════════════════════════════════════════
@@ -300,6 +377,7 @@ function updateModes() {
             selectedMode = modeKey;
             updateModes();
             updateScaleInfo();
+            saveState();
         };
 
         modesGrid.appendChild(btn);
@@ -392,6 +470,27 @@ const romanNumerals = {
     'Locrian':    ['i°', 'II', 'iii', 'iv', 'V', 'VI', 'vii']
 };
 
+let currentChordType = 'triad';
+
+function setChordType(type) {
+    currentChordType = type;
+    document.querySelectorAll('.chord-type-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(type));
+    });
+    updateChords();
+}
+
+// 7th chord qualities per mode
+const seventhQualities = {
+    'Ionian':     ['maj7', 'm7', 'm7', 'maj7', '7', 'm7', 'm7b5'],
+    'Dorian':     ['m7', 'm7', 'maj7', '7', 'm7', 'm7b5', 'maj7'],
+    'Phrygian':   ['m7', 'maj7', '7', 'm7', 'm7b5', 'maj7', 'm7'],
+    'Lydian':     ['maj7', '7', 'm7', 'm7b5', 'maj7', 'm7', 'm7'],
+    'Mixolydian': ['7', 'm7', 'm7b5', 'maj7', 'm7', 'm7', 'maj7'],
+    'Aeolian':    ['m7', 'm7b5', 'maj7', 'm7', 'm7', 'maj7', '7'],
+    'Locrian':    ['m7b5', 'maj7', 'm7', 'm7', 'maj7', '7', 'm7']
+};
+
 // triad notalarını hesapla (1-3-5 of scale from that degree)
 function getTriadNotes(scale, degreeIndex) {
     return [
@@ -420,28 +519,61 @@ function updateChords() {
     if (!chordsSection) {
         chordsSection = document.createElement('div');
         chordsSection.id = 'chords-section-dynamic';
-        // scale-info'dan sonra ekle
-        const scaleInfo = document.getElementById('scale-info');
-        scaleInfo.parentNode.insertBefore(chordsSection, scaleInfo.nextSibling);
+        // results-grid'e panel olarak ekle
+        chordsSection.className = 'panel';
+        const resultsGrid = document.getElementById('results-grid');
+        resultsGrid.appendChild(chordsSection);
     }
 
-    chordsSection.innerHTML = `<h3>★ Diatonic Chords</h3><div class="chords-grid" id="chords-grid-dynamic"></div>`;
+    // tab butonlarını güncelle
+    const activeType = currentChordType;
+    chordsSection.innerHTML = `<div class="panel-title">chords</div><h3>Diatonic Chords</h3><div class="chord-type-tabs"><button class="chord-type-btn ${activeType==='triad'?'active':''}" onclick="setChordType('triad')">Triads</button><button class="chord-type-btn ${activeType==='7th'?'active':''}" onclick="setChordType('7th')">7th</button><button class="chord-type-btn ${activeType==='sus'?'active':''}" onclick="setChordType('sus')">Sus</button></div><div class="chords-grid" id="chords-grid-dynamic"></div>`;
     const grid = document.getElementById('chords-grid-dynamic');
 
+    const seventh = seventhQualities[selectedMode];
+
     for (let i = 0; i < 7; i++) {
-        const triadNotes = getTriadNotes(currentScale, i);
         const chordRoot = currentScale[i];
         const quality = qualities[i];
         const numeral = numerals[i];
+        let chordSymbol, chordQualityText, notesDisplay;
+
+        if (currentChordType === 'triad') {
+            const notes = getTriadNotes(currentScale, i);
+            chordSymbol = getChordSymbol(chordRoot, quality);
+            chordQualityText = quality;
+            notesDisplay = notes.join(' - ');
+        } else if (currentChordType === '7th') {
+            const notes = [
+                currentScale[i % 7],
+                currentScale[(i + 2) % 7],
+                currentScale[(i + 4) % 7],
+                currentScale[(i + 6) % 7]
+            ];
+            const q = seventh[i];
+            chordSymbol = chordRoot + q;
+            chordQualityText = q;
+            notesDisplay = notes.join(' - ');
+        } else { // sus
+            const sus2note = currentScale[(i + 1) % 7];
+            const sus4note = currentScale[(i + 3) % 7];
+            const fifth = currentScale[(i + 4) % 7];
+            chordSymbol = chordRoot + 'sus4';
+            chordQualityText = 'sus4 / sus2';
+            notesDisplay = chordRoot + ' - ' + sus4note + ' - ' + fifth + ' (sus4) | ' + chordRoot + ' - ' + sus2note + ' - ' + fifth + ' (sus2)';
+        }
 
         const card = document.createElement('div');
         card.className = 'chord-card';
+        card.style.cursor = 'pointer';
+        card.title = 'click to add to progression';
         card.innerHTML = `
             <div class="chord-degree">${numeral}</div>
-            <div class="chord-name">${getChordSymbol(chordRoot, quality)}</div>
-            <div class="chord-quality">${quality}</div>
-            <div class="chord-notes-display">${triadNotes.join(' - ')}</div>
+            <div class="chord-name">${chordSymbol}</div>
+            <div class="chord-quality">${chordQualityText}</div>
+            <div class="chord-notes-display">${notesDisplay}</div>
         `;
+        card.onclick = () => addChordToProgression(chordSymbol);
         grid.appendChild(card);
     }
 }
@@ -472,13 +604,12 @@ function updateProgressions() {
     if (!progressionsSection) {
         progressionsSection = document.createElement('div');
         progressionsSection.id = 'progressions-section-dynamic';
-        const chordsSection = document.getElementById('chords-section-dynamic');
-        if (chordsSection) {
-            chordsSection.parentNode.insertBefore(progressionsSection, chordsSection.nextSibling);
-        }
+        progressionsSection.className = 'panel';
+        const resultsGrid = document.getElementById('results-grid');
+        resultsGrid.appendChild(progressionsSection);
     }
 
-    progressionsSection.innerHTML = `<h3>★ Chord Progressions</h3><div class="progressions-list" id="progressions-list-dynamic"></div>`;
+    progressionsSection.innerHTML = `<div class="panel-title">suggested progressions</div><h3>Chord Progressions</h3><div class="progressions-list" id="progressions-list-dynamic"></div>`;
     const list = document.getElementById('progressions-list-dynamic');
 
     commonProgressions.forEach(prog => {
@@ -506,7 +637,227 @@ updateScaleInfo = function() {
     updateProgressions();
 };
 
-// sayfa yüklendiğinde results gizli olsun
+// ═══════════════════════════════════════════
+// PIANO OCTAVE GENERATOR
+// ═══════════════════════════════════════════
+
+let currentOctaves = 2;
+
+function setOctaves(num) {
+    currentOctaves = num;
+    document.querySelectorAll('.octave-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === String(num));
+    });
+    generatePiano(num);
+    updateVisualDisplay();
+    if (selectedKey) highlightScaleOnInstruments(getCurrentScale(), getCurrentRoot());
+    saveState();
+}
+
+function generatePiano(numOctaves) {
+    const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    const blackNotes = ['C#', 'D#', 'F#', 'G#', 'A#'];
+
+    // oktav arttıkça tuşları küçült
+    const keyWidths = { 1: 60, 2: 45, 3: 32 };
+    const keyHeights = { 1: 180, 2: 150, 3: 120 };
+    const blackHeights = { 1: 100, 2: 85, 3: 70 };
+    const blackWidths = { 1: 25, 2: 20, 3: 16 };
+    const fontSizes = { 1: 14, 2: 12, 3: 10 };
+    const blackFontSizes = { 1: 12, 2: 10, 3: 8 };
+
+    const ww = keyWidths[numOctaves] || 32;
+    const wh = keyHeights[numOctaves] || 120;
+    const bw = blackWidths[numOctaves] || 16;
+    const bh = blackHeights[numOctaves] || 70;
+    const fs = fontSizes[numOctaves] || 10;
+    const bfs = blackFontSizes[numOctaves] || 8;
+
+    // black key offsets within one octave (relative to white key positions)
+    // C#: between C and D, D#: between D and E, F#: between F and G, G#: between G and A, A#: between A and B
+    const octaveWidth = ww * 7;
+    const blackOffsets = [
+        ww * 1 - bw / 2 - 2,      // C#
+        ww * 2 - bw / 2 - 2,      // D#
+        ww * 4 - bw / 2 - 2,      // F#
+        ww * 5 - bw / 2 - 2,      // G#
+        ww * 6 - bw / 2 - 2       // A#
+    ];
+
+    const keysDiv = document.getElementById('piano-keys');
+    keysDiv.innerHTML = '';
+
+    const totalWidth = octaveWidth * numOctaves;
+    keysDiv.style.width = totalWidth + 'px';
+    keysDiv.style.height = wh + 'px';
+
+    const whiteKeysDiv = document.createElement('div');
+    whiteKeysDiv.className = 'white-keys';
+
+    const blackKeysDiv = document.createElement('div');
+    blackKeysDiv.className = 'black-keys';
+    blackKeysDiv.style.height = bh + 'px';
+
+    for (let oct = 0; oct < numOctaves; oct++) {
+        whiteNotes.forEach(note => {
+            const btn = document.createElement('button');
+            btn.className = 'white-key';
+            btn.textContent = note;
+            btn.onclick = () => toggleNote(note);
+            btn.style.width = ww + 'px';
+            btn.style.height = wh + 'px';
+            btn.style.fontSize = fs + 'px';
+            whiteKeysDiv.appendChild(btn);
+        });
+
+        blackNotes.forEach((note, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'black-key';
+            btn.textContent = note;
+            btn.onclick = () => toggleNote(note);
+            btn.style.left = (blackOffsets[i] + oct * octaveWidth) + 'px';
+            btn.style.width = bw + 'px';
+            btn.style.height = bh + 'px';
+            btn.style.fontSize = bfs + 'px';
+            blackKeysDiv.appendChild(btn);
+        });
+    }
+
+    keysDiv.appendChild(whiteKeysDiv);
+    keysDiv.appendChild(blackKeysDiv);
+}
+
+// ═══════════════════════════════════════════
+// CHORD PROGRESSION PLANNER + LOCALSTORAGE
+// ═══════════════════════════════════════════
+
+let currentProgression = [];
+let savedProgressions = [];
+
+function addChordToProgression(chordName) {
+    currentProgression.push(chordName);
+    renderProgressionBar();
+}
+
+function removeChordFromProgression(index) {
+    currentProgression.splice(index, 1);
+    renderProgressionBar();
+}
+
+function clearProgression() {
+    currentProgression = [];
+    renderProgressionBar();
+}
+
+function saveProgression() {
+    if (currentProgression.length === 0) return;
+    savedProgressions.push([...currentProgression]);
+    localStorage.setItem('msi_progressions', JSON.stringify(savedProgressions));
+    currentProgression = [];
+    renderProgressionBar();
+    renderSavedProgressions();
+}
+
+function deleteSavedProgression(index) {
+    savedProgressions.splice(index, 1);
+    localStorage.setItem('msi_progressions', JSON.stringify(savedProgressions));
+    renderSavedProgressions();
+}
+
+function renderProgressionBar() {
+    const slots = document.getElementById('progression-slots');
+    if (currentProgression.length === 0) {
+        slots.innerHTML = '<span class="progression-empty">click a chord below to add it here!</span>';
+        return;
+    }
+    slots.innerHTML = '';
+    currentProgression.forEach((chord, i) => {
+        const slot = document.createElement('span');
+        slot.className = 'prog-slot';
+        slot.innerHTML = chord;
+        slot.title = 'click to remove';
+        slot.onclick = () => removeChordFromProgression(i);
+        slots.appendChild(slot);
+
+        if (i < currentProgression.length - 1) {
+            const arrow = document.createElement('span');
+            arrow.textContent = ' → ';
+            arrow.style.color = '#999';
+            arrow.style.fontWeight = '700';
+            slots.appendChild(arrow);
+        }
+    });
+}
+
+function renderSavedProgressions() {
+    const container = document.getElementById('saved-progressions');
+    container.innerHTML = '';
+    savedProgressions.forEach((prog, i) => {
+        const item = document.createElement('div');
+        item.className = 'saved-prog-item';
+        item.innerHTML = `
+            <span class="saved-prog-chords">${prog.join(' → ')}</span>
+            <button class="saved-prog-delete" onclick="deleteSavedProgression(${i})">✕</button>
+        `;
+        container.appendChild(item);
+    });
+}
+
+// saveState — nota seçimlerini kaydet
+function saveState() {
+    localStorage.setItem('msi_state', JSON.stringify({
+        selectedNotes: selectedNotes,
+        selectedKey: selectedKey,
+        selectedMode: selectedMode,
+        octaves: currentOctaves
+    }));
+}
+
+function loadState() {
+    // nota seçimlerini yükle
+    const saved = localStorage.getItem('msi_state');
+    if (saved) {
+        try {
+            const state = JSON.parse(saved);
+            selectedNotes = state.selectedNotes || [];
+            selectedKey = state.selectedKey || null;
+            selectedMode = state.selectedMode || 'Ionian';
+            currentOctaves = state.octaves || 1;
+        } catch(e) {
+            console.log('state parse error', e);
+        }
+    }
+
+    // kaydedilmiş akor yürüyüşlerini yükle
+    const savedProgs = localStorage.getItem('msi_progressions');
+    if (savedProgs) {
+        try {
+            savedProgressions = JSON.parse(savedProgs) || [];
+        } catch(e) {
+            savedProgressions = [];
+        }
+    }
+
+    // piano oluştur
+    generatePiano(currentOctaves);
+
+    // oktav butonunu güncelle
+    document.querySelectorAll('.octave-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === String(currentOctaves));
+    });
+
+    // kaydedilmiş yürüyüşleri göster
+    renderSavedProgressions();
+
+    if (selectedNotes.length > 0) {
+        updateVisualDisplay();
+        findKeys();
+    } else {
+        document.getElementById('results').classList.add('hidden');
+    }
+}
+
+// sayfa yüklendiğinde state'i yükle
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('results').classList.add('hidden');
+    loadState();
 });

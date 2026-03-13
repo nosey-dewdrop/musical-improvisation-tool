@@ -9,9 +9,17 @@
 </head>
 
 <body>
-      <div class="theme-toggle">
-            <button class="theme-btn" id="theme-toggle">🌙 Dark Mode</button>
-      </div>
+      <nav class="top-navbar">
+            <span class="nav-brand">🎵 musical-scale-impromptu 🎶</span>
+            <div class="nav-right">
+                  <a href="#" class="nav-link active" onclick="showPage('detector'); return false;">scale detector</a>
+                  <a href="#" class="nav-link" onclick="showPage('progressions'); return false;">chord progressions</a>
+                  <a href="#" class="nav-link" onclick="showPage('philosophy'); return false;">music philosophy</a>
+                  <button class="theme-btn" id="theme-toggle">🌙</button>
+            </div>
+      </nav>
+
+      <div class="page" id="page-detector">
       
       <div class="container">
 
@@ -23,17 +31,26 @@
                   <p>🎸🎹🪗🎻🎵🎶🎼</p>
             </div>
 
-            <div class = "pick-button"> 
+            <div class="instrument-panel">
+            <div class="panel-title">select the notes you hear</div>
+
+            <div class = "pick-button">
                   <button class="pick tab-piano" onclick="showTab('piano')">🎹 Piano</button>
                   <button class="pick tab-guitar" onclick="showTab('guitar')">🎸 Guitar</button>
             </div>
 
             <!--seçtiğine göre devam edelim, piano ise bir bölme. gitar ise diğer bölme olacak.-->
             <div class = "piano-section" id="piano-tab">
-                  <h4> 🎹 select the notes you hear! </h4>
+
+                  <div class="octave-selector">
+                        <span>octaves:</span>
+                        <button class="octave-btn" onclick="setOctaves(1)">1</button>
+                        <button class="octave-btn active" onclick="setOctaves(2)">2</button>
+                        <button class="octave-btn" onclick="setOctaves(3)">3</button>
+                  </div>
 
                   <div class = "piano-container">
-                        <div class = "keys">
+                        <div class = "keys" id="piano-keys">
                               <!--only one octave now. i will add more optional octaves in the future.-->
                               <div class ="white-keys"> 
                                     <button class="white-key" onclick="toggleNote('C')">C</button>
@@ -59,8 +76,6 @@
             </div>
 
             <div class = "guitar-section hidden" id = "guitar-tab">
-
-                  <h4> 🎹 select the notes you hear! </h4>
 
                   <div class="guitar-strings">
                         <div class="guitar-string" data-string="E">
@@ -209,34 +224,124 @@
                         </div>
                         </div>
             </div>
-            
-            <div class="results" id="results" >
 
-                  <button class="clear-btn" onclick="clearNotes()"> clear choices! </button>
+            <div class="selected-notes-bar">
+                  <span> <i><b>selected notes:</i></b> </span>
+                  <span class="notes-display" id="notes-display"></span>
+                  <button class="clear-btn" onclick="clearNotes()">clear choices!</button>
+            </div>
 
-                  <div class="selected-notes">
-                      <span> <i><b>selected notes:</i></b> </span>
-                      <span class="notes-display" id="notes-display"></span>
+            </div> <!-- /instrument-panel -->
+
+            <div id="results" class="hidden">
+
+                  <div class="results-grid" id="results-grid">
+
+                        <div class="panel" id="panel-keys">
+                              <div class="panel-title">choose your key</div>
+                              <h3>🎵 Choose Your Key (<span id="key-count">0</span> found)</h3>
+                              <div class="keys-grid" id="keys-grid"></div>
+
+                              <div id="scale-info" class="scale-info-inline hidden">
+                                    <h4 id="scale-title">🎵 Scale</h4>
+                                    <div class="scale-notes" id="scale-notes"></div>
+                                    <div class="scale-hints">
+                                        <div>🎸 <strong>For improvisation:</strong> Play any green notes freely!</div>
+                                        <div>🎹 <strong>Root note (red):</strong> Start and end phrases here</div>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="panel hidden" id="modes-section">
+                              <div class="panel-title">choose mode</div>
+                              <h3>Choose Mode:</h3>
+                              <div class="modes-grid" id="modes-grid"></div>
+                        </div>
+
                   </div>
-              
-                  <h3>🎵 Choose Your Key (<span id="key-count">0</span> found)</h3>
-                  <div class="keys-grid" id="keys-grid"></div>
-              
-                  <div id="modes-section" class="hidden">
-                      <h3>Choose Mode:</h3>
-                      <div class="modes-grid" id="modes-grid"></div>
-                  </div>
-              
-                  <div id="scale-info" class="scale-info hidden">
-                      <h4 id="scale-title">🎵 Scale</h4>
-                      <div class="scale-notes" id="scale-notes"></div>
-                      <div>
-                          <div>🎸 <strong>For improvisation:</strong> Play any green notes freely!</div>
-                          <div>🎹 <strong>Root note (red):</strong> Start and end phrases here</div>
-                      </div>
-                  </div>
-              </div>
+            </div>
       </div>
+      </div> <!-- /page-detector -->
+
+      <div class="page hidden" id="page-progressions">
+            <div class="container">
+                  <div class="prog-panel">
+                        <h2>🎵 chord progression planner</h2>
+                        <p class="prog-hint"><i>select a scale from the detector first, then come here to build progressions!</i></p>
+
+                        <div class="prog-builder">
+                              <h3>available chords:</h3>
+                              <div class="prog-available-chords" id="prog-available-chords">
+                                    <span class="prog-hint">no scale selected yet — go to scale detector first</span>
+                              </div>
+                        </div>
+
+                        <div class="prog-current">
+                              <h3>your progression:</h3>
+                              <div class="progression-slots" id="progression-slots">
+                                    <span class="progression-empty">click chords above to build your progression</span>
+                              </div>
+                              <div class="prog-actions">
+                                    <button class="prog-action-btn" onclick="clearProgression()">clear</button>
+                                    <button class="prog-action-btn save-btn" onclick="saveProgression()">save progression</button>
+                              </div>
+                        </div>
+
+                        <div class="prog-saved">
+                              <h3>saved progressions:</h3>
+                              <div id="saved-progressions"></div>
+                        </div>
+
+                        <div class="prog-common">
+                              <h3>common progressions:</h3>
+                              <div id="common-progressions-list"></div>
+                        </div>
+                  </div>
+            </div>
+      </div> <!-- /page-progressions -->
+
+      <div class="page hidden" id="page-philosophy">
+            <div class="container">
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">why music matters</div>
+                        <div class="philosophy-content">
+                              <p>I am deeply in love with all kinds of music. Actually, I feel deeply sorrowful when someone asks me what my main instrument is. I literally play piano, guitar, bass, harmonica and ukulele. I even have a violin. Obviously, I am not a virtuoso - that is so true. But I am into philosophy of music, and to me, that is what really matters.</p>
+
+                              <p>When you listen to something - it can be birds singing, leaves rustling; you hear some noises. In the nature, if you lend an ear, you'll notice that they are perfectly in order. You don't feel anything abnormal. That's because music history developed upon the human ear, what was appealing to an ear over centuries evolved into what we call music today.</p>
+
+                              <p>That is the reason we know seven modes. The most known is Ionian, major tone. For instance, Locrian mode is not feasible to the human ear, it disappeared through something similar to natural selection of music and time. <b>Music is nature.</b> Years after, these harmonies were documented under the name of "music theory". Bach, Vivaldi, Beethoven didn't follow these rules, they looked at the nature. They composed what would be appealing to compose, that's why they shaped music into an art from natural harmonied noises. People documented their works later on.</p>
+
+                              <p>When you listen to a music, it is bunch of notes in order. You hear D4, proceeding with a note that is higher in frequency. It might be something E? Higher? F? So, the story goes on. Once you have a prototype of the formula you hear, you can play it in anywhere. Play the melody on harp, violin, harmonica, saxophone; it's you that decide. They are some vehicles, notebooks, compilers for music.</p>
+
+                              <p><i>Until now, I have taught music theory to ten of my friends. I even wrote a handwritten booklet for a person I love. Yet, I don't have a music of my own. The tragedy is similar to the "centipede" problem. While you ponder about which leg to step with, every other bug has already flown away.</i></p>
+                        </div>
+                  </div>
+
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">basic theory</div>
+                        <div class="philosophy-content">
+                              <h3>What is Circle of Fifths?</h3>
+                              <p>Music theory is not a bunch of knowledge sent from heaven. Music is an observer of human history from the beginning of the creation. First times, there were percussions, wind instruments. Since the beginning of creation, music was not solely an art, but was also a science derived from nature.</p>
+
+                              <p>Musicians founded a relationship between the notes kept the audience focused to their music. For instance, we might not be able to explain it with the music theory. But our ears know that there is something "strange", something "unexpected", something "absurd" is happening when F and G is played with C#.</p>
+
+                              <p>One of the first impulses we get from the outer world is heart beats of our mother when we were fetus :) The birds harmonize together. The leaves harmonize with the wind. They all happen in harmony. This harmony in nature, what our ears are used to listen since the day we were a zygote, what is the tendency of the ears are documentated in the name of music theory.</p>
+
+                              <p><b>All in all, this is not a memorized knowledge. It is documentation of human history and science.</b></p>
+
+                              <h3>Intervals</h3>
+                              <p>C → D (WHOLE) &nbsp; E → F (HALF)</p>
+                              <p>W + H = Major Third &nbsp; | &nbsp; H + W = Minor Third</p>
+                              <p>Major Third + Minor Third = <b>MAJOR Triad</b> (C-E-G)</p>
+                              <p>Minor Third + Major Third = <b>MINOR Triad</b> (E-G-B)</p>
+
+                              <h3>Chords</h3>
+                              <p>There is no certain knowledge for it. Triads are documentated but there are power chords (5), there are suspended chords (sus4, sus2), there are chords with four notes (7th). Build with any interval!</p>
+                        </div>
+                  </div>
+            </div>
+      </div> <!-- /page-philosophy -->
+
 </body>
 <script src="script.js"></script>
 </html>

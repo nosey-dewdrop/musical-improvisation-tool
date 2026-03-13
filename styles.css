@@ -4,7 +4,7 @@
 
    klimt bauerngarten renk paleti:
    #9b59b6  koyu yeşil (panel border)
-   #7b2d8e  yeşil (shadow)
+   #6a1b9a  yeşil (shadow)
    #00bcd4  turuncu (accent/active)
    #e91e90  kırmızı (selected notes)
    #00bcd4  hardal sarı (secondary)
@@ -28,8 +28,15 @@ body {
 }
 
 .container {
-      max-width: 960px;
+      max-width: 95%;
       margin: 0 auto;
+      padding: 0 20px;
+}
+
+/* y2k başlık stili */
+.results h3, .piano-section h4, .guitar-section h4 {
+      font-style: italic;
+      text-decoration: underline;
 }
 
 .theme-toggle {
@@ -45,19 +52,20 @@ body {
       border: 3px solid #9b59b6;
       box-shadow: 5px 5px 0px #6a1b9a;
       overflow: hidden;
+      margin-bottom: 15px;
 }
 
 .header::before {
-      content: '★ MSC101 — music scale detector ★';
+      content: 'musical-scale-impromptu';
       display: block;
-      background: linear-gradient(90deg, #9b59b6, #7b2d8e);
+      background: linear-gradient(90deg, #9b59b6, #6a1b9a);
       color: #fff;
       font-size: 0.7rem;
       font-weight: 700;
       font-style: normal;
       letter-spacing: 2px;
       padding: 5px 12px;
-      text-align: left;
+      text-align: center;
 }
 
 .header h1, .header p {
@@ -85,12 +93,29 @@ body {
       font-style: italic;
 }
 
-/* tabs — tam genişlik */
+/* ── instrument panel — tek kutu ── */
+.instrument-panel {
+      background: #fff;
+      border: 3px solid #00bcd4;
+      box-shadow: 5px 5px 0px #00838f;
+      margin-bottom: 15px;
+      overflow: hidden;
+      text-align: center;
+}
+
+.instrument-panel .selected-notes-bar {
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      border-top: 2px solid #eee;
+}
+
+/* tabs */
 .pick-button {
-      /* full width */
       display: flex;
       justify-content: center;
       gap: 10px;
+      margin-bottom: 15px;
 }
 
 .pick {
@@ -118,30 +143,19 @@ body {
       background: #f3e5f5;
 }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
-/* ── piano section — sol taraf ── */
+/* ── piano section (inside instrument-panel) ── */
 .piano-section {
-      /* full width */
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 0;
       background: #fff;
-      border: 3px solid #00bcd4;
-      box-shadow: 5px 5px 0px #00838f;
-      overflow: hidden;
 }
 
 .piano-section::before {
-      content: '♪ piano ♪';
-      display: block;
-      background: linear-gradient(90deg, #00bcd4, #00838f);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      text-align: left;
-      font-family: 'Quicksand', sans-serif;
+      display: none;
 }
 
 .piano-section h4, .guitar-section h4 {
@@ -153,10 +167,12 @@ body {
 .piano-container {
       display: inline-block;
       position: relative;
-      background: #1a1a1a;
+      background: #111;
       padding: 15px;
       margin-bottom: 15px;
-      border: 2px solid #444;
+      border: 2px solid #333;
+      overflow-x: auto;
+      max-width: 100%;
 }
 
 .keys {
@@ -202,8 +218,8 @@ body {
       position: absolute;
       width: 25px;
       height: 100px;
-      background: #222;
-      border: 2px solid #444;
+      background: #111;
+      border: 2px solid #333;
       color: #ccc;
       cursor: pointer;
       font-size: 12px;
@@ -215,7 +231,7 @@ body {
 }
 
 .black-key:hover {
-      background: #4a3d20;
+      background: #333;
       color: #fff;
 }
 
@@ -225,39 +241,27 @@ body {
 .black-key:nth-child(4) { left: 286px; }
 .black-key:nth-child(5) { left: 346px; }
 
-/* guitar — y2k window */
+/* guitar (inside instrument-panel) */
 .guitar-section {
-      /* full width */
       text-align: center;
       padding: 0;
       background: #fff;
-      border: 3px solid #00bcd4;
-      box-shadow: 5px 5px 0px #00838f;
-      overflow: hidden;
 }
 
 .guitar-section::before {
-      content: '♪ guitar ♪';
-      display: block;
-      background: linear-gradient(90deg, #00bcd4, #00838f);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      text-align: left;
-      font-family: 'Quicksand', sans-serif;
+      display: none;
 }
 
 .guitar-strings {
       align-items: center !important;
-      width: 600px;
-      max-width: 600px;
+      width: 90%;
+      max-width: 800px;
       margin: 12px auto;
-      background: #fafafa;
-      border: 2px solid #ccc;
-      padding: 5px;
+      background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+      border: 3px solid #00bcd4;
+      padding: 12px 8px;
       overflow: visible;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
 }
 
 .guitar-string {
@@ -275,19 +279,25 @@ body {
       position: absolute;
       left: 20px;
       width: calc(100% - 20px);
-      height: 1px;
-      background: #999;
+      height: 2px;
+      background: linear-gradient(90deg, #c0c0c0, #e8d5b0, #c0c0c0);
       top: 50%;
       transform: translateY(-50%);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.guitar-string:nth-child(5) .string-line,
+.guitar-string:nth-child(6) .string-line {
+      height: 1px;
 }
 
 .fret-dot {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      background: #fff;
-      border: 1.5px solid #9b59b6;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid #00bcd4;
       cursor: pointer;
       font-size: 9px;
       font-weight: bold;
@@ -298,20 +308,22 @@ body {
       top: 50%;
       transform: translateY(-50%);
       transition: all 0.15s ease;
-      color: #333;
+      color: #1a1a2e;
       font-family: 'Quicksand', sans-serif;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .fret-dot[data-fret="0"] {
       left: 10px;
-      background: #9b59b6;
+      background: #00bcd4;
       color: white;
-      border-radius: 3px;
+      border-radius: 4px;
       width: 35px;
-      height: 20px;
+      height: 22px;
       font-weight: bold;
       font-family: 'Quicksand', sans-serif;
-      border: 2px solid #6a1b9a;
+      border: 2px solid #00838f;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .fret-dot[data-fret="0"] { left: 2%; }
@@ -329,14 +341,14 @@ body {
 .fret-dot[data-fret="12"] { left: 92%; }
 
 .fret-dot:hover {
-      background: #f3e5f5;
-      color: #9b59b6;
+      background: #e0f7fa;
+      color: #00838f;
       transform: translateY(-50%) scale(1.15);
-      border-color: #9b59b6;
+      border-color: #00bcd4;
 }
 
 .fret-dot[data-fret="0"]:hover {
-      background: #7b2d8e;
+      background: #00838f;
 }
 
 /* selected notes */
@@ -349,56 +361,26 @@ body {
       border-color: #ad1457 !important;
 }
 
-.white-key.root, .black-key.root, .fret-dot.root {
-      background: #e91e90 !important;
-      color: #fff !important;
-      border-color: #ad1457 !important;
-      box-shadow: 0 0 6px rgba(196, 30, 58, 0.4) !important;
-}
-
+/* scale/root highlight SADECE scale-notes display'de, tuşlarda değil */
+.white-key.root, .black-key.root, .fret-dot.root,
 .white-key.scale, .black-key.scale, .fret-dot.scale {
-      background: #9b59b6 !important;
-      color: #fff !important;
-      border-color: #6a1b9a !important;
+      /* tuşlara renk verilmiyor — sadece selected olanlar renklenir */
 }
 
-/* ═══ RESULTS — 2 kolonlu grid layout ═══ */
-.results {
-      /* full width */
+/* ═══ RESULTS — ayrı paneller ═══ */
+.selected-notes-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       background: #fff;
-      padding: 0 20px 20px;
       border: 3px solid #9b59b6;
-      position: relative;
       box-shadow: 5px 5px 0px #6a1b9a;
-      overflow: hidden;
-}
-
-.results::before {
-      content: '★ results ★';
-      display: block;
-      background: linear-gradient(90deg, #9b59b6, #00bcd4);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      font-family: 'Quicksand', sans-serif;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      text-align: left;
-      margin: 0 -20px 15px;
-}
-
-.results h3 {
-      color: #9b59b6;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 10px;
-}
-
-.selected-notes {
-      text-align: center;
+      padding: 10px 20px;
       margin-bottom: 15px;
       font-size: 1.1rem;
       font-style: italic;
+      font-family: 'Quicksand', sans-serif;
 }
 
 .notes-display {
@@ -408,9 +390,6 @@ body {
 }
 
 .clear-btn {
-      position: absolute;
-      top: 28px;
-      right: 12px;
       font-family: 'Quicksand', sans-serif;
       font-size: 0.8rem;
       font-weight: 700;
@@ -420,12 +399,51 @@ body {
       border: 2px solid #e91e90;
       cursor: pointer;
       transition: all 0.2s ease;
-      z-index: 5;
+      margin-left: auto;
 }
 
 .clear-btn:hover {
       background: #e91e90;
       color: #fff;
+}
+
+.results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+}
+
+/* sol sütun: key + mode, sağ sütun: chords + progressions */
+#panel-keys { grid-column: 1; grid-row: 1; }
+#modes-section { grid-column: 1; grid-row: 2; }
+#chords-section-dynamic { grid-column: 2; grid-row: 1; }
+#progressions-section-dynamic { grid-column: 2; grid-row: 2; }
+
+.panel {
+      background: #fff;
+      border: 3px solid #9b59b6;
+      box-shadow: 5px 5px 0px #6a1b9a;
+      padding: 0 15px 15px;
+      overflow: hidden;
+}
+
+.panel-title {
+      background: linear-gradient(90deg, #9b59b6, #00bcd4);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      text-align: center;
+      margin: 0 -15px 10px;
+}
+
+.panel h3 {
+      color: #9b59b6;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
 }
 
 /* keys grid */
@@ -460,7 +478,7 @@ body {
 .key-btn.active {
       background: #00bcd4;
       color: #fff;
-      box-shadow: 2px 2px 0px #7a3a15;
+      box-shadow: 2px 2px 0px #00838f;
 }
 
 /* modes — sağlı sollu grid results içinde */
@@ -500,16 +518,21 @@ body {
 .mode-btn.active {
       background: #9b59b6;
       color: #fff;
-      box-shadow: 2px 2px 0px #3a1f48;
+      box-shadow: 2px 2px 0px #4a0e6a;
 }
 
-/* scale info */
-.scale-info {
+/* scale info — inside keys panel */
+.scale-info-inline {
       background: #fafafa;
       padding: 12px;
       border: 2px solid #9b59b6;
       text-align: center;
-      margin-bottom: 16px;
+      margin-top: 12px;
+}
+
+.scale-hints {
+      font-size: 0.85rem;
+      margin-top: 8px;
 }
 
 .scale-notes {
@@ -540,6 +563,35 @@ body {
 .scale-note.selected-note {
       background: #00bcd4;
       border: 1px solid #00838f;
+}
+
+/* ── chord type tabs ── */
+.chord-type-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+}
+
+.chord-type-btn {
+      padding: 5px 16px;
+      background: #fff;
+      border: 2px solid #e91e90;
+      color: #e91e90;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+}
+
+.chord-type-btn.active {
+      background: #e91e90;
+      color: #fff;
+}
+
+.chord-type-btn:hover {
+      background: #fce4ec;
 }
 
 /* ── chords ── */
@@ -626,6 +678,313 @@ body {
       font-style: italic;
 }
 
+/* ── top navbar ── */
+.top-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border: 3px solid #9b59b6;
+      padding: 0;
+      margin: 0 0 15px;
+      box-shadow: 5px 5px 0px #6a1b9a;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+}
+
+.nav-brand {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #9b59b6;
+      letter-spacing: 2px;
+      padding: 10px 18px;
+      font-style: italic;
+}
+
+.nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0;
+}
+
+.nav-link {
+      text-decoration: none;
+      color: #9b59b6;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover {
+      background: #f3e5f5;
+}
+
+.nav-link.active {
+      border-bottom-color: #9b59b6;
+      background: #f3e5f5;
+}
+
+.top-navbar .theme-btn {
+      padding: 8px 14px;
+      border: none;
+      border-left: 2px solid #eee;
+      box-shadow: none;
+      background: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+}
+
+.top-navbar .theme-btn:hover {
+      background: #f3e5f5;
+}
+
+/* pages */
+.page { }
+
+/* ── progression planner page ── */
+.prog-panel {
+      background: #fff;
+      border: 3px solid #9b59b6;
+      box-shadow: 5px 5px 0px #6a1b9a;
+      padding: 20px;
+      overflow: hidden;
+}
+
+.prog-panel h2 {
+      text-align: center;
+      color: #9b59b6;
+      font-style: italic;
+      margin-bottom: 8px;
+}
+
+.prog-hint {
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+}
+
+.prog-panel h3 {
+      color: #9b59b6;
+      font-style: italic;
+      text-decoration: underline;
+      margin: 16px 0 10px;
+}
+
+.prog-builder { margin-bottom: 16px; }
+
+.prog-available-chords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+}
+
+.prog-chord-btn {
+      padding: 10px 16px;
+      background: #fff;
+      border: 2px solid #00bcd4;
+      color: #00bcd4;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #00838f;
+}
+
+.prog-chord-btn:hover {
+      background: #00bcd4;
+      color: #fff;
+      transform: translate(-1px, -1px);
+}
+
+.prog-current { margin-bottom: 16px; }
+
+.progression-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      min-height: 50px;
+      background: #f5f5f5;
+      border: 2px dashed #ccc;
+      padding: 12px;
+      margin-bottom: 10px;
+}
+
+.progression-empty {
+      color: #999;
+      font-style: italic;
+      font-size: 0.9rem;
+}
+
+.prog-slot {
+      background: #9b59b6;
+      color: #fff;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      border: 2px solid #6a1b9a;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 2px 2px 0px #6a1b9a;
+}
+
+.prog-slot:hover {
+      background: #e91e90;
+      border-color: #ad1457;
+}
+
+.prog-actions {
+      display: flex;
+      gap: 8px;
+}
+
+.prog-action-btn {
+      padding: 8px 18px;
+      background: #fff;
+      border: 2px solid #00bcd4;
+      color: #00bcd4;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+}
+
+.prog-action-btn:hover {
+      background: #00bcd4;
+      color: #fff;
+}
+
+.prog-action-btn.save-btn {
+      border-color: #e91e90;
+      color: #e91e90;
+}
+
+.prog-action-btn.save-btn:hover {
+      background: #e91e90;
+      color: #fff;
+}
+
+.saved-prog-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border: 2px solid #eee;
+      margin-bottom: 6px;
+      font-family: 'Quicksand', sans-serif;
+}
+
+.saved-prog-chords {
+      font-weight: 700;
+      color: #9b59b6;
+      font-size: 0.95rem;
+}
+
+.saved-prog-delete {
+      background: none;
+      border: 2px solid #e91e90;
+      color: #e91e90;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 3px 8px;
+}
+
+.saved-prog-delete:hover {
+      background: #e91e90;
+      color: #fff;
+}
+
+.prog-common-item {
+      display: inline-block;
+      background: #fff;
+      border: 2px solid #9b59b6;
+      padding: 6px 14px;
+      margin: 4px;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      color: #9b59b6;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 2px 2px 0px #6a1b9a;
+}
+
+.prog-common-item:hover {
+      background: #9b59b6;
+      color: #fff;
+}
+
+.prog-common-label {
+      font-size: 0.7rem;
+      color: #999;
+      display: block;
+      font-style: italic;
+}
+
+/* ── philosophy page ── */
+.philosophy-panel {
+      margin-bottom: 15px;
+}
+
+.philosophy-content {
+      padding: 5px 10px;
+      line-height: 1.7;
+      font-size: 0.95rem;
+      color: #444;
+}
+
+.philosophy-content p {
+      margin-bottom: 12px;
+}
+
+.philosophy-content h3 {
+      color: #9b59b6;
+      margin: 16px 0 8px;
+      font-style: italic;
+      text-decoration: underline;
+}
+
+/* ── octave selector ── */
+.octave-selector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      font-weight: 600;
+      color: #555;
+      font-family: 'Quicksand', sans-serif;
+}
+
+.octave-btn {
+      padding: 4px 14px;
+      background: #fff;
+      border: 2px solid #00bcd4;
+      color: #00bcd4;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      box-shadow: 2px 2px 0px #00838f;
+}
+
+.octave-btn.active {
+      background: #00bcd4;
+      color: #fff;
+}
+
+.octave-btn:hover {
+      background: #e0f7fa;
+}
+
 /* ── theme toggle ── */
 .theme-btn {
       padding: 6px 18px;
@@ -681,7 +1040,7 @@ body.dark-mode {
 .dark-mode .pick:hover { background: #2a2a2a; }
 .dark-mode .pick.active { background: #9b59b6; color: #fff; }
 
-.dark-mode .piano-container { background: #0a0a0a; border-color: #333; }
+.dark-mode .piano-container { background: #0a0a0a; border-color: #222; }
 
 .dark-mode .guitar-strings { background: #111; border-color: #333; }
 .dark-mode .string-line { background: #555; }
@@ -694,28 +1053,52 @@ body.dark-mode {
 .dark-mode .clear-btn { background: #1a1a1a; color: #ef9a9a; border-color: #e91e90; }
 .dark-mode .clear-btn:hover { background: #e91e90; color: #fff; }
 
-.dark-mode .key-btn { background: #1a1a1a; border-color: #00bcd4; color: #ffb74d; box-shadow: 3px 3px 0px #5a2a0e; }
+.dark-mode .key-btn { background: #1a1a1a; border-color: #00bcd4; color: #ffb74d; box-shadow: 3px 3px 0px #00838f; }
 .dark-mode .key-btn:hover { background: #2a2a2a; }
 .dark-mode .key-btn.active { background: #00bcd4; color: #fff; }
 
-.dark-mode .mode-btn { background: #1a1a1a; border-color: #9b59b6; color: #ce93d8; box-shadow: 3px 3px 0px #3a1f48; }
+.dark-mode .mode-btn { background: #1a1a1a; border-color: #9b59b6; color: #ce93d8; box-shadow: 3px 3px 0px #4a0e6a; }
 .dark-mode .mode-btn:hover { background: #2a2a2a; }
 .dark-mode .mode-btn.active { background: #9b59b6; color: #fff; }
 .dark-mode .mode-desc { color: #777; }
 
 .dark-mode .scale-info { background: #1a1a1a; border-color: #9b59b6; }
 
-.dark-mode .chord-card { background: #1a1a1a; border-color: #e91e90; box-shadow: 3px 3px 0px #5a0e15; }
+.dark-mode .chord-card { background: #1a1a1a; border-color: #e91e90; box-shadow: 3px 3px 0px #6a0e3a; }
 .dark-mode .chord-name { color: #ef9a9a; }
 .dark-mode .chord-degree, .dark-mode .chord-quality, .dark-mode .chord-notes-display { color: #777; }
 
-.dark-mode .progression-chip { background: #1a1a1a; border-color: #00bcd4; color: #ffd54f; box-shadow: 3px 3px 0px #3a2a08; }
+.dark-mode .progression-chip { background: #1a1a1a; border-color: #00bcd4; color: #ffd54f; box-shadow: 3px 3px 0px #00838f; }
 .dark-mode .progression-chip:hover { background: #00bcd4; color: #fff; }
 .dark-mode .progression-label { color: #666; }
+
+.dark-mode .panel { background: #1a1a1a; color: #ddd; }
+.dark-mode .panel h3 { color: #ce93d8; }
+.dark-mode .selected-notes-bar { background: #1a1a1a; color: #ddd; border-color: #9b59b6; }
+.dark-mode .scale-info-inline { background: #111; border-color: #9b59b6; }
+.dark-mode .chord-type-btn { background: #1a1a1a; }
+.dark-mode .chord-type-btn.active { background: #e91e90; }
+.dark-mode .prog-panel { background: #1a1a1a; color: #ddd; border-color: #9b59b6; }
+.dark-mode .prog-panel h2, .dark-mode .prog-panel h3 { color: #ce93d8; }
+.dark-mode .progression-slots { background: #111; border-color: #444; }
+.dark-mode .progression-bar { background: #1a1a1a; border-color: #9b59b6; box-shadow: 5px 5px 0px #4a0e6a; }
+.dark-mode .prog-slot { background: #6a1b9a; border-color: #4a0e6a; }
+.dark-mode .progression-empty { color: #666; }
+.dark-mode .prog-action-btn { background: #1a1a1a; }
+.dark-mode .saved-prog-item { border-color: #333; }
+.dark-mode .saved-prog-chords { color: #ce93d8; }
+
+.dark-mode .octave-btn { background: #1a1a1a; border-color: #00bcd4; color: #4dd0e1; box-shadow: 2px 2px 0px #004d40; }
+.dark-mode .octave-btn.active { background: #00bcd4; color: #fff; }
+.dark-mode .octave-selector span { color: #bbb; }
 
 /* ── mobile ── */
 @media (max-width: 768px) {
       .container {
+          padding: 0 10px;
+      }
+
+      .results-grid {
           grid-template-columns: 1fr;
       }
 

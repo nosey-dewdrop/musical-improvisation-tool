@@ -1033,45 +1033,46 @@ document.addEventListener('keydown', function(e) {
 // SONG SUGGESTIONS — dizi bazlı şarkı önerileri
 // ═══════════════════════════════════════════
 
+// Gerçek Spotify track ID'leri — tıklayınca embed ile çalar
 const songDatabase = {
     'C': [
-        { title: 'Imagine', artist: 'John Lennon' },
-        { title: 'Let It Be', artist: 'The Beatles' },
-        { title: 'No Woman No Cry', artist: 'Bob Marley' },
+        { title: 'Imagine', artist: 'John Lennon', sp: '7pKfPomDEeI4TPT6EOYjn9' },
+        { title: 'Let It Be', artist: 'The Beatles', sp: '7iN1s7xHE4ifF5povM6A48' },
+        { title: 'No Woman No Cry', artist: 'Bob Marley', sp: '18rF49Lgmn0z3JEEzmgQ9C' },
     ],
     'G': [
-        { title: 'Wonderwall', artist: 'Oasis' },
-        { title: 'Sweet Home Alabama', artist: 'Lynyrd Skynyrd' },
-        { title: 'Wish You Were Here', artist: 'Pink Floyd' },
-        { title: 'Brown Eyed Girl', artist: 'Van Morrison' },
+        { title: 'Wonderwall', artist: 'Oasis', sp: '1qPbGZqppFwLwcBC1JQ6Vr' },
+        { title: 'Sweet Home Alabama', artist: 'Lynyrd Skynyrd', sp: '7e89621JPkKaeDSTQ3avtg' },
+        { title: 'Wish You Were Here', artist: 'Pink Floyd', sp: '6mFkJmJqdDVQ1REhVfGgd1' },
+        { title: 'Brown Eyed Girl', artist: 'Van Morrison', sp: '3yrSvpt2l1xhsV9Em88Pul' },
     ],
     'D': [
-        { title: 'Summer of 69', artist: 'Bryan Adams' },
-        { title: 'Cant Help Falling in Love', artist: 'Elvis' },
+        { title: 'Summer of 69', artist: 'Bryan Adams', sp: '45sqV0WhglbGJswa6SiC0v' },
+        { title: 'Cant Help Falling in Love', artist: 'Elvis', sp: '44AyOl4qVkzS48vBsbNXaC' },
     ],
     'A': [
-        { title: 'Someone Like You', artist: 'Adele' },
-        { title: 'Here Comes The Sun', artist: 'The Beatles' },
+        { title: 'Someone Like You', artist: 'Adele', sp: '1zwMYTA5nlNjZxYrvBB2pV' },
+        { title: 'Here Comes The Sun', artist: 'The Beatles', sp: '6dGnYIeXmHdcikdzNNDMm2' },
     ],
     'E': [
-        { title: 'Back in Black', artist: 'AC/DC' },
-        { title: 'Purple Haze', artist: 'Jimi Hendrix' },
-        { title: 'Roadhouse Blues', artist: 'The Doors' },
+        { title: 'Back in Black', artist: 'AC/DC', sp: '08mG3Y1vljYA6bvDt4Wqkj' },
+        { title: 'Purple Haze', artist: 'Jimi Hendrix', sp: '0wJoRiX5K5BxlqZTolB2LD' },
+        { title: 'Roadhouse Blues', artist: 'The Doors', sp: '1SEJLX94RMARFZaY3Mr3AQ' },
     ],
     'F': [
-        { title: 'Hey Jude', artist: 'The Beatles' },
-        { title: 'Piano Man', artist: 'Billy Joel' },
-        { title: 'Free Fallin', artist: 'Tom Petty' },
+        { title: 'Hey Jude', artist: 'The Beatles', sp: '0aym2LBJBk9DAYuHHutrIl' },
+        { title: 'Piano Man', artist: 'Billy Joel', sp: '1TpxoHaDRVAUQbJsKKZGAv' },
+        { title: 'Free Fallin', artist: 'Tom Petty', sp: '5tVA6TkbaAH9QMITTQRrNv' },
     ],
     'Bb': [
-        { title: 'Fly Me to the Moon', artist: 'Frank Sinatra' },
+        { title: 'Fly Me to the Moon', artist: 'Frank Sinatra', sp: '081AHcLTz6opbo1V9XN8eL' },
     ],
     'Eb': [
-        { title: 'Unchained Melody', artist: 'Righteous Brothers' },
+        { title: 'Unchained Melody', artist: 'Righteous Brothers', sp: '1jFhnVoJkcB4lf9tT0rSZS' },
     ],
     'Ab': [
-        { title: 'Perfect', artist: 'Ed Sheeran' },
-        { title: 'All of Me', artist: 'John Legend' },
+        { title: 'Perfect', artist: 'Ed Sheeran', sp: '0tgVpDi06FyKpA1z0VMD4v' },
+        { title: 'All of Me', artist: 'John Legend', sp: '3U4isOIWM3VvDubwSI3y7a' },
     ],
 };
 
@@ -1094,7 +1095,7 @@ function updateSongSuggestions() {
     let html = `<div class="player-header">now playing — ${selectedKey} major</div><div class="player-video" id="player-video"></div><div class="player-tracks">`;
     songs.forEach((song, i) => {
         const icon = icons[i % icons.length];
-        html += `<div class="player-track" onclick="playSong('${song.title.replace(/'/g, "\\'")}', '${song.artist.replace(/'/g, "\\'")}', this)">
+        html += `<div class="player-track" onclick="playSong('${song.sp}', this)">
             <div class="track-art">${icon}</div>
             <div class="track-info">
                 <div class="track-title">${song.title}</div>
@@ -1107,10 +1108,15 @@ function updateSongSuggestions() {
     nowPlaying.innerHTML = html;
 }
 
-// şarkı seçimi — sadece highlight
-function playSong(title, artist, trackEl) {
+// şarkıyı Spotify embed ile panelde çal
+function playSong(spId, trackEl) {
+    const videoDiv = document.getElementById('player-video');
+    if (!videoDiv) return;
+
     document.querySelectorAll('.player-track').forEach(t => t.classList.remove('playing'));
     if (trackEl) trackEl.classList.add('playing');
+
+    videoDiv.innerHTML = `<iframe src="https://open.spotify.com/embed/track/${spId}?theme=0" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media" loading="lazy"></iframe>`;
 }
 
 // gitar teli → başlangıç oktavı (standart akort)

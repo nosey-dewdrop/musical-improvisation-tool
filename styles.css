@@ -1,78 +1,162 @@
+/* ═══════════════════════════════════════════
+   ★ Y2K AESTHETIC — Music Scale Detector ★
+   2000s internet pencereleri + Klimt renkleri
+
+   klimt bauerngarten renk paleti:
+   #9b59b6  koyu yeşil (panel border)
+   #7b2d8e  yeşil (shadow)
+   #00bcd4  turuncu (accent/active)
+   #e91e90  kırmızı (selected notes)
+   #00bcd4  hardal sarı (secondary)
+   #9b59b6  mor çiçek (mode buttons)
+   #fff     beyaz (panel bg)
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+* {
+      box-sizing: border-box;
+}
+
+body {
+      font-family: 'Quicksand', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      background: url('bg.png') center center / cover no-repeat fixed;
+}
+
 .container {
-      max-width: 1000px;
+      max-width: 960px;
       margin: 0 auto;
+}
+
+.theme-toggle {
+      text-align: center;
+      margin-bottom: 12px;
 }
 
 .header {
       text-align: center;
-      margin-bottom: 30px;
       font-style: italic;
+      padding: 0;
+      background: #fff;
+      border: 3px solid #9b59b6;
+      box-shadow: 5px 5px 0px #6a1b9a;
+      overflow: hidden;
 }
 
-/*yani header sınıfının içindeki h1 ve p'den bahsediyor. 
-header html yapısından değil. */
+.header::before {
+      content: '★ MSC101 — music scale detector ★';
+      display: block;
+      background: linear-gradient(90deg, #9b59b6, #7b2d8e);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      text-align: left;
+}
+
+.header h1, .header p {
+      padding: 0 20px;
+}
 
 .header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+      padding-top: 12px;
+}
+
+.header p:last-child {
+      padding-bottom: 14px;
+}
+
+.header h1 {
+      font-size: 2rem;
+      margin-bottom: 6px;
+      color: #9b59b6;
+      font-weight: 700;
 }
 
 .header p {
-      color: #312e2e;
-      font-size: 1.1rem;
+      color: #666;
+      font-size: 0.95rem;
       font-style: italic;
 }
 
-/*özel bir sınıf yok. tüm tablar*/
+/* tabs — tam genişlik */
 .pick-button {
+      /* full width */
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
       gap: 10px;
 }
 
-/*sadece tab etiketli verileri değiştirdim.*/
 .pick {
-      padding: 2px 8px;
-      background: #ffffff;
-
-      border: 0.1px solid #c4e5f6;  
-      border-radius: 3px;
-
-      color: rgb(0, 0, 0);
+      padding: 8px 24px;
+      background: #fff;
+      border: 3px solid #9b59b6;
+      color: #9b59b6;
       cursor: pointer;
-
-      font-family: 'Times New Roman', Times, serif;
+      font-family: 'Quicksand', sans-serif;
       font-size: 1rem;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #6a1b9a;
 }
 
-/* hem tab hem active etiketli ürünleri değiştirdim. */
+.pick::before { display: none; }
 
 .pick.active {
-      background: #000000;
-      color: white;
+      background: #9b59b6;
+      color: #fff;
+      box-shadow: 2px 2px 0px #4a0e6a;
 }
-
 
 .pick:hover {
-      background: #ffecfd;
-      color: black;
+      background: #f3e5f5;
 }
 
-.hidden {
-      display: none;
-}
+.hidden { display: none; }
 
+/* ── piano section — sol taraf ── */
 .piano-section {
+      /* full width */
       text-align: center;
+      padding: 0;
+      background: #fff;
+      border: 3px solid #00bcd4;
+      box-shadow: 5px 5px 0px #00838f;
+      overflow: hidden;
+}
+
+.piano-section::before {
+      content: '♪ piano ♪';
+      display: block;
+      background: linear-gradient(90deg, #00bcd4, #00838f);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      text-align: left;
+      font-family: 'Quicksand', sans-serif;
+}
+
+.piano-section h4, .guitar-section h4 {
+      color: #555;
+      font-weight: 600;
+      margin: 12px 0;
 }
 
 .piano-container {
       display: inline-block;
       position: relative;
-      background: #222;
-      padding: 20px;
-      border-radius: 4px;
+      background: #1a1a1a;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #444;
 }
 
 .keys {
@@ -90,35 +174,20 @@ header html yapısından değil. */
 .white-key {
       width: 60px;
       height: 180px;
-      background: white;
-      border: 1.5px solid #333;
+      background: #fff;
+      border: 1.5px solid #999;
       color: #333;
       cursor: pointer;
       font-weight: bold;
       font-size: 14px;
-      font-family: 'Times New Roman', Times, serif;
-
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.1s ease;
 }
 
 .white-key:hover {
-      background: #ffecfd;
-      color: black;
+      background: #fff3e0;
+      color: #00bcd4;
 }
-
-/*
-#b7cce0 : light blue
-#95c0ea : mid blue 
-#70a5e2 : darker bluse
-#213f65 so dark
-
-#f7d6e7 super light pink
-#ffecfd : light pinkk
-edadc7 : pink
-#c11c65 fushia
-#d2bfd2 lilac
-
-*/
-
 
 .black-keys {
       position: absolute;
@@ -133,119 +202,116 @@ edadc7 : pink
       position: absolute;
       width: 25px;
       height: 100px;
-      background: #111;
-      border: 2px solid #333;
-      color: white;
+      background: #222;
+      border: 2px solid #444;
+      color: #ccc;
       cursor: pointer;
       font-size: 12px;
-      border-radius: 0 0 5px 5px;
+      border-radius: 0 0 4px 4px;
       pointer-events: auto;
-
-      font-family: 'Times New Roman', Times, serif;
-
+      transition: all 0.1s ease;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
 }
 
 .black-key:hover {
-      background: #ffecfd;
-      color: black;
+      background: #4a3d20;
+      color: #fff;
 }
 
-.black-key:nth-child(1) { left: 46px; }   /* C# */
-.black-key:nth-child(2) { left: 106px; }  /* D# */
-.black-key:nth-child(3) { left: 226px; }  /* F# */
-.black-key:nth-child(4) { left: 286px; }  /* G# */
-.black-key:nth-child(5) { left: 346px; }  /* A# */
-/*burada işler 0'dan değil 1'den başlıyor. */
+.black-key:nth-child(1) { left: 46px; }
+.black-key:nth-child(2) { left: 106px; }
+.black-key:nth-child(3) { left: 226px; }
+.black-key:nth-child(4) { left: 286px; }
+.black-key:nth-child(5) { left: 346px; }
 
-
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;
-    }
-}
-
-/*guitar*/
-
+/* guitar — y2k window */
 .guitar-section {
+      /* full width */
       text-align: center;
-      margin-bottom: 30px;
+      padding: 0;
+      background: #fff;
+      border: 3px solid #00bcd4;
+      box-shadow: 5px 5px 0px #00838f;
+      overflow: hidden;
 }
 
- .guitar-strings {
-      align-items: center !important;
+.guitar-section::before {
+      content: '♪ guitar ♪';
+      display: block;
+      background: linear-gradient(90deg, #00bcd4, #00838f);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      text-align: left;
+      font-family: 'Quicksand', sans-serif;
+}
 
+.guitar-strings {
+      align-items: center !important;
       width: 600px;
       max-width: 600px;
-      margin: 0 auto;
-      background: #f8f8f8;
-      border: 1px solid #cac7c7;
-      border-radius: 2px;
-
-      padding: 1px;
+      margin: 12px auto;
+      background: #fafafa;
+      border: 2px solid #ccc;
+      padding: 5px;
       overflow: visible;
-  }
-  
-  .guitar-string {
+}
+
+.guitar-string {
       position: relative;
       height: 30px;
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       margin-bottom: 3px;
       width: 100%;
-      min-width: auto; 
-  }
-  
-  
+      min-width: auto;
+}
+
 .string-line {
       position: absolute;
-      
-
       left: 20px;
-      width: calc(100% - 20px); 
-
+      width: calc(100% - 20px);
       height: 1px;
-      background: #000000;
+      background: #999;
       top: 50%;
       transform: translateY(-50%);
 }
 
 .fret-dot {
       position: absolute;
-
       width: 20px;
       height: 20px;
-
       border-radius: 50%;
-
-      background: rgba(255, 255, 255);
-      border: 1px solid #333;
-
+      background: #fff;
+      border: 1.5px solid #9b59b6;
       cursor: pointer;
-
-      font-size: 10px;
+      font-size: 9px;
       font-weight: bold;
-
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 5;
       top: 50%;
       transform: translateY(-50%);
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
+      color: #333;
+      font-family: 'Quicksand', sans-serif;
 }
 
 .fret-dot[data-fret="0"] {
-      left: 10px; 
-      background: #090909;
+      left: 10px;
+      background: #9b59b6;
       color: white;
-      border-radius: 20%;
+      border-radius: 3px;
       width: 35px;
       height: 20px;
       font-weight: bold;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: 'Quicksand', sans-serif;
+      border: 2px solid #6a1b9a;
 }
 
 .fret-dot[data-fret="0"] { left: 2%; }
@@ -263,326 +329,419 @@ edadc7 : pink
 .fret-dot[data-fret="12"] { left: 92%; }
 
 .fret-dot:hover {
-      background: #ffecfd; /*change it it looks so bas.*/
-      color: black;
-      transform: translateY(-50%) scale(1.1);
+      background: #f3e5f5;
+      color: #9b59b6;
+      transform: translateY(-50%) scale(1.15);
+      border-color: #9b59b6;
 }
 
 .fret-dot[data-fret="0"]:hover {
-      background: #ffecfd;
-      color: black;
+      background: #7b2d8e;
 }
 
-
-/*
-#b7cce0 : light blue
-#95c0ea : mid blue 
-#70a5e2 : darker bluse
-#213f65 so dark
-
-#f7d6e7 super light pink
-#ffecfd : light pinkk
-edadc7 : pink
-#c11c65 fushia
-#d2bfd2 lilac
-
-*/
-
-
+/* selected notes */
 .white-key.selected,
 .black-key.selected, .fret-dot.selected {
-      background: #c11c65 !important; /* Mavi */
+      background: #e91e90 !important;
       color: white !important;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: 'Quicksand', sans-serif;
+      font-style: italic;
+      border-color: #ad1457 !important;
+}
+
+.white-key.root, .black-key.root, .fret-dot.root {
+      background: #e91e90 !important;
+      color: #fff !important;
+      border-color: #ad1457 !important;
+      box-shadow: 0 0 6px rgba(196, 30, 58, 0.4) !important;
+}
+
+.white-key.scale, .black-key.scale, .fret-dot.scale {
+      background: #9b59b6 !important;
+      color: #fff !important;
+      border-color: #6a1b9a !important;
+}
+
+/* ═══ RESULTS — 2 kolonlu grid layout ═══ */
+.results {
+      /* full width */
+      background: #fff;
+      padding: 0 20px 20px;
+      border: 3px solid #9b59b6;
+      position: relative;
+      box-shadow: 5px 5px 0px #6a1b9a;
+      overflow: hidden;
+}
+
+.results::before {
+      content: '★ results ★';
+      display: block;
+      background: linear-gradient(90deg, #9b59b6, #00bcd4);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+      letter-spacing: 2px;
+      padding: 5px 12px;
+      text-align: left;
+      margin: 0 -20px 15px;
+}
+
+.results h3 {
+      color: #9b59b6;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
+}
+
+.selected-notes {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
       font-style: italic;
 }
 
-/*result implification: */
- 
- .results {
-      background: #fef0f7; /* super light pink */
-      padding: 20px;
-      border-radius: 3px;
-      margin: 20px 0;
-      border: 0.5px solid #ffb6d2; /* pink */
-      position: relative;
-  }
-  
-  .selected-notes {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-      font-style: italic;
-  }
-  
-  .notes-display {
-      color: #000000; /* fushia - zaten kullanıyorsun */
+.notes-display {
+      color: #e91e90;
       font-weight: bold;
-      margin: 0 10px;
-  }
-  
-  .clear-btn {
-      position: absolute; 
-      top:25px; 
-      right: 25px; 
-      font-family: 'Times New Roman', Times, serif;
-      font-size: medium;
+      margin: 0 8px;
+}
 
-      background: #1c1e21; /* so dark blue */
-
-      color: white;
-      padding: 5px 15px;
-
-      border: 1px solid #25282c; 
-      border-radius: 3px; 
-
+.clear-btn {
+      position: absolute;
+      top: 28px;
+      right: 12px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #fff;
+      color: #e91e90;
+      padding: 4px 14px;
+      border: 2px solid #e91e90;
       cursor: pointer;
-      margin-left: 10px;
+      transition: all 0.2s ease;
+      z-index: 5;
+}
 
-      
-  }
-  
-  .clear-btn:hover {
-      background: #fbf4f8; /* darker blue */
-      color: black;
-  }
-  
-  .keys-grid {
+.clear-btn:hover {
+      background: #e91e90;
+      color: #fff;
+}
+
+/* keys grid */
+.keys-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
-  }
-  
-  .key-btn {
-      padding: 15px;
-      background: #f9fcff; 
-      border: 1px solid #25282c; /* mid blue */
-      border-radius: 3px;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+}
+
+.key-btn {
+      padding: 12px 8px;
+      background: #fff;
+      border: 2px solid #00bcd4;
       cursor: pointer;
       text-align: center;
-      color: #213f65; /* dark text */
+      color: #00bcd4;
       font-weight: bold;
-      font-family: 'Times New Roman', Times, serif;
-  }
-  
-  .key-btn:hover {
-      background: #fbf4f8; /* mid blue */
-      font-family: 'Times New Roman', Times, serif;
-      font-style: italic;
-  }
-  
-  .key-btn.active {
-      background: #c11c65; /* fushia */
-      color: white;
-  }
-  
-  .modes-grid {
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #00838f;
+}
+
+.key-btn::before { display: none; }
+
+.key-btn:hover {
+      background: #fff3e0;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #00838f;
+}
+
+.key-btn.active {
+      background: #00bcd4;
+      color: #fff;
+      box-shadow: 2px 2px 0px #7a3a15;
+}
+
+/* modes — sağlı sollu grid results içinde */
+.modes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
-  }
-  
-  .mode-btn {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+}
+
+.mode-btn {
       padding: 10px;
-      background: #d2bfd2; /* lilac */
-      border: 1px solid #edadc7; /* pink */
-      border-radius: 8px;
+      background: #fff;
+      border: 2px solid #9b59b6;
       cursor: pointer;
       text-align: center;
-      color: #213f65; /* dark text */
+      color: #9b59b6;
       font-weight: bold;
-  }
-  
-  .mode-btn:hover {
-      background: #edadc7; /* pink */
-  }
-  
-  .mode-btn.active {
-      background: #70a5e2; /* darker blue */
-      color: white;
-  }
-  
-  .scale-info {
-      background: #ffecfd; /* light pink */
-      padding: 15px;
-      border: 1px solid #edadc7; /* pink */
-      border-radius: 8px;
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #6a1b9a;
+}
+
+.mode-desc {
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 3px;
+      font-style: italic;
+      font-weight: 500;
+}
+
+.mode-btn:hover {
+      background: #f3e5f5;
+      transform: translate(-1px, -1px);
+}
+
+.mode-btn.active {
+      background: #9b59b6;
+      color: #fff;
+      box-shadow: 2px 2px 0px #3a1f48;
+}
+
+/* scale info */
+.scale-info {
+      background: #fafafa;
+      padding: 12px;
+      border: 2px solid #9b59b6;
       text-align: center;
-  }
-  
-  .scale-notes {
+      margin-bottom: 16px;
+}
+
+.scale-notes {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      margin: 15px 0;
-  }
-  
-  .scale-note {
-      padding: 8px 12px;
-      border-radius: 6px;
+      gap: 6px;
+      margin: 10px 0;
+}
+
+.scale-note {
+      padding: 7px 12px;
       font-weight: bold;
       color: white;
-  }
-  
-  .scale-note.normal { 
-      background: #70a5e2; /* darker blue - scale notları için */
-  }
-  
-  .scale-note.root-note { 
-      background: #c11c65; /* fushia - root için */
-  }
-  
-  .scale-note.selected-note { 
-      background: #213f65; /* so dark blue - selected için */
-  }
-  
-  .white-key.root, .black-key.root, .fret-dot.root {
-      background: #c11c65 !important; /* fushia - root */
-      color: rgb(255, 255, 255) !important;
-  }
-  
-  .white-key.scale, .black-key.scale, .fret-dot.scale {
-      background: #70a5e2 !important; /* darker blue - scale */
-      color: white !important;
-  }
-  
-  .dark-mode .results {
-      background: #2a2a2a;
-      border-color: #555;
-  }
-  
-  .dark-mode .key-btn {
-      background: #333;
-      border-color: #555;
-      color: #b7cce0; /* light blue text */
-  }
-  
-  .dark-mode .key-btn:hover {
-      background: #444;
-  }
-  
-  .dark-mode .mode-btn {
-      background: #333;
-      border-color: #555;
-      color: #d2bfd2; /* lilac text */
-  }
-  
-  .dark-mode .mode-btn:hover {
-      background: #444;
-  }
-  
-  .dark-mode .scale-info {
-      background: #333;
-      border-color: #555;
-  }
-
-/* dark mode */
-
-.theme-toggle {
-      text-align: center;
-      margin-bottom: 20px;
+      font-family: 'Quicksand', sans-serif;
 }
-  
+
+.scale-note.normal {
+      background: #9b59b6;
+      border: 1px solid #6a1b9a;
+}
+
+.scale-note.root-note {
+      background: #e91e90;
+      border: 1px solid #ad1457;
+}
+
+.scale-note.selected-note {
+      background: #00bcd4;
+      border: 1px solid #00838f;
+}
+
+/* ── chords ── */
+.chords-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+}
+
+.chord-card {
+      background: #fff;
+      border: 2px solid #e91e90;
+      padding: 10px 6px;
+      text-align: center;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #ad1457;
+}
+
+.chord-card:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #ad1457;
+}
+
+.chord-degree {
+      font-size: 0.6rem;
+      color: #999;
+      font-weight: 700;
+      letter-spacing: 1px;
+}
+
+.chord-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #e91e90;
+      margin: 2px 0;
+}
+
+.chord-quality {
+      font-size: 0.7rem;
+      color: #666;
+      font-style: italic;
+}
+
+.chord-notes-display {
+      font-size: 0.6rem;
+      color: #aaa;
+      margin-top: 2px;
+}
+
+/* progressions */
+.progressions-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
+}
+
+.progression-chip {
+      background: #fff;
+      border: 2px solid #00bcd4;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #00bcd4;
+      font-family: 'Quicksand', sans-serif;
+      cursor: default;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #00838f;
+}
+
+.progression-chip:hover {
+      background: #00bcd4;
+      color: #fff;
+      transform: translate(-1px, -1px);
+}
+
+.progression-label {
+      font-size: 0.6rem;
+      color: #aaa;
+      display: block;
+      font-weight: 500;
+      font-style: italic;
+}
+
+/* ── theme toggle ── */
 .theme-btn {
-      padding: 8px 16px;
-      background: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      color: #333;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.85);
+      border: 2px solid #9b59b6;
+      color: #9b59b6;
       cursor: pointer;
-      font-size: 14px;
-      font-family: 'Times New Roman', Times, serif;
+      font-size: 13px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      box-shadow: 3px 3px 0px #6a1b9a;
 }
 
 .theme-btn:hover {
-      background: #f0f0f0;
+      background: #f3e5f5;
 }
 
+/* ── dark mode ── */
 body.dark-mode {
+      background:
+            linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+            url('bg.png') center center / cover no-repeat fixed;
+      color: #ddd;
+}
+
+.dark-mode .header,
+.dark-mode .piano-section,
+.dark-mode .guitar-section,
+.dark-mode .results {
       background: #1a1a1a;
-      color: #ffffff;
+      color: #ddd;
 }
 
-.dark-mode .header h1 {
-      color: #ffffff;
-}
-
-.dark-mode .header p {
-      color: #cccccc;
-}
+.dark-mode .header h1 { color: #ce93d8; }
+.dark-mode .header p { color: #aaa; }
+.dark-mode .piano-section h4,
+.dark-mode .guitar-section h4 { color: #bbb; }
 
 .dark-mode .theme-btn {
-      background: #333;
-      color: #fff;
-      border-color: #555;
+      background: #1a1a1a;
+      color: #ce93d8;
+      border-color: #9b59b6;
+      box-shadow: 3px 3px 0px #4a0e6a;
 }
 
-.dark-mode .theme-btn:hover {
-      background: #444;
+.dark-mode .pick {
+      background: #1a1a1a;
+      color: #ce93d8;
+      border-color: #9b59b6;
+      box-shadow: 3px 3px 0px #4a0e6a;
 }
+.dark-mode .pick:hover { background: #2a2a2a; }
+.dark-mode .pick.active { background: #9b59b6; color: #fff; }
 
-.dark-mode .piano-container {
-      background: #333;
-}
+.dark-mode .piano-container { background: #0a0a0a; border-color: #333; }
 
-.dark-mode .guitar-strings {
-      background: #2a2a2a;
-      border-color: #555;
-}
+.dark-mode .guitar-strings { background: #111; border-color: #333; }
+.dark-mode .string-line { background: #555; }
+.dark-mode .fret-dot { background: #2a2a2a; border-color: #9b59b6; color: #ccc; }
+.dark-mode .fret-dot[data-fret="0"] { background: #6a1b9a; color: #fff; }
+.dark-mode .fret-dot:hover { background: #3a3a3a; color: #fff; }
 
-.dark-mode .string-line {
-      background: #ccc;
-}
+.dark-mode .results h3 { color: #ce93d8; }
+.dark-mode .notes-display { color: #ef9a9a; }
+.dark-mode .clear-btn { background: #1a1a1a; color: #ef9a9a; border-color: #e91e90; }
+.dark-mode .clear-btn:hover { background: #e91e90; color: #fff; }
 
-.dark-mode .string-name {
-      background: rgba(40, 40, 40, 0.9);
-      color: #fff;
-      border-color: #666;
-}
+.dark-mode .key-btn { background: #1a1a1a; border-color: #00bcd4; color: #ffb74d; box-shadow: 3px 3px 0px #5a2a0e; }
+.dark-mode .key-btn:hover { background: #2a2a2a; }
+.dark-mode .key-btn.active { background: #00bcd4; color: #fff; }
 
-.dark-mode .fret-dot {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: #000000;
-}
+.dark-mode .mode-btn { background: #1a1a1a; border-color: #9b59b6; color: #ce93d8; box-shadow: 3px 3px 0px #3a1f48; }
+.dark-mode .mode-btn:hover { background: #2a2a2a; }
+.dark-mode .mode-btn.active { background: #9b59b6; color: #fff; }
+.dark-mode .mode-desc { color: #777; }
 
-.dark-mode .fret-dot[data-fret="0"] {
-      background: #000000;
-      color: rgb(255, 255, 255);
-}
+.dark-mode .scale-info { background: #1a1a1a; border-color: #9b59b6; }
 
-.dark-mode .fret-dot:hover {
-      background: #ffecfd;
-      color: black;
-}
+.dark-mode .chord-card { background: #1a1a1a; border-color: #e91e90; box-shadow: 3px 3px 0px #5a0e15; }
+.dark-mode .chord-name { color: #ef9a9a; }
+.dark-mode .chord-degree, .dark-mode .chord-quality, .dark-mode .chord-notes-display { color: #777; }
 
+.dark-mode .progression-chip { background: #1a1a1a; border-color: #00bcd4; color: #ffd54f; box-shadow: 3px 3px 0px #3a2a08; }
+.dark-mode .progression-chip:hover { background: #00bcd4; color: #fff; }
+.dark-mode .progression-label { color: #666; }
+
+/* ── mobile ── */
 @media (max-width: 768px) {
+      .container {
+          grid-template-columns: 1fr;
+      }
+
       .guitar-strings {
           width: 95% !important;
           max-width: 95% !important;
           padding: 5px !important;
           overflow-x: auto;
       }
-      
+
       .guitar-string {
-          min-width: 500px !important; /* Daha küçük */
+          min-width: 500px !important;
           height: 25px !important;
       }
-      
+
       .fret-dot {
           width: 15px !important;
           height: 15px !important;
           font-size: 8px !important;
       }
-      
+
       .fret-dot[data-fret="0"] {
           width: 25px !important;
           height: 15px !important;
       }
-      
-      /* Pozisyonları mobil için ayarla */
+
       .fret-dot[data-fret="0"] { left: 2% !important; }
       .fret-dot[data-fret="1"] { left: 12% !important; }
       .fret-dot[data-fret="2"] { left: 20% !important; }
@@ -595,5 +754,11 @@ body.dark-mode {
       .fret-dot[data-fret="9"] { left: 76% !important; }
       .fret-dot[data-fret="10"] { left: 84% !important; }
       .fret-dot[data-fret="11"] { left: 92% !important; }
-      .fret-dot[data-fret="12"] { display: none !important; } /* 12. freti gizle */
-  }
+      .fret-dot[data-fret="12"] { display: none !important; }
+
+      .clear-btn {
+          position: static;
+          display: block;
+          margin: 0 auto 12px;
+      }
+}

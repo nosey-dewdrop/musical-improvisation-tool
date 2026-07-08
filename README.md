@@ -1,7 +1,7 @@
 # musical-improvisation-tool
 <u>*scale identifier. show which scales is possible depending on few notes. so you can enhance your solo plays on piano or guitar.*</u>
 
-### live: https://nosey-dewdrop.github.io/musical-improvisation-tool/
+### live: https://damlahelloworld.github.io/musical-improvisation-tool/
 
 ## 🎸🎹 what is this?
 a program to **identify musical scales** based on a few notes you play or hear. it helps you improvise fluently on **piano, guitar, or any melodic instrument** by quickly suggesting compatible scales and chords.

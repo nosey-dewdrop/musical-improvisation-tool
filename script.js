@@ -1350,12 +1350,27 @@ let ytPlayer = null;
 let ytReady = false;
 
 // radyodamla: the default station, every song in the database
+// radyodamla mini: the first page of damla's real "exit music" playlist
+// (full 1500-track list plugs in as a youtube playlist id when it exists)
 const RADIO_IDS = [
-    'YkgkThdzX-8', '6hzrDeceEKc', 'KQetemT1sWc', 'ye5BuYf8q4o', 'hLQl3WQQoQ0',
-    'IXdNnw99-Ic', 'A_MjCqQoLLA', 'WGoDaYjdfSg', 'gxEPV4kolz0', 'UfmkgQRmmeE',
-    'Vyqpsnx1F7M', 'eFjjO_lhf9c', 'pAgnJDJN4VA', '1lWJXDG2i0A', 'vGJTaP6anOU',
-    'ZEcqHA7dbwM', 'QDYfEBY9NM4', 'kszS7vjA808', '2Vv-BfVoq4g', '450p7goxZqg',
-    'zrK5u5W8afc'
+    'siO6dkqidc4', // there is a light that never goes out
+    '7jMlFXouPk8', // high hopes
+    'fJ9rUzIMcZQ', // bohemian rhapsody
+    'TvnYmWpD_T8', // purple rain
+    'ylUNA_66zEY', // hey you
+    '1k8craCGpgs', // dont stop believin
+    'QkF3oxziUI4', // stairway to heaven
+    '_FrOQC-zEog', // comfortably numb
+    'BciS5krYL80', // hotel california
+    '8SbUC-UaAxE', // november rain
+    'fHiGbolFFGw', // paranoid android
+    'NNACikbchFM', // golden brown
+    'qgaRVvAKoqQ', // black
+    'FapBH3j6WoA', // exit music (for a film)
+    'Pgum6OT_VH8', // starlight
+    't99KH0TR-J4', // the show must go on
+    'eBG7P-K-r1Y', // everlong
+    '-JJAXwAaA2w'  // the bitter end
 ];
 
 window.onYouTubeIframeAPIReady = function () {

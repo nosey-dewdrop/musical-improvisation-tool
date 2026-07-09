@@ -938,11 +938,12 @@ function generatePiano(numOctaves) {
     const bench = document.querySelector('.bench-left');
     const available = (bench && bench.clientWidth > 0 ? bench.clientWidth : Math.min(document.documentElement.clientWidth, 1120) - 40) - 20;
     const fitted = Math.floor(available / (7 * numOctaves));
-    const ww = Math.max(30, Math.min(keyWidths[numOctaves] || 32, fitted));
+    // 4 octaves must FIT, never overflow: keys shrink as far as needed
+    const ww = Math.max(20, Math.min(keyWidths[numOctaves] || 32, fitted));
     const wh = Math.round((keyHeights[numOctaves] || 120) * (ww / (keyWidths[numOctaves] || 32)) * 0.5 + (keyHeights[numOctaves] || 120) * 0.5);
-    const bw = Math.max(14, Math.round(ww * 0.44));
+    const bw = Math.max(10, Math.round(ww * 0.44));
     const bh = Math.round(wh * 0.58);
-    const fs = fontSizes[numOctaves] || 10;
+    const fs = (Math.min(keyWidths[numOctaves] || 32, fitted) < 30) ? 9 : (fontSizes[numOctaves] || 10);
     const bfs = blackFontSizes[numOctaves] || 8;
 
     const octaveWidth = ww * 7;

@@ -81,43 +81,43 @@ const commonProgressions = [
 // real Spotify track IDs — clicking plays them via embed
 const songDatabase = {
     'C': [
-        { title: 'Imagine', artist: 'John Lennon', sp: '7pKfPomDEeI4TPT6EOYjn9' },
-        { title: 'Let It Be', artist: 'The Beatles', sp: '7iN1s7xHE4ifF5povM6A48' },
-        { title: 'No Woman No Cry', artist: 'Bob Marley', sp: '18rF49Lgmn0z3JEEzmgQ9C' },
+        { title: 'Imagine', artist: 'John Lennon', yt: 'YkgkThdzX-8' },
+        { title: 'Let It Be', artist: 'The Beatles', yt: 'QDYfEBY9NM4' },
+        { title: 'No Woman No Cry', artist: 'Bob Marley', yt: 'Vyqpsnx1F7M' },
     ],
     'G': [
-        { title: 'Wonderwall', artist: 'Oasis', sp: '1qPbGZqppFwLwcBC1JQ6Vr' },
-        { title: 'Sweet Home Alabama', artist: 'Lynyrd Skynyrd', sp: '7e89621JPkKaeDSTQ3avtg' },
-        { title: 'Wish You Were Here', artist: 'Pink Floyd', sp: '6mFkJmJqdDVQ1REhVfGgd1' },
-        { title: 'Brown Eyed Girl', artist: 'Van Morrison', sp: '3yrSvpt2l1xhsV9Em88Pul' },
+        { title: 'Wonderwall', artist: 'Oasis', yt: '6hzrDeceEKc' },
+        { title: 'Sweet Home Alabama', artist: 'Lynyrd Skynyrd', yt: 'ye5BuYf8q4o' },
+        { title: 'Wish You Were Here', artist: 'Pink Floyd', yt: 'IXdNnw99-Ic' },
+        { title: 'Brown Eyed Girl', artist: 'Van Morrison', yt: 'UfmkgQRmmeE' },
     ],
     'D': [
-        { title: 'Summer of 69', artist: 'Bryan Adams', sp: '45sqV0WhglbGJswa6SiC0v' },
-        { title: 'Cant Help Falling in Love', artist: 'Elvis', sp: '44AyOl4qVkzS48vBsbNXaC' },
+        { title: 'Summer of 69', artist: 'Bryan Adams', yt: 'eFjjO_lhf9c' },
+        { title: 'Cant Help Falling in Love', artist: 'Elvis', yt: 'vGJTaP6anOU' },
     ],
     'A': [
-        { title: 'Someone Like You', artist: 'Adele', sp: '1zwMYTA5nlNjZxYrvBB2pV' },
-        { title: 'Here Comes The Sun', artist: 'The Beatles', sp: '6dGnYIeXmHdcikdzNNDMm2' },
+        { title: 'Someone Like You', artist: 'Adele', yt: 'hLQl3WQQoQ0' },
+        { title: 'Here Comes The Sun', artist: 'The Beatles', yt: 'KQetemT1sWc' },
     ],
     'E': [
-        { title: 'Back in Black', artist: 'AC/DC', sp: '08mG3Y1vljYA6bvDt4Wqkj' },
-        { title: 'Purple Haze', artist: 'Jimi Hendrix', sp: '0wJoRiX5K5BxlqZTolB2LD' },
-        { title: 'Roadhouse Blues', artist: 'The Doors', sp: '1SEJLX94RMARFZaY3Mr3AQ' },
+        { title: 'Back in Black', artist: 'AC/DC', yt: 'pAgnJDJN4VA' },
+        { title: 'Purple Haze', artist: 'Jimi Hendrix', yt: 'WGoDaYjdfSg' },
+        { title: 'Roadhouse Blues', artist: 'The Doors', yt: 'kszS7vjA808' },
     ],
     'F': [
-        { title: 'Hey Jude', artist: 'The Beatles', sp: '0aym2LBJBk9DAYuHHutrIl' },
-        { title: 'Piano Man', artist: 'Billy Joel', sp: '1TpxoHaDRVAUQbJsKKZGAv' },
-        { title: 'Free Fallin', artist: 'Tom Petty', sp: '5tVA6TkbaAH9QMITTQRrNv' },
+        { title: 'Hey Jude', artist: 'The Beatles', yt: 'A_MjCqQoLLA' },
+        { title: 'Piano Man', artist: 'Billy Joel', yt: 'gxEPV4kolz0' },
+        { title: 'Free Fallin', artist: 'Tom Petty', yt: '1lWJXDG2i0A' },
     ],
     'Bb': [
-        { title: 'Fly Me to the Moon', artist: 'Frank Sinatra', sp: '081AHcLTz6opbo1V9XN8eL' },
+        { title: 'Fly Me to the Moon', artist: 'Frank Sinatra', yt: 'ZEcqHA7dbwM' },
     ],
     'Eb': [
-        { title: 'Unchained Melody', artist: 'Righteous Brothers', sp: '1jFhnVoJkcB4lf9tT0rSZS' },
+        { title: 'Unchained Melody', artist: 'Righteous Brothers', yt: 'zrK5u5W8afc' },
     ],
     'Ab': [
-        { title: 'Perfect', artist: 'Ed Sheeran', sp: '0tgVpDi06FyKpA1z0VMD4v' },
-        { title: 'All of Me', artist: 'John Legend', sp: '3U4isOIWM3VvDubwSI3y7a' },
+        { title: 'Perfect', artist: 'Ed Sheeran', yt: '2Vv-BfVoq4g' },
+        { title: 'All of Me', artist: 'John Legend', yt: '450p7goxZqg' },
     ],
 };
 
@@ -872,7 +872,7 @@ function loadState() {
             selectedNotes = sanitizeNotes(state.selectedNotes);
             selectedKey = majorScales[state.selectedKey] ? state.selectedKey : null;
             selectedMode = modes[state.selectedMode] ? state.selectedMode : 'Ionian';
-            currentOctaves = [1, 2, 3].includes(state.octaves) ? state.octaves : defaultOctaves;
+            currentOctaves = [1, 2, 3, 4].includes(state.octaves) ? state.octaves : defaultOctaves;
             currentProgression = sanitizeProgression(state.currentProgression);
         } catch (e) {
             // corrupt state — start fresh
@@ -928,10 +928,10 @@ function generatePiano(numOctaves) {
     const blackNotes = ['C#', 'D#', 'F#', 'G#', 'A#'];
 
     // keys shrink as octave count grows — big and proud, the piano is the hero
-    const keyWidths = { 1: 74, 2: 58, 3: 42 };
-    const keyHeights = { 1: 210, 2: 185, 3: 150 };
-    const fontSizes = { 1: 15, 2: 13, 3: 11 };
-    const blackFontSizes = { 1: 12, 2: 10, 3: 8 };
+    const keyWidths = { 1: 74, 2: 58, 3: 42, 4: 34 };
+    const keyHeights = { 1: 210, 2: 185, 3: 150, 4: 130 };
+    const fontSizes = { 1: 15, 2: 13, 3: 11, 4: 10 };
+    const blackFontSizes = { 1: 12, 2: 10, 3: 8, 4: 8 };
 
     // fit the keyboard to its column (min 30px keys, then it scrolls)
     const bench = document.querySelector('.bench-left');
@@ -1168,24 +1168,70 @@ function updateSongSuggestions() {
 
 let dockSongs = [];
 let dockIndex = -1;
+let ytPlayer = null;
+let ytReady = false;
+
+// radyodamla: the default station, every song in the database
+const RADIO_IDS = [
+    'YkgkThdzX-8', '6hzrDeceEKc', 'KQetemT1sWc', 'ye5BuYf8q4o', 'hLQl3WQQoQ0',
+    'IXdNnw99-Ic', 'A_MjCqQoLLA', 'WGoDaYjdfSg', 'gxEPV4kolz0', 'UfmkgQRmmeE',
+    'Vyqpsnx1F7M', 'eFjjO_lhf9c', 'pAgnJDJN4VA', '1lWJXDG2i0A', 'vGJTaP6anOU',
+    'ZEcqHA7dbwM', 'QDYfEBY9NM4', 'kszS7vjA808', '2Vv-BfVoq4g', '450p7goxZqg',
+    'zrK5u5W8afc'
+];
+
+window.onYouTubeIframeAPIReady = function () {
+    ytPlayer = new YT.Player('yt-player', {
+        width: '100%',
+        height: '152',
+        playerVars: { playsinline: 1 },
+        events: {
+            onReady: function () {
+                ytReady = true;
+                ytPlayer.cuePlaylist(RADIO_IDS);
+            },
+            onStateChange: function (e) {
+                if (e.data === YT.PlayerState.PLAYING) {
+                    const data = ytPlayer.getVideoData();
+                    document.getElementById('dock-label').textContent =
+                        '♪ ' + (data && data.title ? data.title.toLowerCase() : 'radyodamla');
+                }
+            },
+            // a dead or blocked video never stops the radio
+            onError: function () {
+                try { ytPlayer.nextVideo(); } catch (err) { /* noop */ }
+            }
+        }
+    });
+};
 
 function dockPlay(index) {
     const song = dockSongs[index];
-    if (!song || !/^[A-Za-z0-9]+$/.test(song.sp)) return;
+    if (!song || !song.yt || !ytReady) return;
     dockIndex = index;
 
     document.querySelectorAll('.player-track').forEach(t => {
         t.classList.toggle('playing', parseInt(t.dataset.index, 10) === index);
     });
 
-    document.getElementById('dock-frame').src = `https://open.spotify.com/embed/track/${song.sp}?theme=0`;
-    document.getElementById('dock-label').textContent = `♪ ${song.title.toLowerCase()}`;
+    const ids = dockSongs.filter(s => s.yt).map(s => s.yt);
+    const start = dockSongs.slice(0, index).filter(s => s.yt).length;
+    ytPlayer.loadPlaylist({ playlist: ids, index: start });
     document.getElementById('dock').classList.remove('collapsed');
 }
 
 function dockStep(direction) {
-    if (dockSongs.length === 0) return;
-    dockPlay((dockIndex + direction + dockSongs.length) % dockSongs.length);
+    if (!ytReady) return;
+    if (direction > 0) ytPlayer.nextVideo(); else ytPlayer.previousVideo();
+}
+
+function dockTogglePlay() {
+    if (!ytReady) return;
+    if (ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+        ytPlayer.pauseVideo();
+    } else {
+        ytPlayer.playVideo();
+    }
 }
 
 // ───────────────────────────────────────────
@@ -1234,7 +1280,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dock = document.getElementById('dock');
     document.getElementById('dock-menu').addEventListener('click', () => dock.classList.toggle('collapsed'));
     document.getElementById('dock-bar').addEventListener('click', () => dock.classList.toggle('collapsed'));
-    document.getElementById('dock-center').addEventListener('click', () => dock.classList.remove('collapsed'));
+    document.getElementById('dock-center').addEventListener('click', () => {
+        dock.classList.remove('collapsed');
+        dockTogglePlay();
+    });
     document.getElementById('dock-prev').addEventListener('click', () => dockStep(-1));
     document.getElementById('dock-next').addEventListener('click', () => dockStep(1));
 
@@ -1261,6 +1310,10 @@ document.addEventListener('DOMContentLoaded', function () {
             el.appendChild(span);
         }
     });
+
+    const ytTag = document.createElement('script');
+    ytTag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytTag);
 
     generateGuitar();
     loadState();

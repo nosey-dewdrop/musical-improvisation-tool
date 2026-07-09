@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://open.spotify.com; img-src 'self' data:; base-uri 'self'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.youtube.com https://s.ytimg.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; img-src 'self' data: https://i.ytimg.com; base-uri 'self'; form-action 'none'">
     <meta name="description" content="Pick the notes you hear on piano or guitar · find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Find the Key from a Few Notes · Free Music Scale Detector</title>
     <link rel="canonical" href="https://damlahelloworld.github.io/musical-improvisation-tool/">
@@ -15,8 +15,8 @@
     <meta property="og:image" content="https://damlahelloworld.github.io/musical-improvisation-tool/og.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=30">
-    <script src="script.js?v=30" defer></script>
+    <link rel="stylesheet" href="styles.css?v=31">
+    <script src="script.js?v=31" defer></script>
 </head>
 
 <body>
@@ -51,6 +51,7 @@
                                     <button class="octave-btn" data-octaves="1">1</button>
                                     <button class="octave-btn active" data-octaves="2">2</button>
                                     <button class="octave-btn" data-octaves="3">3</button>
+                                    <button class="octave-btn" data-octaves="4">4</button>
                               </div>
                         </div>
 
@@ -112,7 +113,7 @@
 
             <footer class="site-footer"><div>planned 3 years ago with my music teacher</div>
                   <div><a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <a href="blog/">blog archive</a></div>
-                  <div><span id="build-tag">v30</span></div></footer>
+                  <div><span id="build-tag">v31</span></div></footer>
 
       </div>
       </div> <!-- /page-detector -->
@@ -471,7 +472,7 @@
       <div class="dock" id="dock">
             <div class="dock-bar" id="dock-bar"><span id="dock-label">♪ damla radio</span></div>
             <div class="dock-screen">
-                  <iframe id="dock-frame" src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" title="music player" height="152" allow="autoplay; clipboard-write; encrypted-media" loading="lazy"></iframe>
+                  <div id="yt-player"></div>
             </div>
             <div class="click-wheel">
                   <button class="wheel-btn wheel-menu" id="dock-menu">menu</button>

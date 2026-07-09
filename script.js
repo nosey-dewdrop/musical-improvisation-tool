@@ -191,7 +191,7 @@ function updateKeyReadout() {
         el.classList.add('empty');
         el.textContent = selectedNotes.length === 0
             ? 'press a few notes…'
-            : 'no single key fits — try fewer notes';
+            : 'no single key fits, try fewer notes';
     }
 }
 
@@ -487,7 +487,7 @@ function updateScaleInfo() {
     const rootNote = getCurrentRoot();
     const modeData = modes[selectedMode];
 
-    scaleTitleEl.textContent = `${rootNote} ${modeData.name} — ${modeData.description.toLowerCase()}`;
+    scaleTitleEl.textContent = `${rootNote} ${modeData.name} · ${modeData.description.toLowerCase()}`;
     updateKeyReadout();
 
     scaleNotesEl.innerHTML = '';

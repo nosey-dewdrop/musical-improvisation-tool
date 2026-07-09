@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://open.spotify.com; img-src 'self' data:; base-uri 'self'; form-action 'none'">
-    <meta name="description" content="Pick the notes you hear on piano or guitar — find the key, explore its modes, get diatonic chords and songs to jam along with.">
+    <meta name="description" content="Pick the notes you hear on piano or guitar · find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Music Scale Detector</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=11">
-    <script src="script.js?v=11" defer></script>
+    <link rel="stylesheet" href="styles.css?v=12">
+    <script src="script.js?v=12" defer></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
       <div class="container">
 
             <header class="intro">
-                  <h1>press what you hear — <em>see your key</em>.</h1>
+                  <h1>press what you hear. <em>see your key</em>.</h1>
                   <p>tap a few notes on the piano or the fretboard. your key appears on the right, with every chord and song that fits it. planned 3 years ago with my music teacher.</p>
             </header>
 
@@ -69,7 +69,7 @@
                         <div class="key-current empty" id="key-current">press a few notes&hellip;</div>
                         <div class="rail-label">candidates (<span id="key-count">0</span>)</div>
                         <div class="keys-grid" id="keys-grid"></div>
-                        <p class="synesthesia-note">every key carries its own color — scriabin heard them this way.</p>
+                        <p class="synesthesia-note">every key carries its own color · scriabin heard them this way.</p>
                   </aside>
             </section>
 
@@ -81,14 +81,14 @@
                               <h4 id="scale-title"></h4>
                               <div class="scale-notes" id="scale-notes"></div>
                               <div class="scale-hints">
-                                    <div><span class="hint-dot scale-dot"></span>tinted notes belong to the scale — play them freely</div>
-                                    <div><span class="hint-dot root-dot"></span>the root note — start and end phrases there</div>
+                                    <div><span class="hint-dot scale-dot"></span>tinted notes belong to the scale · play them freely</div>
+                                    <div><span class="hint-dot root-dot"></span>the root note · start and end phrases there</div>
                               </div>
                         </div>
                   </section>
 
                   <section class="strip hidden" id="modes-section">
-                        <div class="strip-label">modes — same notes, other moods</div>
+                        <div class="strip-label">modes · same notes, other moods</div>
                         <div class="strip-body">
                               <div class="modes-grid" id="modes-grid"></div>
                         </div>
@@ -127,7 +127,7 @@
                         <div class="prog-builder">
                               <h3>available chords:</h3>
                               <div class="prog-available-chords" id="prog-available-chords">
-                                    <span class="prog-hint">no scale selected yet — go to scale detector first</span>
+                                    <span class="prog-hint">no scale selected yet · go to scale detector first</span>
                               </div>
                         </div>
 
@@ -161,7 +161,7 @@
                   <div id="blog-index">
                         <div class="blog-head">
                               <h2>the music theory blog</h2>
-                              <p>essays and small lessons — written by a person who plays five instruments badly and loves all of them.</p>
+                              <p>essays and small lessons · written by a person who plays five instruments badly and loves all of them.</p>
                         </div>
                         <div class="blog-grid">
                               <article class="blog-card" data-post="why-music-matters" tabindex="0">
@@ -173,19 +173,19 @@
                               <article class="blog-card" data-post="circle-of-fifths" tabindex="0">
                                     <span class="blog-tag">theory</span>
                                     <h3>The Circle of Fifths & Intervals</h3>
-                                    <p>Theory is not knowledge sent from heaven — it is documentation of what our ears always knew.</p>
+                                    <p>Theory is not knowledge sent from heaven · it is documentation of what our ears always knew.</p>
                                     <span class="blog-readmore">read →</span>
                               </article>
                               <article class="blog-card" data-post="seven-modes" tabindex="0">
                                     <span class="blog-tag">theory</span>
                                     <h3>Seven Modes, Seven Moods</h3>
-                                    <p>Same seven notes, seven completely different feelings — with songs you already know.</p>
+                                    <p>Same seven notes, seven completely different feelings · with songs you already know.</p>
                                     <span class="blog-readmore">read →</span>
                               </article>
                               <article class="blog-card" data-post="find-the-key" tabindex="0">
                                     <span class="blog-tag">practice</span>
                                     <h3>How I Find a Song's Key by Ear</h3>
-                                    <p>The Sails of Charon method — the exact habit this whole site was built to speed up.</p>
+                                    <p>The Sails of Charon method · the exact habit this whole site was built to speed up.</p>
                                     <span class="blog-readmore">read →</span>
                               </article>
                               <article class="blog-card" data-post="four-chords" tabindex="0">
@@ -197,7 +197,7 @@
                               <article class="blog-card" data-post="dictionary" tabindex="0">
                                     <span class="blog-tag">reference</span>
                                     <h3>The Dictionary</h3>
-                                    <p>Every word on this site — scale, mode, triad, progression, roman numerals — explained like a friend would.</p>
+                                    <p>Every word on this site · scale, mode, triad, progression, roman numerals · explained like a friend would.</p>
                                     <span class="blog-readmore">read →</span>
                               </article>
                         </div>
@@ -252,30 +252,30 @@
                   <div class="panel philosophy-panel">
                         <div class="panel-title">seven modes, seven moods</div>
                         <div class="philosophy-content">
-                              <p>Here is the most generous trick in music: take the seven notes of one major scale, change nothing, and just start from a different note. You get a completely different mood. These are the modes — seven moods hiding inside every key you find on this site.</p>
+                              <p>Here is the most generous trick in music: take the seven notes of one major scale, change nothing, and just start from a different note. You get a completely different mood. These are the modes · seven moods hiding inside every key you find on this site.</p>
 
-                              <h3>Ionian — the major scale itself</h3>
+                              <h3>Ionian · the major scale itself</h3>
                               <p>Happy, bright, home. Most pop and folk lives here. "Let It Be" is pure Ionian comfort.</p>
 
-                              <h3>Dorian — minor with hope</h3>
+                              <h3>Dorian · minor with hope</h3>
                               <p>Start from the 2nd note. It is minor, but with one raised note that adds a jazzy, hopeful shimmer. Miles Davis built "So What" on it; "Scarborough Fair" and Santana's "Oye Como Va" breathe it.</p>
 
-                              <h3>Phrygian — the Spanish shadow</h3>
-                              <p>Start from the 3rd note and the very first step is a half step — instantly dark, instantly Spanish. Flamenco lives here, and metal guitarists love it for riffs that feel dangerous.</p>
+                              <h3>Phrygian · the Spanish shadow</h3>
+                              <p>Start from the 3rd note and the very first step is a half step · instantly dark, instantly Spanish. Flamenco lives here, and metal guitarists love it for riffs that feel dangerous.</p>
 
-                              <h3>Lydian — the dream</h3>
+                              <h3>Lydian · the dream</h3>
                               <p>Start from the 4th note. One raised note makes everything float, like a film about flying. The Simpsons theme is the textbook Lydian melody.</p>
 
-                              <h3>Mixolydian — major with dirt</h3>
+                              <h3>Mixolydian · major with dirt</h3>
                               <p>Start from the 5th note. It is major, but the softened 7th makes it bluesy and easy-going. "Sweet Home Alabama" and The Beatles' "Norwegian Wood" ride on it.</p>
 
-                              <h3>Aeolian — the natural minor</h3>
+                              <h3>Aeolian · the natural minor</h3>
                               <p>Start from the 6th note. This is the sad one, the emotional one. "Losing My Religion" stays in it from the first bar to the last.</p>
 
-                              <h3>Locrian — the ghost</h3>
-                              <p>Start from the 7th note and even the home chord is unstable (diminished). Music history almost never uses it — which tells you something: our ears vote, and Locrian keeps losing the election. It survives as spice, not as a home.</p>
+                              <h3>Locrian · the ghost</h3>
+                              <p>Start from the 7th note and even the home chord is unstable (diminished). Music history almost never uses it · which tells you something: our ears vote, and Locrian keeps losing the election. It survives as spice, not as a home.</p>
 
-                              <p><i>Practical use: find your key on the detector page, then click through the seven modes and listen to how the same notes change costume. Improvise in Dorian one day, Mixolydian the next — same fingers, new feelings.</i></p>
+                              <p><i>Practical use: find your key on the detector page, then click through the seven modes and listen to how the same notes change costume. Improvise in Dorian one day, Mixolydian the next · same fingers, new feelings.</i></p>
                         </div>
                   </div>
                   </div> <!-- /post -->
@@ -285,21 +285,21 @@
                   <div class="panel philosophy-panel">
                         <div class="panel-title">how i find a song's key by ear</div>
                         <div class="philosophy-content">
-                              <p>One of my biggest joys is listening through my playlists and harmonizing together with random songs. But to join a song, you first have to know where it lives. This site exists because of that habit — here is the exact method, with a real example.</p>
+                              <p>One of my biggest joys is listening through my playlists and harmonizing together with random songs. But to join a song, you first have to know where it lives. This site exists because of that habit · here is the exact method, with a real example.</p>
 
-                              <h3>Step 1 — catch a few notes</h3>
+                              <h3>Step 1 · catch a few notes</h3>
                               <p>Don't try to hear everything. Catch three or four notes from the intro or the main riff and find them on the piano or the fretboard. Hum along if it helps; your voice is a slower but honest instrument.</p>
 
-                              <h3>Step 2 — let the candidates appear</h3>
-                              <p>Feed those notes to the detector. Three notes usually leave you with a handful of possible keys. That's not failure — that's the shortlist.</p>
+                              <h3>Step 2 · let the candidates appear</h3>
+                              <p>Feed those notes to the detector. Three notes usually leave you with a handful of possible keys. That's not failure · that's the shortlist.</p>
 
-                              <h3>Step 3 — wait for the deciding note</h3>
-                              <p>Real example: "Sails of Charon" by Scorpions. The intro gave me two possible readings — C D E F# G A B, or C# D E F# G A B. One note apart. Then the song continued with a C natural, and option one won: the G major family, played from B. <b>B Phrygian.</b> One note decided everything.</p>
+                              <h3>Step 3 · wait for the deciding note</h3>
+                              <p>Real example: "Sails of Charon" by Scorpions. The intro gave me two possible readings · C D E F# G A B, or C# D E F# G A B. One note apart. Then the song continued with a C natural, and option one won: the G major family, played from B. <b>B Phrygian.</b> One note decided everything.</p>
 
-                              <h3>Step 4 — find the home note</h3>
-                              <p>The key's family and its mode are different questions. The family tells you which notes are legal; the home note tells you where phrases rest. Listen for the note the song keeps landing on — that's your root. Start and end your lines there and you will sound like you belong.</p>
+                              <h3>Step 4 · find the home note</h3>
+                              <p>The key's family and its mode are different questions. The family tells you which notes are legal; the home note tells you where phrases rest. Listen for the note the song keeps landing on · that's your root. Start and end your lines there and you will sound like you belong.</p>
 
-                              <p><i>After a few weeks this stops being steps and becomes a reflex. The tool is training wheels — good ones. Use it until your ears don't need it.</i></p>
+                              <p><i>After a few weeks this stops being steps and becomes a reflex. The tool is training wheels · good ones. Use it until your ears don't need it.</i></p>
                         </div>
                   </div>
                   </div> <!-- /post -->
@@ -309,20 +309,20 @@
                   <div class="panel philosophy-panel">
                         <div class="panel-title">the four chords that rule pop</div>
                         <div class="philosophy-content">
-                              <p>Pop music has a public secret: an enormous part of it is built on one progression — <b>I–V–vi–IV</b>. In C major that is C → G → Am → F. The comedy group Axis of Awesome once played dozens of hits over this single loop, and the joke lands because it is true.</p>
+                              <p>Pop music has a public secret: an enormous part of it is built on one progression · <b>I–V–vi–IV</b>. In C major that is C → G → Am → F. The comedy group Axis of Awesome once played dozens of hits over this single loop, and the joke lands because it is true.</p>
 
                               <h3>Why does it work?</h3>
                               <p>It tells a complete emotional story in four bars: home (I), tension (V), sadness (vi), comfort (IV), and back home. Human ears never get tired of that round trip.</p>
 
                               <h3>The siblings</h3>
-                              <p><b>I–vi–IV–V</b> — the 50s doo-wop progression. "Stand By Me" made it immortal; every slow dance of that decade leaned on it.</p>
-                              <p><b>vi–IV–I–V</b> — the same four chords starting from the sad one. Instant melancholy; half of the 2010s radio pop starts here.</p>
-                              <p><b>ii–V–I</b> — jazz's heartbeat. "Autumn Leaves" is practically a ii–V–I étude. Learn to hear this one and jazz standards open like doors.</p>
-                              <p><b>I–IV–V</b> — the 12-bar blues skeleton, the grandfather of rock and roll.</p>
-                              <p><b>i–VII–VI–V</b> — the Andalusian cadence, ancient and dramatic. "Hit the Road Jack" walks down it the whole song.</p>
+                              <p><b>I–vi–IV–V</b> · the 50s doo-wop progression. "Stand By Me" made it immortal; every slow dance of that decade leaned on it.</p>
+                              <p><b>vi–IV–I–V</b> · the same four chords starting from the sad one. Instant melancholy; half of the 2010s radio pop starts here.</p>
+                              <p><b>ii–V–I</b> · jazz's heartbeat. "Autumn Leaves" is practically a ii–V–I étude. Learn to hear this one and jazz standards open like doors.</p>
+                              <p><b>I–IV–V</b> · the 12-bar blues skeleton, the grandfather of rock and roll.</p>
+                              <p><b>i–VII–VI–V</b> · the Andalusian cadence, ancient and dramatic. "Hit the Road Jack" walks down it the whole song.</p>
 
                               <h3>How to use this site with them</h3>
-                              <p>Find your key on the detector, open the progressions page, and tap any of these — the site translates the numerals into real chords for your key instantly. Play the loop, then improvise over it using the scale notes. Congratulations: you are now the rhythm section and the soloist.</p>
+                              <p>Find your key on the detector, open the progressions page, and tap any of these · the site translates the numerals into real chords for your key instantly. Play the loop, then improvise over it using the scale notes. Congratulations: you are now the rhythm section and the soloist.</p>
                         </div>
                   </div>
                   </div> <!-- /post -->
@@ -330,43 +330,414 @@
                   <div class="blog-post hidden" id="post-dictionary">
                   <button class="blog-back">← all posts</button>
                   <div class="panel philosophy-panel">
-                        <div class="panel-title">the dictionary — every word on this site, explained</div>
+                        <div class="panel-title">the dictionary · every word on this site, explained</div>
                         <div class="philosophy-content">
                               <h3>What is a scale?</h3>
-                              <p>A scale is a family of notes that sound good together. Take C major: C D E F G A B. Stay inside those seven notes and almost anything you play will sound "right". That is why finding the scale is the whole point of this site — once you know the family, you can improvise without fear.</p>
+                              <p>A scale is a family of notes that sound good together. Take C major: C D E F G A B. Stay inside those seven notes and almost anything you play will sound "right". That is why finding the scale is the whole point of this site · once you know the family, you can improvise without fear.</p>
 
                               <h3>What is a key?</h3>
-                              <p>The key is the home of a song. When we say a song is "in G major", it means the song's melody and chords are built from the G major scale, and the note G feels like home — the place where phrases want to land and rest.</p>
+                              <p>The key is the home of a song. When we say a song is "in G major", it means the song's melody and chords are built from the G major scale, and the note G feels like home · the place where phrases want to land and rest.</p>
 
                               <h3>What is a root note?</h3>
-                              <p>The root is the note a scale or a chord is built on — its ground floor. In C major the root is C; in a Dm chord the root is D. Starting and ending your phrases on the root makes your solo sound resolved instead of lost.</p>
+                              <p>The root is the note a scale or a chord is built on · its ground floor. In C major the root is C; in a Dm chord the root is D. Starting and ending your phrases on the root makes your solo sound resolved instead of lost.</p>
 
                               <h3>What are modes?</h3>
-                              <p>Take the same seven notes of a major scale, but start from a different one of them — you get a mode. Same ingredients, completely different mood. Start C major from D and you get D Dorian (jazzy minor); start it from A and you get A minor (sad). That is why this site shows seven modes for every key you find: seven moods for free, no new notes to learn.</p>
+                              <p>Take the same seven notes of a major scale, but start from a different one of them · you get a mode. Same ingredients, completely different mood. Start C major from D and you get D Dorian (jazzy minor); start it from A and you get A minor (sad). That is why this site shows seven modes for every key you find: seven moods for free, no new notes to learn.</p>
 
                               <h3>What is a chord?</h3>
-                              <p>A chord is several notes played at the same time. The most common kind is the <b>triad</b>: pick a note, skip one, pick, skip one, pick — like C, E, G. Three notes, one sound.</p>
+                              <p>A chord is several notes played at the same time. The most common kind is the <b>triad</b>: pick a note, skip one, pick, skip one, pick · like C, E, G. Three notes, one sound.</p>
 
-                              <h3>Major, minor, diminished — what do they mean?</h3>
-                              <p>They describe a chord's mood, and the mood comes from the distances between its notes. Major chords sound happy and open (C), minor chords sound sad or thoughtful (Cm), diminished chords sound tense and unstable (C°) — they want to move somewhere else immediately.</p>
+                              <h3>Major, minor, diminished · what do they mean?</h3>
+                              <p>They describe a chord's mood, and the mood comes from the distances between its notes. Major chords sound happy and open (C), minor chords sound sad or thoughtful (Cm), diminished chords sound tense and unstable (C°) · they want to move somewhere else immediately.</p>
 
                               <h3>What are 7th and sus chords?</h3>
-                              <p>A <b>7th chord</b> is a triad with one more note stacked on top — it adds color: maj7 sounds dreamy, m7 sounds smooth and jazzy, 7 (dominant) sounds bluesy. A <b>sus chord</b> (suspended) replaces the middle note of a triad with its neighbor — sus2 or sus4 — so the chord floats, neither happy nor sad, waiting to resolve.</p>
+                              <p>A <b>7th chord</b> is a triad with one more note stacked on top · it adds color: maj7 sounds dreamy, m7 sounds smooth and jazzy, 7 (dominant) sounds bluesy. A <b>sus chord</b> (suspended) replaces the middle note of a triad with its neighbor · sus2 or sus4 · so the chord floats, neither happy nor sad, waiting to resolve.</p>
 
                               <h3>What are diatonic chords?</h3>
-                              <p>The chords you can build using only the notes of one scale. Every scale gives you exactly seven of them, one on each note. They are guaranteed to fit together — that is why the site lists them for every key: it is your safe palette for writing or jamming.</p>
+                              <p>The chords you can build using only the notes of one scale. Every scale gives you exactly seven of them, one on each note. They are guaranteed to fit together · that is why the site lists them for every key: it is your safe palette for writing or jamming.</p>
 
                               <h3>What is a chord progression?</h3>
-                              <p>A chord progression is chords played one after another — the skeleton of a song. Verse, chorus, everything sits on top of a progression. We write them with roman numerals (I–IV–V) so they work in any key.</p>
+                              <p>A chord progression is chords played one after another · the skeleton of a song. Verse, chorus, everything sits on top of a progression. We write them with roman numerals (I–IV–V) so they work in any key.</p>
 
                               <h3>What do the roman numerals (I, ii, V...) mean?</h3>
-                              <p>They number the scale's seven degrees, so a progression can be described without naming a key. In C major: I = C, ii = Dm, V = G. Uppercase means major, lowercase means minor, the ° sign means diminished. "I–V–vi–IV" in C is C → G → Am → F; the same recipe in G is G → D → Em → C. Same feeling, different key — that is the magic of numerals.</p>
+                              <p>They number the scale's seven degrees, so a progression can be described without naming a key. In C major: I = C, ii = Dm, V = G. Uppercase means major, lowercase means minor, the ° sign means diminished. "I–V–vi–IV" in C is C → G → Am → F; the same recipe in G is G → D → Em → C. Same feeling, different key · that is the magic of numerals.</p>
 
                               <h3>Why do some progressions have names like "Pop Classic"?</h3>
                               <p>Because a handful of progressions carried most of popular music. I–V–vi–IV alone powers hundreds of hits; ii–V–I is the heart of jazz; the 12-bar blues is I–IV–V rearranged. Learn to hear these few shapes and half of the radio becomes sight-readable.</p>
 
                               <h3>What is an octave?</h3>
-                              <p>The same note, higher or lower. A piano has many C's — each one doubles the frequency of the one below. That is why the piano here offers 1 to 3 octaves: same note names, different heights.</p>
+                              <p>The same note, higher or lower. A piano has many C's · each one doubles the frequency of the one below. That is why the piano here offers 1 to 3 octaves: same note names, different heights.</p>
+
+                              <h3>What is an interval?</h3>
+                              <p>The distance between two notes, measured in steps. The smallest one on a piano is a half step (E to F); two half steps make a whole step (C to D). Stack intervals and you get chords; walk them and you get melodies.</p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+            </div>
+      </div> <!-- /page-philosophy -->
+
+
+      <div class="dock" id="dock">
+            ">
+    <link rel="stylesheet" href="styles.css?v=12">
+    <script src="script.js?v=12" defer></script>
+</head>
+
+<body>
+      <nav class="top-navbar">
+            <span class="nav-brand">musical-scale-impromptu ♪</span>
+            <div class="nav-right">
+                  <a href="#" class="nav-link active" data-page="detector">scale detector</a>
+                  <a href="#" class="nav-link" data-page="progressions">chord progressions</a>
+                  <a href="#" class="nav-link" data-page="philosophy">music theory</a>
+                  <button class="theme-btn" id="theme-toggle" aria-label="toggle dark mode">🌙</button>
+            </div>
+      </nav>
+
+      <div class="page" id="page-detector">
+
+      <div class="container">
+
+            <header class="intro">
+                  <h1>press what you hear. <em>see your key</em>.</h1>
+                  <p>tap a few notes on the piano or the fretboard. your key appears on the right, with every chord and song that fits it. planned 3 years ago with my music teacher.</p>
+            </header>
+
+            <section class="workbench">
+                  <div class="bench-left">
+                        <div class="bench-controls">
+                              <div class="pick-button">
+                                    <button class="pick tab-piano active" data-tab="piano">piano</button>
+                                    <button class="pick tab-guitar" data-tab="guitar">guitar</button>
+                              </div>
+                              <div class="octave-selector">
+                                    <span>octaves</span>
+                                    <button class="octave-btn" data-octaves="1">1</button>
+                                    <button class="octave-btn active" data-octaves="2">2</button>
+                                    <button class="octave-btn" data-octaves="3">3</button>
+                              </div>
+                        </div>
+
+                        <div class="piano-section" id="piano-tab">
+                              <div class="piano-container">
+                                    <div class="keys" id="piano-keys"><!-- built by generatePiano() --></div>
+                              </div>
+                        </div>
+
+                        <div class="guitar-section hidden" id="guitar-tab">
+                              <div class="guitar-strings" id="guitar-strings"><!-- built by generateGuitar() --></div>
+                        </div>
+
+                        <div class="selected-notes-bar">
+                              <span class="bar-label">selected</span>
+                              <span class="notes-display" id="notes-display"></span>
+                              <button class="clear-btn" id="clear-notes-btn">clear</button>
+                        </div>
+                  </div>
+
+                  <aside class="bench-rail">
+                        <div class="rail-label">your key</div>
+                        <div class="key-current empty" id="key-current">press a few notes&hellip;</div>
+                        <div class="rail-label">candidates (<span id="key-count">0</span>)</div>
+                        <div class="keys-grid" id="keys-grid"></div>
+                        <p class="synesthesia-note">every key carries its own color · scriabin heard them this way.</p>
+                  </aside>
+            </section>
+
+            <div id="results" class="hidden">
+
+                  <section class="strip hidden" id="scale-info">
+                        <div class="strip-label">the scale</div>
+                        <div class="strip-body">
+                              <h4 id="scale-title"></h4>
+                              <div class="scale-notes" id="scale-notes"></div>
+                              <div class="scale-hints">
+                                    <div><span class="hint-dot scale-dot"></span>tinted notes belong to the scale · play them freely</div>
+                                    <div><span class="hint-dot root-dot"></span>the root note · start and end phrases there</div>
+                              </div>
+                        </div>
+                  </section>
+
+                  <section class="strip hidden" id="modes-section">
+                        <div class="strip-label">modes · same notes, other moods</div>
+                        <div class="strip-body">
+                              <div class="modes-grid" id="modes-grid"></div>
+                        </div>
+                  </section>
+
+                  <div id="results-grid"></div>
+
+                  <section class="strip hidden" id="songs-strip">
+                        <div class="strip-label">songs in this key</div>
+                        <div class="strip-body" id="now-playing"></div>
+                  </section>
+
+            </div>
+
+            <footer class="site-footer">made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a></footer>
+
+      </div>
+      </div> <!-- /page-detector -->
+
+      <div class="page hidden" id="page-progressions">
+            <div class="container">
+                  <div class="prog-panel">
+                        <h2>🎵 chord progression planner</h2>
+
+                        <div class="prog-key-select">
+                              <div class="prog-key-row">
+                                    <span><b>key:</b></span>
+                                    <div class="prog-key-buttons" id="prog-key-buttons"></div>
+                              </div>
+                              <div class="prog-key-row">
+                                    <span><b>mode:</b></span>
+                                    <div class="prog-mode-buttons" id="prog-mode-buttons"></div>
+                              </div>
+                        </div>
+
+                        <div class="prog-builder">
+                              <h3>available chords:</h3>
+                              <div class="prog-available-chords" id="prog-available-chords">
+                                    <span class="prog-hint">no scale selected yet · go to scale detector first</span>
+                              </div>
+                        </div>
+
+                        <div class="prog-current">
+                              <h3>your progression:</h3>
+                              <div class="progression-slots" id="progression-slots">
+                                    <span class="progression-empty">click chords above to build your progression</span>
+                              </div>
+                              <div class="prog-actions">
+                                    <button class="prog-action-btn" id="clear-prog-btn">clear</button>
+                                    <button class="prog-action-btn save-btn" id="save-prog-btn">save progression</button>
+                              </div>
+                        </div>
+
+                        <div class="prog-saved">
+                              <h3>saved progressions:</h3>
+                              <div id="saved-progressions"></div>
+                        </div>
+
+                        <div class="prog-common">
+                              <h3>common progressions:</h3>
+                              <div id="common-progressions-list"></div>
+                        </div>
+                  </div>
+            </div>
+      </div> <!-- /page-progressions -->
+
+      <div class="page hidden" id="page-philosophy">
+            <div class="container">
+
+                  <div id="blog-index">
+                        <div class="blog-head">
+                              <h2>the music theory blog</h2>
+                              <p>essays and small lessons · written by a person who plays five instruments badly and loves all of them.</p>
+                        </div>
+                        <div class="blog-grid">
+                              <article class="blog-card" data-post="why-music-matters" tabindex="0">
+                                    <span class="blog-tag">essay</span>
+                                    <h3>Why Music Matters</h3>
+                                    <p>Music is nature. Why the human ear already knows the rules before theory names them.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                              <article class="blog-card" data-post="circle-of-fifths" tabindex="0">
+                                    <span class="blog-tag">theory</span>
+                                    <h3>The Circle of Fifths & Intervals</h3>
+                                    <p>Theory is not knowledge sent from heaven · it is documentation of what our ears always knew.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                              <article class="blog-card" data-post="seven-modes" tabindex="0">
+                                    <span class="blog-tag">theory</span>
+                                    <h3>Seven Modes, Seven Moods</h3>
+                                    <p>Same seven notes, seven completely different feelings · with songs you already know.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                              <article class="blog-card" data-post="find-the-key" tabindex="0">
+                                    <span class="blog-tag">practice</span>
+                                    <h3>How I Find a Song's Key by Ear</h3>
+                                    <p>The Sails of Charon method · the exact habit this whole site was built to speed up.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                              <article class="blog-card" data-post="four-chords" tabindex="0">
+                                    <span class="blog-tag">practice</span>
+                                    <h3>The Four Chords That Rule Pop</h3>
+                                    <p>I–V–vi–IV and its three siblings carried half of the radio. Learn to hear them once, hear them forever.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                              <article class="blog-card" data-post="dictionary" tabindex="0">
+                                    <span class="blog-tag">reference</span>
+                                    <h3>The Dictionary</h3>
+                                    <p>Every word on this site · scale, mode, triad, progression, roman numerals · explained like a friend would.</p>
+                                    <span class="blog-readmore">read →</span>
+                              </article>
+                        </div>
+                  </div>
+
+                  <div class="blog-post hidden" id="post-why-music-matters">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">why music matters</div>
+                        <div class="philosophy-content">
+                              <p>I am deeply in love with all kinds of music. Actually, I feel deeply sorrowful when someone asks me what my main instrument is. I literally play piano, guitar, bass, harmonica and ukulele. I even have a violin. Obviously, I am not a virtuoso - that is so true. But I am into philosophy of music, and to me, that is what really matters.</p>
+
+                              <p>When you listen to something - it can be birds singing, leaves rustling; you hear some noises. In the nature, if you lend an ear, you'll notice that they are perfectly in order. You don't feel anything abnormal. That's because music history developed upon the human ear, what was appealing to an ear over centuries evolved into what we call music today.</p>
+
+                              <p>That is the reason we know seven modes. The most known is Ionian, major tone. For instance, Locrian mode is not feasible to the human ear, it disappeared through something similar to natural selection of music and time. <b>Music is nature.</b> Years after, these harmonies were documented under the name of "music theory". Bach, Vivaldi, Beethoven didn't follow these rules, they looked at the nature. They composed what would be appealing to compose, that's why they shaped music into an art from natural harmonied noises. People documented their works later on.</p>
+
+                              <p>When you listen to a music, it is bunch of notes in order. You hear D4, proceeding with a note that is higher in frequency. It might be something E? Higher? F? So, the story goes on. Once you have a prototype of the formula you hear, you can play it in anywhere. Play the melody on harp, violin, harmonica, saxophone; it's you that decide. They are some vehicles, notebooks, compilers for music.</p>
+
+                              <p><i>Until now, I have taught music theory to ten of my friends. I even wrote a handwritten booklet for a person I love. Yet, I don't have a music of my own. The tragedy is similar to the "centipede" problem. While you ponder about which leg to step with, every other bug has already flown away.</i></p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+
+                  <div class="blog-post hidden" id="post-circle-of-fifths">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">the circle of fifths & intervals</div>
+                        <div class="philosophy-content">
+                              <h3>What is Circle of Fifths?</h3>
+                              <p>Music theory is not a bunch of knowledge sent from heaven. Music is an observer of human history from the beginning of the creation. First times, there were percussions, wind instruments. Since the beginning of creation, music was not solely an art, but was also a science derived from nature.</p>
+
+                              <p>Musicians founded a relationship between the notes kept the audience focused to their music. For instance, we might not be able to explain it with the music theory. But our ears know that there is something "strange", something "unexpected", something "absurd" is happening when F and G is played with C#.</p>
+
+                              <p>One of the first impulses we get from the outer world is heart beats of our mother when we were fetus :) The birds harmonize together. The leaves harmonize with the wind. They all happen in harmony. This harmony in nature, what our ears are used to listen since the day we were a zygote, what is the tendency of the ears are documentated in the name of music theory.</p>
+
+                              <p><b>All in all, this is not a memorized knowledge. It is documentation of human history and science.</b></p>
+
+                              <h3>Intervals</h3>
+                              <p>C → D (WHOLE) &nbsp; E → F (HALF)</p>
+                              <p>W + H = Major Third &nbsp; | &nbsp; H + W = Minor Third</p>
+                              <p>Major Third + Minor Third = <b>MAJOR Triad</b> (C-E-G)</p>
+                              <p>Minor Third + Major Third = <b>MINOR Triad</b> (E-G-B)</p>
+
+                              <h3>Chords</h3>
+                              <p>There is no certain knowledge for it. Triads are documentated but there are power chords (5), there are suspended chords (sus4, sus2), there are chords with four notes (7th). Build with any interval!</p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+
+                  <div class="blog-post hidden" id="post-seven-modes">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">seven modes, seven moods</div>
+                        <div class="philosophy-content">
+                              <p>Here is the most generous trick in music: take the seven notes of one major scale, change nothing, and just start from a different note. You get a completely different mood. These are the modes · seven moods hiding inside every key you find on this site.</p>
+
+                              <h3>Ionian · the major scale itself</h3>
+                              <p>Happy, bright, home. Most pop and folk lives here. "Let It Be" is pure Ionian comfort.</p>
+
+                              <h3>Dorian · minor with hope</h3>
+                              <p>Start from the 2nd note. It is minor, but with one raised note that adds a jazzy, hopeful shimmer. Miles Davis built "So What" on it; "Scarborough Fair" and Santana's "Oye Como Va" breathe it.</p>
+
+                              <h3>Phrygian · the Spanish shadow</h3>
+                              <p>Start from the 3rd note and the very first step is a half step · instantly dark, instantly Spanish. Flamenco lives here, and metal guitarists love it for riffs that feel dangerous.</p>
+
+                              <h3>Lydian · the dream</h3>
+                              <p>Start from the 4th note. One raised note makes everything float, like a film about flying. The Simpsons theme is the textbook Lydian melody.</p>
+
+                              <h3>Mixolydian · major with dirt</h3>
+                              <p>Start from the 5th note. It is major, but the softened 7th makes it bluesy and easy-going. "Sweet Home Alabama" and The Beatles' "Norwegian Wood" ride on it.</p>
+
+                              <h3>Aeolian · the natural minor</h3>
+                              <p>Start from the 6th note. This is the sad one, the emotional one. "Losing My Religion" stays in it from the first bar to the last.</p>
+
+                              <h3>Locrian · the ghost</h3>
+                              <p>Start from the 7th note and even the home chord is unstable (diminished). Music history almost never uses it · which tells you something: our ears vote, and Locrian keeps losing the election. It survives as spice, not as a home.</p>
+
+                              <p><i>Practical use: find your key on the detector page, then click through the seven modes and listen to how the same notes change costume. Improvise in Dorian one day, Mixolydian the next · same fingers, new feelings.</i></p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+
+                  <div class="blog-post hidden" id="post-find-the-key">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">how i find a song's key by ear</div>
+                        <div class="philosophy-content">
+                              <p>One of my biggest joys is listening through my playlists and harmonizing together with random songs. But to join a song, you first have to know where it lives. This site exists because of that habit · here is the exact method, with a real example.</p>
+
+                              <h3>Step 1 · catch a few notes</h3>
+                              <p>Don't try to hear everything. Catch three or four notes from the intro or the main riff and find them on the piano or the fretboard. Hum along if it helps; your voice is a slower but honest instrument.</p>
+
+                              <h3>Step 2 · let the candidates appear</h3>
+                              <p>Feed those notes to the detector. Three notes usually leave you with a handful of possible keys. That's not failure · that's the shortlist.</p>
+
+                              <h3>Step 3 · wait for the deciding note</h3>
+                              <p>Real example: "Sails of Charon" by Scorpions. The intro gave me two possible readings · C D E F# G A B, or C# D E F# G A B. One note apart. Then the song continued with a C natural, and option one won: the G major family, played from B. <b>B Phrygian.</b> One note decided everything.</p>
+
+                              <h3>Step 4 · find the home note</h3>
+                              <p>The key's family and its mode are different questions. The family tells you which notes are legal; the home note tells you where phrases rest. Listen for the note the song keeps landing on · that's your root. Start and end your lines there and you will sound like you belong.</p>
+
+                              <p><i>After a few weeks this stops being steps and becomes a reflex. The tool is training wheels · good ones. Use it until your ears don't need it.</i></p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+
+                  <div class="blog-post hidden" id="post-four-chords">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">the four chords that rule pop</div>
+                        <div class="philosophy-content">
+                              <p>Pop music has a public secret: an enormous part of it is built on one progression · <b>I–V–vi–IV</b>. In C major that is C → G → Am → F. The comedy group Axis of Awesome once played dozens of hits over this single loop, and the joke lands because it is true.</p>
+
+                              <h3>Why does it work?</h3>
+                              <p>It tells a complete emotional story in four bars: home (I), tension (V), sadness (vi), comfort (IV), and back home. Human ears never get tired of that round trip.</p>
+
+                              <h3>The siblings</h3>
+                              <p><b>I–vi–IV–V</b> · the 50s doo-wop progression. "Stand By Me" made it immortal; every slow dance of that decade leaned on it.</p>
+                              <p><b>vi–IV–I–V</b> · the same four chords starting from the sad one. Instant melancholy; half of the 2010s radio pop starts here.</p>
+                              <p><b>ii–V–I</b> · jazz's heartbeat. "Autumn Leaves" is practically a ii–V–I étude. Learn to hear this one and jazz standards open like doors.</p>
+                              <p><b>I–IV–V</b> · the 12-bar blues skeleton, the grandfather of rock and roll.</p>
+                              <p><b>i–VII–VI–V</b> · the Andalusian cadence, ancient and dramatic. "Hit the Road Jack" walks down it the whole song.</p>
+
+                              <h3>How to use this site with them</h3>
+                              <p>Find your key on the detector, open the progressions page, and tap any of these · the site translates the numerals into real chords for your key instantly. Play the loop, then improvise over it using the scale notes. Congratulations: you are now the rhythm section and the soloist.</p>
+                        </div>
+                  </div>
+                  </div> <!-- /post -->
+
+                  <div class="blog-post hidden" id="post-dictionary">
+                  <button class="blog-back">← all posts</button>
+                  <div class="panel philosophy-panel">
+                        <div class="panel-title">the dictionary · every word on this site, explained</div>
+                        <div class="philosophy-content">
+                              <h3>What is a scale?</h3>
+                              <p>A scale is a family of notes that sound good together. Take C major: C D E F G A B. Stay inside those seven notes and almost anything you play will sound "right". That is why finding the scale is the whole point of this site · once you know the family, you can improvise without fear.</p>
+
+                              <h3>What is a key?</h3>
+                              <p>The key is the home of a song. When we say a song is "in G major", it means the song's melody and chords are built from the G major scale, and the note G feels like home · the place where phrases want to land and rest.</p>
+
+                              <h3>What is a root note?</h3>
+                              <p>The root is the note a scale or a chord is built on · its ground floor. In C major the root is C; in a Dm chord the root is D. Starting and ending your phrases on the root makes your solo sound resolved instead of lost.</p>
+
+                              <h3>What are modes?</h3>
+                              <p>Take the same seven notes of a major scale, but start from a different one of them · you get a mode. Same ingredients, completely different mood. Start C major from D and you get D Dorian (jazzy minor); start it from A and you get A minor (sad). That is why this site shows seven modes for every key you find: seven moods for free, no new notes to learn.</p>
+
+                              <h3>What is a chord?</h3>
+                              <p>A chord is several notes played at the same time. The most common kind is the <b>triad</b>: pick a note, skip one, pick, skip one, pick · like C, E, G. Three notes, one sound.</p>
+
+                              <h3>Major, minor, diminished · what do they mean?</h3>
+                              <p>They describe a chord's mood, and the mood comes from the distances between its notes. Major chords sound happy and open (C), minor chords sound sad or thoughtful (Cm), diminished chords sound tense and unstable (C°) · they want to move somewhere else immediately.</p>
+
+                              <h3>What are 7th and sus chords?</h3>
+                              <p>A <b>7th chord</b> is a triad with one more note stacked on top · it adds color: maj7 sounds dreamy, m7 sounds smooth and jazzy, 7 (dominant) sounds bluesy. A <b>sus chord</b> (suspended) replaces the middle note of a triad with its neighbor · sus2 or sus4 · so the chord floats, neither happy nor sad, waiting to resolve.</p>
+
+                              <h3>What are diatonic chords?</h3>
+                              <p>The chords you can build using only the notes of one scale. Every scale gives you exactly seven of them, one on each note. They are guaranteed to fit together · that is why the site lists them for every key: it is your safe palette for writing or jamming.</p>
+
+                              <h3>What is a chord progression?</h3>
+                              <p>A chord progression is chords played one after another · the skeleton of a song. Verse, chorus, everything sits on top of a progression. We write them with roman numerals (I–IV–V) so they work in any key.</p>
+
+                              <h3>What do the roman numerals (I, ii, V...) mean?</h3>
+                              <p>They number the scale's seven degrees, so a progression can be described without naming a key. In C major: I = C, ii = Dm, V = G. Uppercase means major, lowercase means minor, the ° sign means diminished. "I–V–vi–IV" in C is C → G → Am → F; the same recipe in G is G → D → Em → C. Same feeling, different key · that is the magic of numerals.</p>
+
+                              <h3>Why do some progressions have names like "Pop Classic"?</h3>
+                              <p>Because a handful of progressions carried most of popular music. I–V–vi–IV alone powers hundreds of hits; ii–V–I is the heart of jazz; the 12-bar blues is I–IV–V rearranged. Learn to hear these few shapes and half of the radio becomes sight-readable.</p>
+
+                              <h3>What is an octave?</h3>
+                              <p>The same note, higher or lower. A piano has many C's · each one doubles the frequency of the one below. That is why the piano here offers 1 to 3 octaves: same note names, different heights.</p>
 
                               <h3>What is an interval?</h3>
                               <p>The distance between two notes, measured in steps. The smallest one on a piano is a half step (E to F); two half steps make a whole step (C to D). Stack intervals and you get chords; walk them and you get melodies.</p>

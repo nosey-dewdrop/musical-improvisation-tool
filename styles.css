@@ -917,18 +917,6 @@ button {
       transform: rotate(-2.5deg);
 }
 
-/* vector earphones plugged into the top */
-.earphones {
-      position: absolute;
-      bottom: calc(100% - 6px);
-      left: 50%;
-      transform: translateX(-50%);
-      width: 210px;
-      height: 150px;
-      pointer-events: none;
-      filter: drop-shadow(0 1px 1px rgba(120, 30, 80, 0.25));
-}
-
 .dock-bar {
       display: block;
       text-align: center;
@@ -1011,10 +999,6 @@ button {
 .dock.collapsed {
       width: 170px;
       padding: 8px 12px;
-}
-
-.dock.collapsed .earphones {
-      display: none;
 }
 
 .dock.collapsed .dock-screen,
@@ -1472,184 +1456,123 @@ button {
 }
 
 
-/* ═══ y2k rainbow — not one color, all of them (pastel, sticker-like) ═══ */
+/* ═══ y2k candy — juicy jelly chips, glossy like an imac g3 ═══ */
 
-/* key candidates: each key wears its own color as a filled chip */
-.key-btn {
-      background: hsl(var(--btn-h, 285) 60% 91%);
-      border-color: hsl(var(--btn-h, 285) 50% 76%);
-      color: hsl(var(--btn-h, 285) 55% 32%);
-}
+.mode-btn:nth-child(1), .chord-card:nth-child(1), .scale-note:nth-child(1), .prog-chord-btn:nth-child(1) { --chip-h: 335; }
+.mode-btn:nth-child(2), .chord-card:nth-child(2), .scale-note:nth-child(2), .prog-chord-btn:nth-child(2) { --chip-h: 15; }
+.mode-btn:nth-child(3), .chord-card:nth-child(3), .scale-note:nth-child(3), .prog-chord-btn:nth-child(3) { --chip-h: 42; }
+.mode-btn:nth-child(4), .chord-card:nth-child(4), .scale-note:nth-child(4), .prog-chord-btn:nth-child(4) { --chip-h: 145; }
+.mode-btn:nth-child(5), .chord-card:nth-child(5), .scale-note:nth-child(5), .prog-chord-btn:nth-child(5) { --chip-h: 192; }
+.mode-btn:nth-child(6), .chord-card:nth-child(6), .scale-note:nth-child(6), .prog-chord-btn:nth-child(6) { --chip-h: 248; }
+.mode-btn:nth-child(7), .chord-card:nth-child(7), .scale-note:nth-child(7), .prog-chord-btn:nth-child(7) { --chip-h: 283; }
 
-.key-btn .key-name {
-      color: hsl(var(--btn-h, 285) 60% 28%);
-}
-
-.key-btn:hover {
-      border-color: hsl(var(--btn-h, 285) 55% 55%);
-}
-
-.key-btn.active {
-      background: hsl(var(--btn-h, 285) 60% 48%);
-      border-color: hsl(var(--btn-h, 285) 65% 40%);
-      color: rgba(255, 255, 255, 0.85);
-}
-
-.key-btn.active .key-name {
-      color: #fff;
-}
-
-/* modes: seven moods, seven colors */
-.mode-btn:nth-child(1) { --chip-h: 340; }
-.mode-btn:nth-child(2) { --chip-h: 25; }
-.mode-btn:nth-child(3) { --chip-h: 55; }
-.mode-btn:nth-child(4) { --chip-h: 145; }
-.mode-btn:nth-child(5) { --chip-h: 190; }
-.mode-btn:nth-child(6) { --chip-h: 250; }
-.mode-btn:nth-child(7) { --chip-h: 285; }
-
-.mode-btn {
-      background: hsl(var(--chip-h, 285) 65% 93%);
-      border-color: hsl(var(--chip-h, 285) 50% 78%);
-}
-
-.mode-btn:hover {
-      border-color: hsl(var(--chip-h, 285) 55% 55%);
-}
-
-.mode-btn.active {
-      background: hsl(var(--chip-h, 285) 60% 46%);
-      border-color: hsl(var(--chip-h, 285) 65% 38%);
-}
-
-.mode-btn.active .mode-root {
-      color: #fff;
-}
-
-.mode-btn.active .mode-desc {
-      color: rgba(255, 255, 255, 0.8);
-}
-
-/* chords: one color per degree, I → vii° across the rainbow */
-.chord-card:nth-child(1) { --chip-h: 340; }
-.chord-card:nth-child(2) { --chip-h: 25; }
-.chord-card:nth-child(3) { --chip-h: 55; }
-.chord-card:nth-child(4) { --chip-h: 145; }
-.chord-card:nth-child(5) { --chip-h: 190; }
-.chord-card:nth-child(6) { --chip-h: 250; }
-.chord-card:nth-child(7) { --chip-h: 285; }
-
-.chord-card {
-      background: hsl(var(--chip-h, 285) 65% 94%);
-      border-color: hsl(var(--chip-h, 285) 50% 80%);
-}
-
-.chord-card:hover {
-      border-color: hsl(var(--chip-h, 285) 60% 50%);
-}
-
-.chord-card .chord-name {
-      color: hsl(var(--chip-h, 285) 65% 32%);
-}
-
-.chord-card .chord-degree {
-      color: hsl(var(--chip-h, 285) 40% 50%);
-}
-
-/* scale notes: rainbow walk from root to seventh */
-.scale-note:nth-child(1) { --chip-h: 340; }
-.scale-note:nth-child(2) { --chip-h: 25; }
-.scale-note:nth-child(3) { --chip-h: 55; }
-.scale-note:nth-child(4) { --chip-h: 145; }
-.scale-note:nth-child(5) { --chip-h: 190; }
-.scale-note:nth-child(6) { --chip-h: 250; }
-.scale-note:nth-child(7) { --chip-h: 285; }
-
-.scale-note.normal {
-      background: hsl(var(--chip-h, 285) 60% 91%);
-      border-color: hsl(var(--chip-h, 285) 50% 76%);
-      color: hsl(var(--chip-h, 285) 60% 30%);
-}
-
-/* progressions: cycling sticker colors */
-.progression-chip:nth-child(6n+1), .prog-common-item:nth-child(6n+1) { --chip-h: 340; }
-.progression-chip:nth-child(6n+2), .prog-common-item:nth-child(6n+2) { --chip-h: 25; }
+.progression-chip:nth-child(6n+1), .prog-common-item:nth-child(6n+1) { --chip-h: 335; }
+.progression-chip:nth-child(6n+2), .prog-common-item:nth-child(6n+2) { --chip-h: 15; }
 .progression-chip:nth-child(6n+3), .prog-common-item:nth-child(6n+3) { --chip-h: 145; }
-.progression-chip:nth-child(6n+4), .prog-common-item:nth-child(6n+4) { --chip-h: 190; }
-.progression-chip:nth-child(6n+5), .prog-common-item:nth-child(6n+5) { --chip-h: 250; }
-.progression-chip:nth-child(6n+6), .prog-common-item:nth-child(6n+6) { --chip-h: 285; }
+.progression-chip:nth-child(6n+4), .prog-common-item:nth-child(6n+4) { --chip-h: 192; }
+.progression-chip:nth-child(6n+5), .prog-common-item:nth-child(6n+5) { --chip-h: 248; }
+.progression-chip:nth-child(6n+6), .prog-common-item:nth-child(6n+6) { --chip-h: 283; }
 
-.progression-chip, .prog-common-item {
-      background: hsl(var(--chip-h, 285) 65% 94%);
-      border-color: hsl(var(--chip-h, 285) 50% 80%);
-}
-
-.progression-chip:hover, .prog-common-item:hover {
-      border-color: hsl(var(--chip-h, 285) 60% 50%);
-}
-
-/* progression builder chords too */
-.prog-chord-btn:nth-child(1) { --chip-h: 340; }
-.prog-chord-btn:nth-child(2) { --chip-h: 25; }
-.prog-chord-btn:nth-child(3) { --chip-h: 55; }
-.prog-chord-btn:nth-child(4) { --chip-h: 145; }
-.prog-chord-btn:nth-child(5) { --chip-h: 190; }
-.prog-chord-btn:nth-child(6) { --chip-h: 250; }
-.prog-chord-btn:nth-child(7) { --chip-h: 285; }
-
-.prog-chord-btn {
-      background: hsl(var(--chip-h, 285) 65% 94%);
-      border-color: hsl(var(--chip-h, 285) 50% 78%);
-      color: hsl(var(--chip-h, 285) 65% 30%);
-}
-
-.prog-chord-btn:hover {
-      border-color: hsl(var(--chip-h, 285) 60% 50%);
-      color: hsl(var(--chip-h, 285) 65% 25%);
-}
-
-/* blog tags: each topic its own color */
-.blog-card:nth-child(6n+1) .blog-tag { --chip-h: 340; }
-.blog-card:nth-child(6n+2) .blog-tag { --chip-h: 190; }
-.blog-card:nth-child(6n+3) .blog-tag { --chip-h: 250; }
+.blog-card:nth-child(6n+1) .blog-tag { --chip-h: 335; }
+.blog-card:nth-child(6n+2) .blog-tag { --chip-h: 192; }
+.blog-card:nth-child(6n+3) .blog-tag { --chip-h: 248; }
 .blog-card:nth-child(6n+4) .blog-tag { --chip-h: 145; }
-.blog-card:nth-child(6n+5) .blog-tag { --chip-h: 25; }
-.blog-card:nth-child(6n+6) .blog-tag { --chip-h: 285; }
+.blog-card:nth-child(6n+5) .blog-tag { --chip-h: 15; }
+.blog-card:nth-child(6n+6) .blog-tag { --chip-h: 283; }
 
-.blog-tag {
-      background: hsl(var(--chip-h, 285) 65% 93%);
-      border-color: hsl(var(--chip-h, 285) 50% 70%);
-      color: hsl(var(--chip-h, 285) 60% 32%);
+/* the jelly recipe: saturated fill, glossy top light, soft candy shadow */
+.key-btn, .mode-btn, .chord-card, .scale-note.normal,
+.progression-chip, .prog-common-item, .prog-chord-btn, .blog-tag {
+      --h: var(--chip-h, var(--btn-h, 285));
+      background: linear-gradient(180deg, hsl(var(--h) 92% 72%) 0%, hsl(var(--h) 86% 57%) 55%, hsl(var(--h) 88% 51%) 100%);
+      border: 1px solid hsl(var(--h) 72% 42%);
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 2px 4px hsl(var(--h) 60% 40% / 0.3);
 }
 
-/* dark mode: same rainbow, deeper */
-.dark-mode .key-btn {
-      background: hsl(var(--btn-h, 285) 35% 22%);
-      border-color: hsl(var(--btn-h, 285) 40% 38%);
+.key-btn .key-name,
+.mode-btn .mode-root,
+.chord-card .chord-name {
+      color: #fff;
 }
 
-.dark-mode .key-btn .key-name {
-      color: hsl(var(--btn-h, 285) 70% 80%);
+.key-btn,
+.mode-btn .mode-desc,
+.chord-card .chord-degree,
+.chord-card .chord-quality,
+.chord-card .chord-notes-display,
+.progression-label,
+.prog-common-label {
+      color: rgba(255, 255, 255, 0.88);
 }
 
-.dark-mode .mode-btn,
-.dark-mode .chord-card,
-.dark-mode .progression-chip,
-.dark-mode .prog-common-item,
-.dark-mode .prog-chord-btn,
-.dark-mode .blog-tag {
-      background: hsl(var(--chip-h, 285) 32% 20%);
-      border-color: hsl(var(--chip-h, 285) 38% 36%);
+.key-btn:hover, .mode-btn:hover, .chord-card:hover,
+.progression-chip:hover, .prog-common-item:hover, .prog-chord-btn:hover {
+      filter: brightness(1.07) saturate(1.05);
+      border-color: hsl(var(--h) 72% 42%);
 }
 
-.dark-mode .chord-card .chord-name,
-.dark-mode .prog-chord-btn,
-.dark-mode .blog-tag {
-      color: hsl(var(--chip-h, 285) 70% 78%);
+/* selected = pressed jelly with a white inner ring */
+.key-btn.active, .mode-btn.active {
+      background: linear-gradient(180deg, hsl(var(--h) 88% 50%) 0%, hsl(var(--h) 90% 60%) 100%);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85), inset 0 2px 5px rgba(0, 0, 0, 0.22);
 }
 
-.dark-mode .scale-note.normal {
-      background: hsl(var(--chip-h, 285) 32% 22%);
-      border-color: hsl(var(--chip-h, 285) 38% 38%);
-      color: hsl(var(--chip-h, 285) 70% 80%);
+/* the big key chip: jelly in the found key's color */
+.key-current {
+      background: linear-gradient(180deg, hsl(var(--key-h) 90% 68%) 0%, hsl(var(--key-h) 82% 52%) 60%, hsl(var(--key-h) 85% 46%) 100%);
+      border: 1px solid hsl(var(--key-h) 70% 38%);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 3px 8px hsl(var(--key-h) 60% 40% / 0.35);
+}
+
+.key-current.empty {
+      background: transparent;
+      border: 1px dashed var(--hair-strong);
+      box-shadow: none;
+      text-shadow: none;
+}
+
+/* candy for the semantic chips too */
+.scale-note.root-note {
+      background: linear-gradient(180deg, hsl(var(--key-h) 90% 66%), hsl(var(--key-h) 85% 48%));
+      border-color: hsl(var(--key-h) 72% 38%);
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.scale-note.selected-note {
+      background: linear-gradient(180deg, #ff6ec0, var(--pink));
+      border: 1px solid var(--pink-deep);
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.octave-btn.active {
+      background: linear-gradient(180deg, #56dff0, var(--cyan));
+      border-color: #0097a7;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.hint-dot.scale-dot {
+      background: hsl(var(--key-h) 80% 62%);
+      border: none;
+}
+
+.hint-dot.root-dot {
+      background: hsl(var(--key-h) 85% 48%);
+}
+
+/* piano/guitar scale tint gets juicier too */
+.white-key.scale { background: hsl(var(--key-h) 75% 82%); color: hsl(var(--key-h) 60% 32%); }
+.fret-dot.scale { background: hsl(var(--key-h) 75% 82%); border-color: hsl(var(--key-h) 60% 50%); }
+
+/* dark mode: same candy, deeper glass */
+.dark-mode .key-btn, .dark-mode .mode-btn, .dark-mode .chord-card,
+.dark-mode .scale-note.normal, .dark-mode .progression-chip,
+.dark-mode .prog-common-item, .dark-mode .prog-chord-btn, .dark-mode .blog-tag {
+      background: linear-gradient(180deg, hsl(var(--h) 70% 56%) 0%, hsl(var(--h) 72% 42%) 100%);
+      border-color: hsl(var(--h) 60% 30%);
 }

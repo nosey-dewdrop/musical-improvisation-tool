@@ -227,15 +227,15 @@ a { color: var(--fg); }
 
 .dark-mode .white-key.root { background: #fff; color: #000; }
 
-/* pressed notes wear their frequency: low C red, up to violet B */
+/* pressed notes wear damla's rainbow */
 .white-key.selected, .black-key.selected, .fret-dot.selected {
-      background: hsl(var(--note-h, 320) 85% 46%) !important;
-      border-color: hsl(var(--note-h, 320) 85% 30%) !important;
+      background: var(--note-c, var(--pink)) !important;
+      border-color: #000 !important;
       color: #fff !important;
 }
 
 .white-key.keyboard-active, .black-key.keyboard-active {
-      background: hsl(var(--note-h, 320) 85% 46%) !important;
+      background: var(--note-c, var(--pink)) !important;
       color: #fff !important;
 }
 
@@ -842,3 +842,16 @@ a { color: var(--fg); }
 /* static blog pages */
 .post-h1 { font-size: 1.5rem; font-weight: 400; margin: 22px 0 4px; }
 .blog-grid a.blog-card { text-decoration: none; color: inherit; }
+
+
+/* blog post pages: centered column */
+.post-h1 {
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+}
+
+.philosophy-panel {
+      margin-left: auto;
+      margin-right: auto;
+}

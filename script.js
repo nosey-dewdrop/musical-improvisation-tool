@@ -205,13 +205,25 @@ let savedProgressions = [];
 // PITCH HELPERS — pitch-based comparison so enharmonics (D# vs Eb) match
 // ───────────────────────────────────────────
 
-// the visible spectrum spans about one octave of light frequency.
-// naturals sit on the classic rainbow (C red, D orange, E yellow,
-// F green, G cyan, A blue, B violet), sharps take the in-between hues
-const PITCH_HUES = [0, 15, 30, 43, 55, 110, 148, 185, 208, 230, 255, 280];
+// damla's rainbow: C red, D pink, E orange, F yellow,
+// G green, A blue, B purple. sharps blend their neighbors.
+const PITCH_COLORS = [
+    '#e40303', // C  red
+    '#ec1050', // C#
+    '#e91e90', // D  pink
+    '#f5551c', // D#
+    '#ff8c00', // E  orange
+    '#d9a300', // F  yellow
+    '#7d9a13', // F#
+    '#008026', // G  green
+    '#00679c', // G#
+    '#004dff', // A  blue
+    '#4b2fd0', // A#
+    '#750787'  // B  purple
+];
 
-function noteHue(note) {
-    return PITCH_HUES[noteToPitch(note)];
+function noteColor(note) {
+    return PITCH_COLORS[noteToPitch(note)];
 }
 
 function noteToPitch(note) {
@@ -345,7 +357,7 @@ function updateVisualDisplay() {
         if (i > 0) display.appendChild(document.createTextNode(' '));
         const s = document.createElement('span');
         s.textContent = n;
-        s.style.color = `hsl(${noteHue(n)} 85% 40%)`;
+        s.style.color = noteColor(n);
         display.appendChild(s);
     });
 }
@@ -960,7 +972,7 @@ function generatePiano(numOctaves) {
             const btn = document.createElement('button');
             btn.className = 'white-key';
             btn.textContent = note;
-            btn.style.setProperty('--note-h', noteHue(note));
+            btn.style.setProperty('--note-c', noteColor(note));
             btn.onclick = () => toggleNote(note, octaveNum);
             btn.style.width = ww + 'px';
             btn.style.height = wh + 'px';
@@ -972,7 +984,7 @@ function generatePiano(numOctaves) {
             const btn = document.createElement('button');
             btn.className = 'black-key';
             btn.textContent = note;
-            btn.style.setProperty('--note-h', noteHue(note));
+            btn.style.setProperty('--note-c', noteColor(note));
             btn.onclick = () => toggleNote(note, octaveNum);
             btn.style.left = (blackOffsets[i] + oct * octaveWidth) + 'px';
             btn.style.width = bw + 'px';
@@ -1009,7 +1021,7 @@ function generateGuitar() {
             dot.className = 'fret-dot';
             dot.dataset.fret = fret;
             dot.textContent = note;
-            dot.style.setProperty('--note-h', noteHue(note));
+            dot.style.setProperty('--note-c', noteColor(note));
             if (fret === 0) dot.title = `open ${string.open}${string.octave} string`;
             dot.onclick = () => toggleNote(note, octave);
             row.appendChild(dot);
@@ -1234,7 +1246,7 @@ document.addEventListener('DOMContentLoaded', function () {
     applyTheme(localStorage.getItem('msi_theme') === 'dark');
 
     // rainbow headings: every letter gets its own color, flat
-    const RAINBOW = ['#e40303', '#ff8c00', '#d9a300', '#008026', '#00a8c9', '#004dff', '#750787'];
+    const RAINBOW = ['#e40303', '#e91e90', '#ff8c00', '#d9a300', '#008026', '#004dff', '#750787'];
     document.querySelectorAll('.rainbow').forEach(el => {
         const text = el.textContent;
         el.textContent = '';

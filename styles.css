@@ -1232,7 +1232,7 @@ button {
       color: var(--mut);
 }
 
-/* posts stacked as rows, not chips */
+/* posts packed tight, one line each, like a file search result */
 .blog-grid {
       display: block;
       border-top: 1px solid var(--hair);
@@ -1240,10 +1240,10 @@ button {
 
 .blog-card {
       display: grid;
-      grid-template-columns: 96px 1fr auto;
-      gap: 6px 22px;
+      grid-template-columns: 76px auto 1fr auto;
+      gap: 0 12px;
       align-items: baseline;
-      padding: 18px 4px;
+      padding: 6px 6px;
       border-bottom: 1px solid var(--hair);
       cursor: pointer;
       transition: background 0.15s ease;
@@ -1254,35 +1254,32 @@ button {
 }
 
 .blog-tag {
-      grid-row: 1 / span 2;
-      align-self: start;
       justify-self: start;
-      font-size: 0.62rem;
+      align-self: center;
+      font-size: 0.56rem;
       letter-spacing: 0.04em;
-      color: var(--accent-deep);
-      border: 1px solid var(--accent);
-      padding: 2px 7px;
+      padding: 1px 6px;
 }
 
 .blog-card h3 {
-      font-size: 1.05rem;
+      font-size: 0.9rem;
       font-weight: 400;
       margin: 0;
-      grid-column: 2;
+      white-space: nowrap;
 }
 
 .blog-card p {
       margin: 0;
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: var(--mut);
-      grid-column: 2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 }
 
 .blog-readmore {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       color: var(--accent-deep);
-      grid-column: 3;
-      grid-row: 1;
       white-space: nowrap;
 }
 
@@ -1413,20 +1410,11 @@ button {
       }
 
       .blog-card {
-            grid-template-columns: 1fr auto;
+            grid-template-columns: auto 1fr auto;
       }
 
-      .blog-tag {
-            grid-row: auto;
-            grid-column: 1;
-      }
-
-      .blog-card h3, .blog-card p {
-            grid-column: 1;
-      }
-
-      .blog-readmore {
-            grid-column: 2;
+      .blog-card p {
+            display: none;
       }
 
       .guitar-strings {

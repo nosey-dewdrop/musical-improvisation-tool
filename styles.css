@@ -598,6 +598,10 @@ button {
       align-items: start;
 }
 
+.strip > * {
+      min-width: 0;
+}
+
 .strip-label {
       font-size: 0.68rem;
       letter-spacing: 0.02em;
@@ -776,7 +780,7 @@ button {
 
 .chords-grid {
       display: grid;
-      grid-template-columns: repeat(7, minmax(86px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
       gap: 6px;
 }
 
@@ -1446,32 +1450,10 @@ button {
 
 /* ═══ y2k candy — juicy jelly chips, glossy like an imac g3 ═══ */
 
-.mode-btn:nth-child(1), .chord-card:nth-child(1), .scale-note:nth-child(1), .prog-chord-btn:nth-child(1) { --chip-h: 335; }
-.mode-btn:nth-child(2), .chord-card:nth-child(2), .scale-note:nth-child(2), .prog-chord-btn:nth-child(2) { --chip-h: 15; }
-.mode-btn:nth-child(3), .chord-card:nth-child(3), .scale-note:nth-child(3), .prog-chord-btn:nth-child(3) { --chip-h: 42; }
-.mode-btn:nth-child(4), .chord-card:nth-child(4), .scale-note:nth-child(4), .prog-chord-btn:nth-child(4) { --chip-h: 145; }
-.mode-btn:nth-child(5), .chord-card:nth-child(5), .scale-note:nth-child(5), .prog-chord-btn:nth-child(5) { --chip-h: 192; }
-.mode-btn:nth-child(6), .chord-card:nth-child(6), .scale-note:nth-child(6), .prog-chord-btn:nth-child(6) { --chip-h: 248; }
-.mode-btn:nth-child(7), .chord-card:nth-child(7), .scale-note:nth-child(7), .prog-chord-btn:nth-child(7) { --chip-h: 283; }
-
-.progression-chip:nth-child(6n+1), .prog-common-item:nth-child(6n+1) { --chip-h: 335; }
-.progression-chip:nth-child(6n+2), .prog-common-item:nth-child(6n+2) { --chip-h: 15; }
-.progression-chip:nth-child(6n+3), .prog-common-item:nth-child(6n+3) { --chip-h: 145; }
-.progression-chip:nth-child(6n+4), .prog-common-item:nth-child(6n+4) { --chip-h: 192; }
-.progression-chip:nth-child(6n+5), .prog-common-item:nth-child(6n+5) { --chip-h: 248; }
-.progression-chip:nth-child(6n+6), .prog-common-item:nth-child(6n+6) { --chip-h: 283; }
-
-.blog-card:nth-child(6n+1) .blog-tag { --chip-h: 335; }
-.blog-card:nth-child(6n+2) .blog-tag { --chip-h: 192; }
-.blog-card:nth-child(6n+3) .blog-tag { --chip-h: 248; }
-.blog-card:nth-child(6n+4) .blog-tag { --chip-h: 145; }
-.blog-card:nth-child(6n+5) .blog-tag { --chip-h: 15; }
-.blog-card:nth-child(6n+6) .blog-tag { --chip-h: 283; }
-
 /* the jelly recipe: saturated fill, glossy top light, soft candy shadow */
 .key-btn, .mode-btn, .chord-card, .scale-note.normal,
 .progression-chip, .prog-common-item, .prog-chord-btn, .blog-tag {
-      --h: var(--chip-h, var(--btn-h, 285));
+      --h: var(--chip-h, var(--btn-h, var(--key-h)));
       background: linear-gradient(180deg, hsl(var(--h) 92% 72%) 0%, hsl(var(--h) 86% 57%) 55%, hsl(var(--h) 88% 51%) 100%);
       border: 1px solid hsl(var(--h) 72% 42%);
       color: #fff;

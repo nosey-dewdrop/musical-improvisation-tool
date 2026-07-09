@@ -266,6 +266,23 @@ function showPage(page) {
         link.classList.toggle('active', link.dataset.page === page);
     });
     if (page === 'progressions') updateProgressionPage();
+    if (page === 'philosophy') showBlogIndex();
+}
+
+// ───────────────────────────────────────────
+// BLOG — theory page: index of posts, each opens alone
+// ───────────────────────────────────────────
+
+function showBlogIndex() {
+    document.getElementById('blog-index').classList.remove('hidden');
+    document.querySelectorAll('.blog-post').forEach(p => p.classList.add('hidden'));
+}
+
+function showBlogPost(id) {
+    document.getElementById('blog-index').classList.add('hidden');
+    document.querySelectorAll('.blog-post').forEach(p => p.classList.add('hidden'));
+    document.getElementById('post-' + id).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showTab(choice) {
@@ -864,10 +881,10 @@ function generatePiano(numOctaves) {
     const whiteNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
     const blackNotes = ['C#', 'D#', 'F#', 'G#', 'A#'];
 
-    // keys shrink as octave count grows
-    const keyWidths = { 1: 60, 2: 45, 3: 32 };
-    const keyHeights = { 1: 180, 2: 150, 3: 120 };
-    const fontSizes = { 1: 14, 2: 12, 3: 10 };
+    // keys shrink as octave count grows — big and proud, the piano is the hero
+    const keyWidths = { 1: 74, 2: 58, 3: 42 };
+    const keyHeights = { 1: 210, 2: 185, 3: 150 };
+    const fontSizes = { 1: 15, 2: 13, 3: 11 };
     const blackFontSizes = { 1: 12, 2: 10, 3: 8 };
 
     // on narrow screens, fit the keyboard to the viewport (min 30px keys, then it scrolls)
@@ -1160,6 +1177,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.octave-btn').forEach(btn => {
         btn.addEventListener('click', () => setOctaves(parseInt(btn.dataset.octaves, 10)));
+    });
+
+    document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', () => showBlogPost(card.dataset.post));
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showBlogPost(card.dataset.post); }
+        });
+    });
+    document.querySelectorAll('.blog-back').forEach(btn => {
+        btn.addEventListener('click', showBlogIndex);
     });
 
     document.getElementById('clear-notes-btn').addEventListener('click', clearNotes);

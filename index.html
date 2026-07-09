@@ -8,8 +8,8 @@
     <meta name="description" content="Pick the notes you hear on piano or guitar — find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Music Scale Detector</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=7">
-    <script src="script.js?v=7" defer></script>
+    <link rel="stylesheet" href="styles.css?v=8">
+    <script src="script.js?v=8" defer></script>
 </head>
 
 <body>
@@ -378,11 +378,17 @@
 
 
       <div class="dock" id="dock">
-            <div class="dock-bar">
-                  <span id="dock-label">♪ damla radio</span>
-                  <button id="dock-toggle" aria-label="collapse player">–</button>
+            <div class="dock-bar" id="dock-bar"><span id="dock-label">♪ damla radio</span></div>
+            <div class="dock-screen">
+                  <iframe id="dock-frame" src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" title="music player" height="152" allow="autoplay; clipboard-write; encrypted-media" loading="lazy"></iframe>
             </div>
-            <iframe id="dock-frame" src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" title="music player" height="152" allow="autoplay; clipboard-write; encrypted-media" loading="lazy"></iframe>
+            <div class="click-wheel">
+                  <button class="wheel-btn wheel-menu" id="dock-menu">menu</button>
+                  <button class="wheel-btn wheel-prev" id="dock-prev" aria-label="previous song">⏮</button>
+                  <button class="wheel-btn wheel-next" id="dock-next" aria-label="next song">⏭</button>
+                  <span class="wheel-btn wheel-play" aria-hidden="true">▶ ⏸</span>
+                  <button class="wheel-center" id="dock-center" aria-label="expand player"></button>
+            </div>
       </div>
 
 </body>

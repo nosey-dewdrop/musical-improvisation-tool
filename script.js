@@ -167,10 +167,12 @@ let appReady = false;
 // (hues walk the circle of fifths; idle = damla purple)
 // ───────────────────────────────────────────
 
+// hues stay inside damla's palette band (cyan → purple → pink),
+// so the room never drifts into olive or brown
 const IDLE_HUE = 285;
 const keyHues = {
-    'C': 355, 'G': 25, 'D': 50, 'A': 90, 'E': 150, 'B': 200,
-    'F#': 230, 'Db': 260, 'Ab': 285, 'Eb': 310, 'Bb': 330, 'F': 5
+    'C': 320, 'G': 265, 'D': 205, 'A': 290, 'E': 230, 'B': 335,
+    'F#': 215, 'Db': 300, 'Ab': 275, 'Eb': 190, 'Bb': 250, 'F': 348
 };
 
 function applyKeyColor(key) {
@@ -1104,9 +1106,12 @@ function updateSongSuggestions() {
         return;
     }
 
-    songs.forEach(song => {
+    dockSongs = songs;
+    dockIndex = -1;
+    songs.forEach((song, i) => {
         const track = document.createElement('div');
         track.className = 'player-track';
+        track.dataset.index = i;
         const info = document.createElement('div');
         info.className = 'track-info';
         const title = document.createElement('div');
@@ -1120,23 +1125,35 @@ function updateSongSuggestions() {
         play.className = 'track-play-btn';
         play.textContent = '▶ play';
         track.append(info, play);
-        track.onclick = () => playSong(song.sp, track, song.title);
+        track.onclick = () => dockPlay(i);
         nowPlaying.appendChild(track);
     });
 }
 
-// songs play in the dock — the little ipod in the corner
-function playSong(spId, trackEl, title) {
-    if (!/^[A-Za-z0-9]+$/.test(spId)) return;
+// ───────────────────────────────────────────
+// THE IPOD — songs play in the dock; the wheel walks the tracklist
+// ───────────────────────────────────────────
 
-    document.querySelectorAll('.player-track').forEach(t => t.classList.remove('playing'));
-    if (trackEl) trackEl.classList.add('playing');
+let dockSongs = [];
+let dockIndex = -1;
 
-    const frame = document.getElementById('dock-frame');
-    if (!frame) return;
-    frame.src = `https://open.spotify.com/embed/track/${spId}?theme=0`;
-    document.getElementById('dock-label').textContent = title ? `♪ ${title.toLowerCase()}` : '♪ now playing';
+function dockPlay(index) {
+    const song = dockSongs[index];
+    if (!song || !/^[A-Za-z0-9]+$/.test(song.sp)) return;
+    dockIndex = index;
+
+    document.querySelectorAll('.player-track').forEach(t => {
+        t.classList.toggle('playing', parseInt(t.dataset.index, 10) === index);
+    });
+
+    document.getElementById('dock-frame').src = `https://open.spotify.com/embed/track/${song.sp}?theme=0`;
+    document.getElementById('dock-label').textContent = `♪ ${song.title.toLowerCase()}`;
     document.getElementById('dock').classList.remove('collapsed');
+}
+
+function dockStep(direction) {
+    if (dockSongs.length === 0) return;
+    dockPlay((dockIndex + direction + dockSongs.length) % dockSongs.length);
 }
 
 // ───────────────────────────────────────────
@@ -1182,11 +1199,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('clear-prog-btn').addEventListener('click', clearProgression);
     document.getElementById('save-prog-btn').addEventListener('click', saveProgression);
 
-    document.getElementById('dock-toggle').addEventListener('click', () => {
-        const dock = document.getElementById('dock');
-        const collapsed = dock.classList.toggle('collapsed');
-        document.getElementById('dock-toggle').textContent = collapsed ? '♪' : '–';
-    });
+    const dock = document.getElementById('dock');
+    document.getElementById('dock-menu').addEventListener('click', () => dock.classList.toggle('collapsed'));
+    document.getElementById('dock-bar').addEventListener('click', () => dock.classList.toggle('collapsed'));
+    document.getElementById('dock-center').addEventListener('click', () => dock.classList.remove('collapsed'));
+    document.getElementById('dock-prev').addEventListener('click', () => dockStep(-1));
+    document.getElementById('dock-next').addEventListener('click', () => dockStep(1));
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
         const dark = !document.body.classList.contains('dark-mode');

@@ -15,27 +15,31 @@
       --key-h: 285;
       transition: --key-h 0.9s ease;
 
-      --bg: #f2f1ec;
-      --fg: #1a1a17;
-      --mut: #8b8880;
-      --hair: #d9d6cc;
-      --hair-strong: #b9b6ab;
+      --bg: #faf8fb;
+      --fg: #221e26;
+      --mut: #8d8494;
+      --hair: #e2dbe6;
+      --hair-strong: #c5bacb;
       --pink: #e91e90;
       --pink-deep: #ad1457;
+      --purple: #9b59b6;
+      --cyan: #00bcd4;
       --accent: hsl(var(--key-h) 52% 48%);
       --accent-deep: hsl(var(--key-h) 55% 38%);
       --accent-soft: hsl(var(--key-h) 45% 93%);
       --scale-tint: hsl(var(--key-h) 46% 89%);
-      --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font: Helvetica, 'Helvetica Neue', Arial, sans-serif;
 }
 
 body.dark-mode {
-      --bg: #171716;
-      --fg: #eceae3;
-      --mut: #8f8d85;
-      --hair: #32312d;
-      --hair-strong: #4b4942;
+      --bg: #1b1622;
+      --fg: #efe9f2;
+      --mut: #97899f;
+      --hair: #372e40;
+      --hair-strong: #4f4459;
       --pink: #f0439f;
+      --purple: #b57bd1;
+      --cyan: #4dd0e1;
       --accent: hsl(var(--key-h) 55% 60%);
       --accent-deep: hsl(var(--key-h) 55% 50%);
       --accent-soft: hsl(var(--key-h) 35% 20%);
@@ -56,6 +60,38 @@ body {
       background: var(--bg);
       line-height: 1.5;
       transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* y2k sky — quiet gradient + a few pastel sparkles, nothing shouting */
+body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+            radial-gradient(3px 3px at 8% 22%, rgba(233, 30, 144, 0.35) 40%, transparent 42%),
+            radial-gradient(2px 2px at 23% 64%, rgba(0, 188, 212, 0.35) 40%, transparent 42%),
+            radial-gradient(3px 3px at 41% 15%, rgba(155, 89, 182, 0.3) 40%, transparent 42%),
+            radial-gradient(2px 2px at 66% 74%, rgba(233, 30, 144, 0.28) 40%, transparent 42%),
+            radial-gradient(2px 2px at 78% 28%, rgba(155, 89, 182, 0.33) 40%, transparent 42%),
+            radial-gradient(3px 3px at 91% 58%, rgba(0, 188, 212, 0.3) 40%, transparent 42%),
+            radial-gradient(2px 2px at 55% 44%, rgba(233, 30, 144, 0.2) 40%, transparent 42%),
+            radial-gradient(2px 2px at 12% 86%, rgba(155, 89, 182, 0.25) 40%, transparent 42%),
+            linear-gradient(180deg, #eef0fb 0%, #faf7f9 42%, #fbeff7 100%);
+}
+
+body.dark-mode::before {
+      background:
+            radial-gradient(3px 3px at 8% 22%, rgba(240, 67, 159, 0.5) 40%, transparent 42%),
+            radial-gradient(2px 2px at 23% 64%, rgba(77, 208, 225, 0.45) 40%, transparent 42%),
+            radial-gradient(3px 3px at 41% 15%, rgba(181, 123, 209, 0.45) 40%, transparent 42%),
+            radial-gradient(2px 2px at 66% 74%, rgba(240, 67, 159, 0.35) 40%, transparent 42%),
+            radial-gradient(2px 2px at 78% 28%, rgba(181, 123, 209, 0.45) 40%, transparent 42%),
+            radial-gradient(3px 3px at 91% 58%, rgba(77, 208, 225, 0.4) 40%, transparent 42%),
+            radial-gradient(2px 2px at 55% 44%, rgba(240, 67, 159, 0.3) 40%, transparent 42%),
+            radial-gradient(2px 2px at 12% 86%, rgba(181, 123, 209, 0.35) 40%, transparent 42%),
+            linear-gradient(180deg, #191330 0%, #1c1624 48%, #241428 100%);
 }
 
 .container {
@@ -94,7 +130,7 @@ button {
 .nav-brand {
       font-size: 0.88rem;
       letter-spacing: 0.01em;
-      color: var(--fg);
+      color: var(--purple);
 }
 
 .nav-right {
@@ -192,8 +228,7 @@ button {
       border: none;
       padding: 2px 0;
       font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       cursor: pointer;
       border-bottom: 2px solid transparent;
@@ -213,8 +248,7 @@ button {
       align-items: baseline;
       gap: 10px;
       font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
 }
 
@@ -236,9 +270,9 @@ button {
 }
 
 .octave-btn.active {
-      background: var(--fg);
-      border-color: var(--fg);
-      color: var(--bg);
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #fff;
 }
 
 /* ── piano: line-drawn, precise ── */
@@ -446,8 +480,7 @@ button {
 
 .bar-label {
       font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
 }
 
@@ -462,8 +495,7 @@ button {
       border: 1px solid var(--hair);
       color: var(--mut);
       font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       padding: 4px 12px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -483,12 +515,14 @@ button {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      align-self: flex-start;
+      position: sticky;
+      top: 16px;
 }
 
 .rail-label {
       font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
 }
 
@@ -573,8 +607,7 @@ button {
 
 .strip-label {
       font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       padding-top: 4px;
 }
@@ -597,8 +630,7 @@ button {
       grid-column: 1;
       grid-row: 1 / span 9;
       font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       padding-top: 4px;
 }
@@ -736,8 +768,7 @@ button {
       border-bottom: 2px solid transparent;
       padding: 2px 0;
       font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       cursor: pointer;
 }
@@ -873,44 +904,41 @@ button {
       font-style: italic;
 }
 
-/* ── the dock: a little ipod, always with you ── */
+/* ── the ipod: body, screen, click wheel — a real little object ── */
 .dock {
       position: fixed;
-      right: 16px;
-      bottom: 16px;
-      width: 320px;
-      background: var(--bg);
-      border: 1px solid var(--fg);
+      right: 18px;
+      bottom: 18px;
+      width: 250px;
+      background: linear-gradient(180deg, #fdfdfe 0%, #eceff4 70%, #dfe3ea 100%);
+      border: 1px solid #c3c6ce;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(30, 20, 40, 0.25), inset 0 1px 0 #fff;
+      padding: 12px 12px 10px;
       z-index: 50;
 }
 
 .dock-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 6px 10px;
-      border-bottom: 1px solid var(--hair);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mut);
+      display: block;
+      text-align: center;
+      padding: 0 0 8px;
+      font-size: 0.7rem;
+      color: #6c7078;
+      cursor: pointer;
 }
 
 .dock-bar #dock-label {
+      display: block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
 }
 
-#dock-toggle {
-      background: none;
-      border: none;
-      color: var(--fg);
-      font-size: 0.85rem;
-      cursor: pointer;
-      padding: 0 2px;
-      line-height: 1;
+.dock-screen {
+      border: 2px solid #9aa0ab;
+      border-radius: 5px;
+      background: #000;
+      overflow: hidden;
 }
 
 #dock-frame {
@@ -920,12 +948,67 @@ button {
       border: none;
 }
 
-.dock.collapsed #dock-frame {
+.click-wheel {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin: 12px auto 2px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 42%, #f6f7f9 0%, #e6e8ee 75%, #d8dbe2 100%);
+      border: 1px solid #c8cbd3;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.wheel-btn {
+      position: absolute;
+      background: none;
+      border: none;
+      color: #8b8f98;
+      font-size: 0.62rem;
+      cursor: pointer;
+      padding: 6px;
+      line-height: 1;
+}
+
+.wheel-btn:hover {
+      color: var(--pink);
+}
+
+.wheel-menu { top: 8px; left: 50%; transform: translateX(-50%); }
+.wheel-prev { left: 8px; top: 50%; transform: translateY(-50%); font-size: 0.75rem; }
+.wheel-next { right: 8px; top: 50%; transform: translateY(-50%); font-size: 0.75rem; }
+.wheel-play { bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; }
+
+.wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 1px solid #c8cbd3;
+      background: linear-gradient(180deg, #fff, #e9ebf0);
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.wheel-center:active {
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.dock.collapsed {
+      width: 170px;
+      padding: 8px 12px;
+}
+
+.dock.collapsed .dock-screen,
+.dock.collapsed .click-wheel {
       display: none;
 }
 
 .dock.collapsed .dock-bar {
-      border-bottom: none;
+      padding-bottom: 0;
 }
 
 /* ── progressions page ── */
@@ -942,8 +1025,7 @@ button {
 .prog-panel h3 {
       font-size: 0.68rem;
       font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       margin: 22px 0 10px;
 }
@@ -973,8 +1055,7 @@ button {
       min-width: 44px;
       color: var(--mut);
       font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.02em;
 }
 
 .prog-key-btn, .prog-mode-btn {
@@ -1064,8 +1145,7 @@ button {
       padding: 7px 16px;
       color: var(--mut);
       font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       cursor: pointer;
       transition: all 0.15s ease;
 }
@@ -1153,21 +1233,20 @@ button {
       color: var(--mut);
 }
 
+/* posts stacked as rows, not chips */
 .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--hair);
-      border: 1px solid var(--hair);
+      display: block;
+      border-top: 1px solid var(--hair);
 }
 
 .blog-card {
-      background: var(--bg);
-      padding: 18px;
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 6px 22px;
+      align-items: baseline;
+      padding: 18px 4px;
+      border-bottom: 1px solid var(--hair);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
       transition: background 0.15s ease;
 }
 
@@ -1176,10 +1255,11 @@ button {
 }
 
 .blog-tag {
-      align-self: flex-start;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      grid-row: 1 / span 2;
+      align-self: start;
+      justify-self: start;
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
       color: var(--accent-deep);
       border: 1px solid var(--accent);
       padding: 2px 7px;
@@ -1189,18 +1269,22 @@ button {
       font-size: 1.05rem;
       font-weight: 400;
       margin: 0;
+      grid-column: 2;
 }
 
 .blog-card p {
       margin: 0;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--mut);
-      flex: 1;
+      grid-column: 2;
 }
 
 .blog-readmore {
       font-size: 0.78rem;
       color: var(--accent-deep);
+      grid-column: 3;
+      grid-row: 1;
+      white-space: nowrap;
 }
 
 .blog-back {
@@ -1224,8 +1308,7 @@ button {
 
 .philosophy-panel .panel-title {
       font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       color: var(--mut);
       margin-bottom: 12px;
 }
@@ -1330,8 +1413,21 @@ button {
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
       }
 
-      .blog-grid {
-            grid-template-columns: 1fr;
+      .blog-card {
+            grid-template-columns: 1fr auto;
+      }
+
+      .blog-tag {
+            grid-row: auto;
+            grid-column: 1;
+      }
+
+      .blog-card h3, .blog-card p {
+            grid-column: 1;
+      }
+
+      .blog-readmore {
+            grid-column: 2;
       }
 
       .guitar-strings {
@@ -1344,8 +1440,18 @@ button {
       }
 
       .dock {
-            left: 14px;
-            right: 14px;
-            width: auto;
+            right: 12px;
+            bottom: 12px;
+            width: 216px;
+      }
+
+      .click-wheel {
+            width: 118px;
+            height: 118px;
+      }
+
+      .wheel-center {
+            width: 44px;
+            height: 44px;
       }
 }

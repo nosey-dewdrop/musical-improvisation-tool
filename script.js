@@ -178,6 +178,21 @@ function applyKeyColor(key) {
     document.documentElement.style.setProperty('--key-h', hue);
 }
 
+// the big chip on the rail — answers "what key am I in?" at a glance
+function updateKeyReadout() {
+    const el = document.getElementById('key-current');
+    if (!el) return;
+    if (selectedKey) {
+        el.classList.remove('empty');
+        el.textContent = `${getCurrentRoot()} ${modes[selectedMode].name}`;
+    } else {
+        el.classList.add('empty');
+        el.textContent = selectedNotes.length === 0
+            ? 'press a few notes…'
+            : 'no single key fits — try fewer notes';
+    }
+}
+
 // progression page has its own key/mode state
 let progKey = null;
 let progMode = 'Ionian';
@@ -321,6 +336,9 @@ function clearNotes() {
     selectedKey = null;
     selectedMode = 'Ionian';
     applyKeyColor(null);
+    document.getElementById('keys-grid').innerHTML = '';
+    document.getElementById('key-count').textContent = '0';
+    updateKeyReadout();
     updateVisualDisplay();
     document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(el => {
         el.classList.remove('scale', 'root');
@@ -374,12 +392,7 @@ function updateResults(possibleKeys = []) {
         return;
     }
 
-    // gently lead the eye to the results the first time they appear
-    const firstReveal = resultsDiv.classList.contains('hidden');
     resultsDiv.classList.remove('hidden');
-    if (firstReveal && appReady) {
-        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
     document.getElementById('key-count').textContent = possibleKeys.length;
 
     const keysGrid = document.getElementById('keys-grid');
@@ -400,6 +413,7 @@ function updateResults(possibleKeys = []) {
     });
 
     applyKeyColor(selectedKey);
+    updateKeyReadout();
 
     if (selectedKey) {
         updateModes();
@@ -471,7 +485,8 @@ function updateScaleInfo() {
     const rootNote = getCurrentRoot();
     const modeData = modes[selectedMode];
 
-    scaleTitleEl.textContent = `🎵 ${rootNote} ${modeData.name}  —  "${modeData.description}"`;
+    scaleTitleEl.textContent = `${rootNote} ${modeData.name} — ${modeData.description.toLowerCase()}`;
+    updateKeyReadout();
 
     scaleNotesEl.innerHTML = '';
     currentScale.forEach(note => {
@@ -887,8 +902,9 @@ function generatePiano(numOctaves) {
     const fontSizes = { 1: 15, 2: 13, 3: 11 };
     const blackFontSizes = { 1: 12, 2: 10, 3: 8 };
 
-    // on narrow screens, fit the keyboard to the viewport (min 30px keys, then it scrolls)
-    const available = Math.min(document.documentElement.clientWidth, 1180) - 80;
+    // fit the keyboard to its column (min 30px keys, then it scrolls)
+    const bench = document.querySelector('.bench-left');
+    const available = (bench && bench.clientWidth > 0 ? bench.clientWidth : Math.min(document.documentElement.clientWidth, 1120) - 40) - 20;
     const fitted = Math.floor(available / (7 * numOctaves));
     const ww = Math.max(30, Math.min(keyWidths[numOctaves] || 32, fitted));
     const wh = Math.round((keyHeights[numOctaves] || 120) * (ww / (keyWidths[numOctaves] || 32)) * 0.5 + (keyHeights[numOctaves] || 120) * 0.5);
@@ -1067,53 +1083,30 @@ document.addEventListener('keydown', function (e) {
 // SONG SUGGESTIONS — Spotify embed player
 // ───────────────────────────────────────────
 
-function buildPlayerIdle(message) {
-    const idle = document.createElement('div');
-    idle.className = 'player-idle';
-    const vinyl = document.createElement('div');
-    vinyl.className = 'player-vinyl';
-    vinyl.textContent = '🎵';
-    const p = document.createElement('p');
-    p.textContent = message;
-    idle.append(vinyl, p);
-    return idle;
-}
-
 function updateSongSuggestions() {
+    const strip = document.getElementById('songs-strip');
     const nowPlaying = document.getElementById('now-playing');
-    if (!nowPlaying) return;
+    if (!strip || !nowPlaying) return;
     nowPlaying.innerHTML = '';
 
     if (!selectedKey) {
-        nowPlaying.appendChild(buildPlayerIdle('select a scale to see song suggestions here'));
+        strip.classList.add('hidden');
         return;
     }
-
-    const header = document.createElement('div');
-    header.className = 'player-header';
-    header.textContent = `now playing — ${selectedKey} major`;
-    nowPlaying.appendChild(header);
+    strip.classList.remove('hidden');
 
     const songs = songDatabase[selectedKey] || [];
     if (songs.length === 0) {
-        nowPlaying.appendChild(buildPlayerIdle(`no suggestions for ${selectedKey} yet`));
+        const empty = document.createElement('div');
+        empty.className = 'songs-empty';
+        empty.textContent = `no songs for ${selectedKey} yet — soon.`;
+        nowPlaying.appendChild(empty);
         return;
     }
 
-    const video = document.createElement('div');
-    video.className = 'player-video';
-    video.id = 'player-video';
-    const tracks = document.createElement('div');
-    tracks.className = 'player-tracks';
-    nowPlaying.append(video, tracks);
-
-    const icons = ['🎵', '🎶', '🎸', '🎹', '🎷', '🎺', '🎻', '🥁'];
-    songs.forEach((song, i) => {
+    songs.forEach(song => {
         const track = document.createElement('div');
         track.className = 'player-track';
-        const art = document.createElement('div');
-        art.className = 'track-art';
-        art.textContent = icons[i % icons.length];
         const info = document.createElement('div');
         info.className = 'track-info';
         const title = document.createElement('div');
@@ -1125,29 +1118,25 @@ function updateSongSuggestions() {
         info.append(title, artist);
         const play = document.createElement('div');
         play.className = 'track-play-btn';
-        play.textContent = '▶';
-        track.append(art, info, play);
-        track.onclick = () => playSong(song.sp, track);
-        tracks.appendChild(track);
+        play.textContent = '▶ play';
+        track.append(info, play);
+        track.onclick = () => playSong(song.sp, track, song.title);
+        nowPlaying.appendChild(track);
     });
 }
 
-function playSong(spId, trackEl) {
-    const videoDiv = document.getElementById('player-video');
-    if (!videoDiv || !/^[A-Za-z0-9]+$/.test(spId)) return;
+// songs play in the dock — the little ipod in the corner
+function playSong(spId, trackEl, title) {
+    if (!/^[A-Za-z0-9]+$/.test(spId)) return;
 
     document.querySelectorAll('.player-track').forEach(t => t.classList.remove('playing'));
     if (trackEl) trackEl.classList.add('playing');
 
-    videoDiv.innerHTML = '';
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://open.spotify.com/embed/track/${spId}?theme=0`;
-    iframe.width = '100%';
-    iframe.height = '80';
-    iframe.title = 'Spotify player';
-    iframe.loading = 'lazy';
-    iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media');
-    videoDiv.appendChild(iframe);
+    const frame = document.getElementById('dock-frame');
+    if (!frame) return;
+    frame.src = `https://open.spotify.com/embed/track/${spId}?theme=0`;
+    document.getElementById('dock-label').textContent = title ? `♪ ${title.toLowerCase()}` : '♪ now playing';
+    document.getElementById('dock').classList.remove('collapsed');
 }
 
 // ───────────────────────────────────────────
@@ -1192,6 +1181,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('clear-notes-btn').addEventListener('click', clearNotes);
     document.getElementById('clear-prog-btn').addEventListener('click', clearProgression);
     document.getElementById('save-prog-btn').addEventListener('click', saveProgression);
+
+    document.getElementById('dock-toggle').addEventListener('click', () => {
+        const dock = document.getElementById('dock');
+        const collapsed = dock.classList.toggle('collapsed');
+        document.getElementById('dock-toggle').textContent = collapsed ? '♪' : '–';
+    });
 
     document.getElementById('theme-toggle').addEventListener('click', () => {
         const dark = !document.body.classList.contains('dark-mode');

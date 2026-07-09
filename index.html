@@ -8,13 +8,13 @@
     <meta name="description" content="Pick the notes you hear on piano or guitar — find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Music Scale Detector</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=6">
-    <script src="script.js?v=6" defer></script>
+    <link rel="stylesheet" href="styles.css?v=7">
+    <script src="script.js?v=7" defer></script>
 </head>
 
 <body>
       <nav class="top-navbar">
-            <span class="nav-brand">🎵 musical-scale-impromptu 🎶</span>
+            <span class="nav-brand">musical-scale-impromptu ♪</span>
             <div class="nav-right">
                   <a href="#" class="nav-link active" data-page="detector">scale detector</a>
                   <a href="#" class="nav-link" data-page="progressions">chord progressions</a>
@@ -27,90 +27,81 @@
 
       <div class="container">
 
-            <div class="header-row">
-                  <div class="header">
-                        <h1>Music Scale Detector</h1>
-                        <p>pick the notes you hear, get the key — then jam fluently.</p>
-                        <p class="hero-sub">every key re-lights the room in its own color. scriabin heard keys this way.</p>
-                        <div class="staff-ornament" aria-hidden="true"><span>♪</span></div>
+            <header class="intro">
+                  <h1>press what you hear — <em>see your key</em>.</h1>
+                  <p>tap a few notes on the piano or the fretboard. your key appears on the right, with every chord and song that fits it. planned 3 years ago with my music teacher.</p>
+            </header>
+
+            <section class="workbench">
+                  <div class="bench-left">
+                        <div class="bench-controls">
+                              <div class="pick-button">
+                                    <button class="pick tab-piano active" data-tab="piano">piano</button>
+                                    <button class="pick tab-guitar" data-tab="guitar">guitar</button>
+                              </div>
+                              <div class="octave-selector">
+                                    <span>octaves</span>
+                                    <button class="octave-btn" data-octaves="1">1</button>
+                                    <button class="octave-btn active" data-octaves="2">2</button>
+                                    <button class="octave-btn" data-octaves="3">3</button>
+                              </div>
+                        </div>
+
+                        <div class="piano-section" id="piano-tab">
+                              <div class="piano-container">
+                                    <div class="keys" id="piano-keys"><!-- built by generatePiano() --></div>
+                              </div>
+                        </div>
+
+                        <div class="guitar-section hidden" id="guitar-tab">
+                              <div class="guitar-strings" id="guitar-strings"><!-- built by generateGuitar() --></div>
+                        </div>
+
+                        <div class="selected-notes-bar">
+                              <span class="bar-label">selected</span>
+                              <span class="notes-display" id="notes-display"></span>
+                              <button class="clear-btn" id="clear-notes-btn">clear</button>
+                        </div>
                   </div>
-                  <div class="damla-radio-header">
-                        <iframe src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" title="damla radio — Spotify playlist" width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                  </div>
-            </div>
 
-            <div class="instrument-panel">
-            <div class="panel-title">select the notes you hear</div>
-
-            <div class="pick-button">
-                  <button class="pick tab-piano active" data-tab="piano">🎹 Piano</button>
-                  <button class="pick tab-guitar" data-tab="guitar">🎸 Guitar</button>
-            </div>
-
-            <div class="piano-section" id="piano-tab">
-
-                  <div class="octave-selector">
-                        <span>octaves:</span>
-                        <button class="octave-btn" data-octaves="1">1</button>
-                        <button class="octave-btn active" data-octaves="2">2</button>
-                        <button class="octave-btn" data-octaves="3">3</button>
-                  </div>
-
-                  <div class="piano-container">
-                        <div class="keys" id="piano-keys"><!-- built by generatePiano() --></div>
-                  </div>
-
-            </div>
-
-            <div class="guitar-section hidden" id="guitar-tab">
-                  <div class="guitar-strings" id="guitar-strings"><!-- built by generateGuitar() --></div>
-            </div>
-
-            <div class="selected-notes-bar">
-                  <span> <i><b>selected notes:</b></i> </span>
-                  <span class="notes-display" id="notes-display"></span>
-                  <button class="clear-btn" id="clear-notes-btn">clear choices!</button>
-            </div>
-
-            </div> <!-- /instrument-panel -->
+                  <aside class="bench-rail">
+                        <div class="rail-label">your key</div>
+                        <div class="key-current empty" id="key-current">press a few notes&hellip;</div>
+                        <div class="rail-label">candidates (<span id="key-count">0</span>)</div>
+                        <div class="keys-grid" id="keys-grid"></div>
+                        <p class="synesthesia-note">every key carries its own color — scriabin heard them this way.</p>
+                  </aside>
+            </section>
 
             <div id="results" class="hidden">
 
-                  <div class="results-grid" id="results-grid">
-
-                        <div class="panel" id="panel-keys">
-                              <div class="panel-title">choose your key</div>
-                              <h3>🎵 Choose Your Key (<span id="key-count">0</span> found)</h3>
-                              <div class="keys-grid" id="keys-grid"></div>
-                              <p class="synesthesia-note">each key carries its own color — pick one and watch the room change. scriabin heard keys this way.</p>
-
-                              <div id="scale-info" class="scale-info-inline hidden">
-                                    <h4 id="scale-title">🎵 Scale</h4>
-                                    <div class="scale-notes" id="scale-notes"></div>
-                                    <div class="scale-hints">
-                                        <div>🎸 <strong>Lit keys belong to the scale</strong> — play any of them freely</div>
-                                        <div>🎹 <strong>The root wears the strongest color</strong> — start and end phrases there</div>
-                                    </div>
+                  <section class="strip hidden" id="scale-info">
+                        <div class="strip-label">the scale</div>
+                        <div class="strip-body">
+                              <h4 id="scale-title"></h4>
+                              <div class="scale-notes" id="scale-notes"></div>
+                              <div class="scale-hints">
+                                    <div><span class="hint-dot scale-dot"></span>tinted notes belong to the scale — play them freely</div>
+                                    <div><span class="hint-dot root-dot"></span>the root note — start and end phrases there</div>
                               </div>
                         </div>
+                  </section>
 
-                        <div class="panel hidden" id="modes-section">
-                              <div class="panel-title">choose mode</div>
-                              <h3>Choose Mode:</h3>
+                  <section class="strip hidden" id="modes-section">
+                        <div class="strip-label">modes — same notes, other moods</div>
+                        <div class="strip-body">
                               <div class="modes-grid" id="modes-grid"></div>
                         </div>
+                  </section>
 
-                        <!-- iPod-style player — filled by JS -->
-                        <div class="panel ipod-panel" id="now-playing">
-                              <div class="player-idle">
-                                    <div class="player-vinyl">🎵</div>
-                                    <p>select a scale to see<br>song suggestions here</p>
-                              </div>
-                        </div>
+                  <div id="results-grid"></div>
 
-                  </div>
+                  <section class="strip hidden" id="songs-strip">
+                        <div class="strip-label">songs in this key</div>
+                        <div class="strip-body" id="now-playing"></div>
+                  </section>
+
             </div>
-
 
             <footer class="site-footer">made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a></footer>
 
@@ -384,6 +375,15 @@
                   </div> <!-- /post -->
             </div>
       </div> <!-- /page-philosophy -->
+
+
+      <div class="dock" id="dock">
+            <div class="dock-bar">
+                  <span id="dock-label">♪ damla radio</span>
+                  <button id="dock-toggle" aria-label="collapse player">–</button>
+            </div>
+            <iframe id="dock-frame" src="https://open.spotify.com/embed/playlist/6rXkUtZzF3edfLbzoOKU4n?utm_source=generator&theme=0" title="music player" height="152" allow="autoplay; clipboard-write; encrypted-media" loading="lazy"></iframe>
+      </div>
 
 </body>
 

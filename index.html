@@ -8,8 +8,8 @@
     <meta name="description" content="Pick the notes you hear on piano or guitar · find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Music Scale Detector</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=16">
-    <script src="script.js?v=16" defer></script>
+    <link rel="stylesheet" href="styles.css?v=17">
+    <script src="script.js?v=17" defer></script>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 
             <header class="intro">
                   <h1>press what you hear. <em>see your key</em>.</h1>
-                  <p>tap a few notes on the piano or the fretboard. your key appears on the right, with every chord and song that fits it. planned 3 years ago with my music teacher.</p>
+                  <p>tap a few notes. the key, its chords and songs appear instantly.</p>
             </header>
 
             <section class="workbench">
@@ -73,7 +73,7 @@
                         <div class="key-current empty" id="key-current">press a few notes&hellip;</div>
                         <div class="rail-label">candidates (<span id="key-count">0</span>)</div>
                         <div class="keys-grid" id="keys-grid"></div>
-                        <p class="synesthesia-note">every key carries its own color · scriabin heard them this way.</p>
+                        <p class="synesthesia-note">every key has its own color.</p>
                   </aside>
             </section>
 
@@ -91,14 +91,14 @@
                         </div>
                   </section>
 
+                  <div id="results-grid"></div>
+
                   <section class="strip hidden" id="modes-section">
                         <div class="strip-label">modes · same notes, other moods</div>
                         <div class="strip-body">
                               <div class="modes-grid" id="modes-grid"></div>
                         </div>
                   </section>
-
-                  <div id="results-grid"></div>
 
                   <section class="strip hidden" id="songs-strip">
                         <div class="strip-label">songs in this key</div>
@@ -107,7 +107,7 @@
 
             </div>
 
-            <footer class="site-footer">made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <span id="build-tag">v16</span></footer>
+            <footer class="site-footer">planned 3 years ago with my music teacher · made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <span id="build-tag">v17</span></footer>
 
       </div>
       </div></div></div> <!-- /page-detector -->

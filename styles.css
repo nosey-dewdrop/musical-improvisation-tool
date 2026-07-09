@@ -424,13 +424,6 @@ a { color: var(--fg); }
       background: var(--bg);
 }
 
-.scale-note:nth-child(1) { color: var(--r1); }
-.scale-note:nth-child(2) { color: var(--r2); }
-.scale-note:nth-child(3) { color: var(--r3); }
-.scale-note:nth-child(4) { color: var(--r4); }
-.scale-note:nth-child(5) { color: var(--r5); }
-.scale-note:nth-child(6) { color: var(--r6); }
-.scale-note:nth-child(7) { color: var(--r7); }
 
 .scale-note.root-note { border-color: var(--fg); background: var(--fg); }
 .scale-note.root-note { color: var(--bg) !important; }
@@ -453,13 +446,6 @@ a { color: var(--fg); }
       color: var(--fg);
 }
 
-.mode-btn:nth-child(1) .mode-root { color: var(--r1); }
-.mode-btn:nth-child(2) .mode-root { color: var(--r2); }
-.mode-btn:nth-child(3) .mode-root { color: var(--r3); }
-.mode-btn:nth-child(4) .mode-root { color: var(--r4); }
-.mode-btn:nth-child(5) .mode-root { color: var(--r5); }
-.mode-btn:nth-child(6) .mode-root { color: var(--r6); }
-.mode-btn:nth-child(7) .mode-root { color: var(--r7); }
 
 .mode-root { font-size: 0.85rem; }
 .mode-desc { font-size: 0.7rem; color: var(--mut); }
@@ -498,13 +484,6 @@ a { color: var(--fg); }
 
 .chord-card:hover { border-color: var(--fg); }
 
-.chord-card:nth-child(1) .chord-name { color: var(--r1); }
-.chord-card:nth-child(2) .chord-name { color: var(--r2); }
-.chord-card:nth-child(3) .chord-name { color: var(--r3); }
-.chord-card:nth-child(4) .chord-name { color: var(--r4); }
-.chord-card:nth-child(5) .chord-name { color: var(--r5); }
-.chord-card:nth-child(6) .chord-name { color: var(--r6); }
-.chord-card:nth-child(7) .chord-name { color: var(--r7); }
 
 .chord-degree { font-size: 0.65rem; color: var(--mut); }
 .chord-name { font-size: 1rem; margin: 1px 0; }

@@ -834,3 +834,8 @@ a { color: var(--fg); }
 @media (prefers-reduced-motion: reduce) {
       * { transition-duration: 0.01ms !important; }
 }
+
+
+/* static blog pages */
+.post-h1 { font-size: 1.5rem; font-weight: 400; margin: 22px 0 4px; }
+.blog-grid a.blog-card { text-decoration: none; color: inherit; }

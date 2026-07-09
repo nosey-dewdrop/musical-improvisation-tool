@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://damlahelloworld.github.io/musical-improvisation-tool/sitemap.xml

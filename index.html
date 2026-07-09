@@ -15,8 +15,10 @@
     <meta property="og:image" content="https://damlahelloworld.github.io/musical-improvisation-tool/og.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=31">
-    <script src="script.js?v=31" defer></script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="styles.css?v=32">
+    <script src="script.js?v=32" defer></script>
 </head>
 
 <body>
@@ -36,7 +38,7 @@
 
             <header class="intro">
                   <h1 class="rainbow">press what you hear. see your key.</h1>
-                  <p>tap a few notes. the key, its chords and songs appear instantly.</p>
+                  <p>tap a few notes. the key, its chords and songs appear instantly. <button class="linklike" id="try-example">or try an example ♪</button></p>
             </header>
 
             <section class="workbench">
@@ -78,6 +80,9 @@
                         <div class="rail-label">candidates (<span id="key-count">0</span>)</div>
                         <div class="keys-grid" id="keys-grid"></div>
                         <p class="synesthesia-note">every key has its own color.</p>
+                        <div class="rail-label">what key is that song in?</div>
+                        <input id="song-search" class="song-search" type="text" placeholder="search a song, e.g. wonderwall" autocomplete="off">
+                        <div id="song-search-results"></div>
                   </aside>
             </section>
 
@@ -111,9 +116,19 @@
 
             </div>
 
+            <section class="strip" id="ear-trainer">
+                  <div class="strip-label">ear trainer</div>
+                  <div class="strip-body">
+                        <p class="ear-intro">i play three notes from a random key, the root first. you name the key.</p>
+                        <button class="prog-action-btn" id="ear-play">play 3 notes</button>
+                        <div id="ear-options" class="keys-grid"></div>
+                        <div id="ear-msg" class="ear-msg"></div>
+                  </div>
+            </section>
+
             <footer class="site-footer"><div>planned 3 years ago with my music teacher</div>
                   <div><a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <a href="blog/">blog archive</a></div>
-                  <div><span id="build-tag">v31</span></div></footer>
+                  <div><span id="build-tag">v32</span></div></footer>
 
       </div>
       </div> <!-- /page-detector -->
@@ -149,6 +164,8 @@
                               </div>
                               <div class="prog-actions">
                                     <button class="prog-action-btn" id="clear-prog-btn">clear</button>
+                                    <button class="prog-action-btn" id="play-prog-btn">play loop</button>
+                                    <button class="prog-action-btn" id="share-prog-btn">copy link</button>
                                     <button class="prog-action-btn save-btn" id="save-prog-btn">save progression</button>
                               </div>
                         </div>

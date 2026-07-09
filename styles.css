@@ -860,3 +860,57 @@ a { color: var(--fg); }
       margin-left: auto;
       margin-right: auto;
 }
+
+
+/* try an example */
+.linklike {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: inherit;
+      color: var(--fg);
+      cursor: pointer;
+}
+
+.linklike:hover { color: var(--mut); }
+
+/* song search */
+.song-search {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      padding: 7px 10px;
+      outline: none;
+}
+
+.song-search:focus { border-color: var(--fg); }
+
+.search-hit {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 6px 2px;
+      font-size: 0.82rem;
+      color: var(--fg);
+      cursor: pointer;
+}
+
+.search-hit:hover { color: var(--mut); }
+
+.search-empty {
+      font-size: 0.8rem;
+      color: var(--mut);
+      font-style: italic;
+      padding: 6px 2px;
+}
+
+/* ear trainer */
+.ear-intro { margin: 0 0 10px; font-size: 0.9rem; color: var(--mut); }
+#ear-options { margin-top: 10px; }
+.ear-msg { margin-top: 8px; font-size: 0.9rem; }

@@ -327,6 +327,7 @@ function showTab(choice) {
     document.querySelectorAll('.pick').forEach(tab => tab.classList.remove('active'));
     document.querySelector(choice === 'piano' ? '.tab-piano' : '.tab-guitar').classList.add('active');
     document.getElementById('piano-tab').classList.toggle('hidden', choice !== 'piano');
+    document.querySelector('.octave-selector').classList.toggle('hidden', choice !== 'piano');
     document.getElementById('guitar-tab').classList.toggle('hidden', choice !== 'guitar');
 }
 
@@ -1080,7 +1081,7 @@ function playNote(noteName, octave = 4) {
     if (!baseFreq) return;
 
     // autoplay policy: the context is born suspended until a user gesture
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (audioCtx.state !== 'running') audioCtx.resume();
 
     const freq = baseFreq * Math.pow(2, octave - 4);
     if (isGuitarActive()) {
@@ -1088,6 +1089,183 @@ function playNote(noteName, octave = 4) {
     } else {
         playPianoSound(freq);
     }
+}
+
+// ───────────────────────────────────────────
+// CHORD SYNTH — the site plays your progression
+// ───────────────────────────────────────────
+
+const CHORD_INTERVALS = {
+    '': [0, 4, 7], 'm': [0, 3, 7], '°': [0, 3, 6],
+    'maj7': [0, 4, 7, 11], 'm7': [0, 3, 7, 10], '7': [0, 4, 7, 10],
+    'm7b5': [0, 3, 6, 10], 'sus4': [0, 5, 7]
+};
+
+function parseChord(symbol) {
+    const m = symbol.match(/^([A-G][#b]?)(m7b5|maj7|m7|sus4|7|m|°)?$/);
+    if (!m) return null;
+    return { pitch: noteToPitch(m[1]), intervals: CHORD_INTERVALS[m[2] || ''] };
+}
+
+function playChordAt(chord, when, dur) {
+    chord.intervals.forEach(iv => {
+        const freq = 130.81 * Math.pow(2, (chord.pitch + iv) / 12); // from C3
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, when);
+        gain.gain.setValueAtTime(0.0001, when);
+        gain.gain.linearRampToValueAtTime(0.16, when + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, when + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(when);
+        osc.stop(when + dur);
+    });
+}
+
+let progLoopTimer = null;
+let progLoopStep = 0;
+
+function toggleProgressionLoop() {
+    const btn = document.getElementById('play-prog-btn');
+    if (progLoopTimer) {
+        clearInterval(progLoopTimer);
+        progLoopTimer = null;
+        progLoopStep = 0;
+        btn.textContent = 'play loop';
+        return;
+    }
+    if (currentProgression.length === 0) return;
+    if (audioCtx.state !== 'running') audioCtx.resume();
+    const BAR = 1.7;
+    const tick = () => {
+        const chord = parseChord(currentProgression[progLoopStep % currentProgression.length]);
+        if (chord) playChordAt(chord, audioCtx.currentTime + 0.05, BAR);
+        progLoopStep++;
+    };
+    tick();
+    progLoopTimer = setInterval(tick, BAR * 1000);
+    btn.textContent = 'stop';
+}
+
+// ───────────────────────────────────────────
+// SONG SEARCH — "what key is that song in?"
+// ───────────────────────────────────────────
+
+function initSongSearch() {
+    const input = document.getElementById('song-search');
+    const box = document.getElementById('song-search-results');
+    if (!input) return;
+    input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        box.innerHTML = '';
+        if (q.length < 2) return;
+        const hits = [];
+        Object.entries(songDatabase).forEach(([key, songs]) => {
+            songs.forEach(s => {
+                if (s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q)) {
+                    hits.push({ key, song: s });
+                }
+            });
+        });
+        hits.slice(0, 5).forEach(h => {
+            const row = document.createElement('button');
+            row.className = 'search-hit';
+            row.textContent = `${h.song.title} · ${h.song.artist} → ${h.key} major`;
+            row.onclick = () => {
+                selectedNotes = [majorScales[h.key][0]];
+                selectedKey = h.key;
+                selectedMode = 'Ionian';
+                updateVisualDisplay();
+                findKeys();
+                saveState();
+                box.innerHTML = '';
+                input.value = '';
+            };
+            box.appendChild(row);
+        });
+        if (hits.length === 0) {
+            const d = document.createElement('div');
+            d.className = 'search-empty';
+            d.textContent = 'not in the songbook yet';
+            box.appendChild(d);
+        }
+    });
+}
+
+// ───────────────────────────────────────────
+// EAR TRAINER — i play three notes, you name the key
+// ───────────────────────────────────────────
+
+let earAnswer = null;
+let earStreak = 0;
+let earBest = parseInt(localStorage.getItem('msi_ear_best') || '0', 10);
+
+function earNew() {
+    if (audioCtx.state !== 'running') audioCtx.resume();
+    const keys = Object.keys(majorScales);
+    earAnswer = keys[Math.floor(Math.random() * keys.length)];
+    const scale = majorScales[earAnswer];
+    const picks = [scale[0]];
+    while (picks.length < 3) {
+        const n = scale[Math.floor(Math.random() * 7)];
+        if (!picks.includes(n)) picks.push(n);
+    }
+    picks.forEach((n, i) => setTimeout(() => playNote(n, 4), i * 550));
+
+    const opts = new Set([earAnswer]);
+    while (opts.size < 4) opts.add(keys[Math.floor(Math.random() * keys.length)]);
+    const grid = document.getElementById('ear-options');
+    grid.innerHTML = '';
+    [...opts].sort(() => Math.random() - 0.5).forEach(k => {
+        const btn = document.createElement('button');
+        btn.className = 'key-btn';
+        const name = document.createElement('div');
+        name.className = 'key-name';
+        name.textContent = k;
+        const sub = document.createElement('div');
+        sub.textContent = 'Major';
+        btn.append(name, sub);
+        btn.onclick = () => earGuess(k);
+        grid.appendChild(btn);
+    });
+    document.getElementById('ear-msg').textContent = 'which key did you hear? (first note was the root)';
+}
+
+function earGuess(k) {
+    if (!earAnswer) return;
+    const msg = document.getElementById('ear-msg');
+    if (k === earAnswer) {
+        earStreak++;
+        earBest = Math.max(earBest, earStreak);
+        localStorage.setItem('msi_ear_best', earBest);
+        msg.textContent = `correct! streak ${earStreak} · best ${earBest}`;
+    } else {
+        msg.textContent = `it was ${earAnswer} major · streak reset`;
+        earStreak = 0;
+    }
+    earAnswer = null;
+    document.getElementById('ear-options').innerHTML = '';
+}
+
+// ───────────────────────────────────────────
+// SHARE + EXAMPLE
+// ───────────────────────────────────────────
+
+function copyProgressionLink() {
+    if (currentProgression.length === 0) return;
+    const url = location.origin + location.pathname + '#prog=' + encodeURIComponent(currentProgression.join(','));
+    navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('share-prog-btn');
+        btn.textContent = 'copied!';
+        setTimeout(() => { btn.textContent = 'copy link'; }, 1500);
+    });
+}
+
+function runExample() {
+    clearNotes();
+    ['C', 'D', 'F#'].forEach((n, i) => setTimeout(() => toggleNote(n, 4), i * 500));
 }
 
 // ───────────────────────────────────────────
@@ -1311,12 +1489,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    document.getElementById('play-prog-btn').addEventListener('click', toggleProgressionLoop);
+    document.getElementById('share-prog-btn').addEventListener('click', copyProgressionLink);
+    document.getElementById('ear-play').addEventListener('click', earNew);
+    document.getElementById('try-example').addEventListener('click', runExample);
+    initSongSearch();
+
     const ytTag = document.createElement('script');
     ytTag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(ytTag);
 
     generateGuitar();
     loadState();
+
+    const hashProg = location.hash.match(/^#prog=(.+)/);
+    if (hashProg) {
+        const shared = sanitizeProgression(decodeURIComponent(hashProg[1]).split(','));
+        if (shared.length) {
+            currentProgression = shared;
+            renderProgressionBar();
+            saveState();
+            showPage('progressions');
+        }
+    }
+
     appReady = true;
 });
 

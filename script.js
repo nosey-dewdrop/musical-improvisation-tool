@@ -1213,6 +1213,23 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     applyTheme(localStorage.getItem('msi_theme') === 'dark');
 
+    // rainbow headings: every letter gets its own color, flat
+    const RAINBOW = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)', 'var(--r6)', 'var(--r7)'];
+    document.querySelectorAll('.rainbow').forEach(el => {
+        const text = el.textContent;
+        el.textContent = '';
+        let k = 0;
+        for (const ch of text) {
+            const span = document.createElement('span');
+            span.textContent = ch;
+            if (ch.trim()) {
+                span.style.color = RAINBOW[k % RAINBOW.length];
+                k++;
+            }
+            el.appendChild(span);
+        }
+    });
+
     generateGuitar();
     loadState();
     appReady = true;

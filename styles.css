@@ -28,7 +28,7 @@
       --accent-deep: hsl(var(--key-h) 55% 38%);
       --accent-soft: hsl(var(--key-h) 45% 93%);
       --scale-tint: hsl(var(--key-h) 46% 89%);
-      --font: Helvetica, 'Helvetica Neue', Arial, sans-serif;
+      --font: Helvetica, Arial, sans-serif;
 }
 
 body.dark-mode {
@@ -143,9 +143,8 @@ button {
       text-decoration: none;
       color: var(--mut);
       font-size: 0.85rem;
-      padding: 2px 0;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s ease, border-color 0.15s ease;
+      padding: 4px 10px;
+      transition: color 0.15s ease, background 0.15s ease;
 }
 
 .nav-link:hover {
@@ -154,7 +153,7 @@ button {
 
 .nav-link.active {
       color: var(--accent-deep);
-      border-bottom-color: var(--accent);
+      background: var(--accent-soft);
 }
 
 .top-navbar .theme-btn {
@@ -186,7 +185,7 @@ button {
 
 .intro h1 em {
       font-style: normal;
-      color: var(--accent-deep);
+      color: inherit;
 }
 
 .intro p {
@@ -226,12 +225,11 @@ button {
 .pick {
       background: none;
       border: none;
-      padding: 2px 0;
+      padding: 4px 10px;
       font-size: 0.72rem;
       letter-spacing: 0.02em;
       color: var(--mut);
       cursor: pointer;
-      border-bottom: 2px solid transparent;
 }
 
 .pick:hover {
@@ -239,8 +237,8 @@ button {
 }
 
 .pick.active {
-      color: var(--fg);
-      border-bottom-color: var(--accent);
+      color: var(--accent-deep);
+      background: var(--accent-soft);
 }
 
 .octave-selector {
@@ -356,7 +354,9 @@ button {
 .black-key.scale { background: hsl(var(--key-h) 30% 30%); color: hsl(var(--key-h) 30% 80%); }
 
 .white-key.root, .black-key.root {
-      box-shadow: inset 0 -4px 0 var(--accent);
+      background: var(--scale-strong);
+      border-color: var(--scale-strong);
+      color: #fff;
 }
 
 .white-key.selected, .black-key.selected, .fret-dot.selected {
@@ -435,8 +435,9 @@ button {
 }
 
 .fret-dot.root {
-      border: 2px solid var(--accent);
-      color: var(--accent-deep);
+      background: var(--scale-strong);
+      border-color: var(--scale-strong);
+      color: #fff;
 }
 
 .fret-dot[data-fret="0"] {
@@ -567,21 +568,13 @@ button {
       line-height: 1.2;
 }
 
-.key-btn::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 3px;
-      margin-top: 4px;
-      background: hsl(var(--btn-h, 285) 50% 55%);
-}
-
 .key-btn:hover {
       border-color: var(--hair-strong);
 }
 
 .key-btn.active {
       border-color: var(--accent);
+      background: var(--accent-soft);
 }
 
 .key-btn.active .key-name {
@@ -712,7 +705,7 @@ button {
 }
 
 .hint-dot.root-dot {
-      background: var(--accent);
+      background: var(--scale-strong);
 }
 
 /* modes: one row of chips */
@@ -765,8 +758,7 @@ button {
 .chord-type-btn {
       background: none;
       border: none;
-      border-bottom: 2px solid transparent;
-      padding: 2px 0;
+      padding: 4px 10px;
       font-size: 0.72rem;
       letter-spacing: 0.02em;
       color: var(--mut);
@@ -779,7 +771,7 @@ button {
 
 .chord-type-btn.active {
       color: var(--accent-deep);
-      border-bottom-color: var(--accent);
+      background: var(--accent-soft);
 }
 
 .chords-grid {
@@ -1321,7 +1313,7 @@ button {
 }
 
 .blog-back:hover {
-      text-decoration: underline;
+      color: var(--pink);
 }
 
 .philosophy-panel {
@@ -1477,4 +1469,187 @@ button {
             width: 44px;
             height: 44px;
       }
+}
+
+
+/* ═══ y2k rainbow — not one color, all of them (pastel, sticker-like) ═══ */
+
+/* key candidates: each key wears its own color as a filled chip */
+.key-btn {
+      background: hsl(var(--btn-h, 285) 60% 91%);
+      border-color: hsl(var(--btn-h, 285) 50% 76%);
+      color: hsl(var(--btn-h, 285) 55% 32%);
+}
+
+.key-btn .key-name {
+      color: hsl(var(--btn-h, 285) 60% 28%);
+}
+
+.key-btn:hover {
+      border-color: hsl(var(--btn-h, 285) 55% 55%);
+}
+
+.key-btn.active {
+      background: hsl(var(--btn-h, 285) 60% 48%);
+      border-color: hsl(var(--btn-h, 285) 65% 40%);
+      color: rgba(255, 255, 255, 0.85);
+}
+
+.key-btn.active .key-name {
+      color: #fff;
+}
+
+/* modes: seven moods, seven colors */
+.mode-btn:nth-child(1) { --chip-h: 340; }
+.mode-btn:nth-child(2) { --chip-h: 25; }
+.mode-btn:nth-child(3) { --chip-h: 55; }
+.mode-btn:nth-child(4) { --chip-h: 145; }
+.mode-btn:nth-child(5) { --chip-h: 190; }
+.mode-btn:nth-child(6) { --chip-h: 250; }
+.mode-btn:nth-child(7) { --chip-h: 285; }
+
+.mode-btn {
+      background: hsl(var(--chip-h, 285) 65% 93%);
+      border-color: hsl(var(--chip-h, 285) 50% 78%);
+}
+
+.mode-btn:hover {
+      border-color: hsl(var(--chip-h, 285) 55% 55%);
+}
+
+.mode-btn.active {
+      background: hsl(var(--chip-h, 285) 60% 46%);
+      border-color: hsl(var(--chip-h, 285) 65% 38%);
+}
+
+.mode-btn.active .mode-root {
+      color: #fff;
+}
+
+.mode-btn.active .mode-desc {
+      color: rgba(255, 255, 255, 0.8);
+}
+
+/* chords: one color per degree, I → vii° across the rainbow */
+.chord-card:nth-child(1) { --chip-h: 340; }
+.chord-card:nth-child(2) { --chip-h: 25; }
+.chord-card:nth-child(3) { --chip-h: 55; }
+.chord-card:nth-child(4) { --chip-h: 145; }
+.chord-card:nth-child(5) { --chip-h: 190; }
+.chord-card:nth-child(6) { --chip-h: 250; }
+.chord-card:nth-child(7) { --chip-h: 285; }
+
+.chord-card {
+      background: hsl(var(--chip-h, 285) 65% 94%);
+      border-color: hsl(var(--chip-h, 285) 50% 80%);
+}
+
+.chord-card:hover {
+      border-color: hsl(var(--chip-h, 285) 60% 50%);
+}
+
+.chord-card .chord-name {
+      color: hsl(var(--chip-h, 285) 65% 32%);
+}
+
+.chord-card .chord-degree {
+      color: hsl(var(--chip-h, 285) 40% 50%);
+}
+
+/* scale notes: rainbow walk from root to seventh */
+.scale-note:nth-child(1) { --chip-h: 340; }
+.scale-note:nth-child(2) { --chip-h: 25; }
+.scale-note:nth-child(3) { --chip-h: 55; }
+.scale-note:nth-child(4) { --chip-h: 145; }
+.scale-note:nth-child(5) { --chip-h: 190; }
+.scale-note:nth-child(6) { --chip-h: 250; }
+.scale-note:nth-child(7) { --chip-h: 285; }
+
+.scale-note.normal {
+      background: hsl(var(--chip-h, 285) 60% 91%);
+      border-color: hsl(var(--chip-h, 285) 50% 76%);
+      color: hsl(var(--chip-h, 285) 60% 30%);
+}
+
+/* progressions: cycling sticker colors */
+.progression-chip:nth-child(6n+1), .prog-common-item:nth-child(6n+1) { --chip-h: 340; }
+.progression-chip:nth-child(6n+2), .prog-common-item:nth-child(6n+2) { --chip-h: 25; }
+.progression-chip:nth-child(6n+3), .prog-common-item:nth-child(6n+3) { --chip-h: 145; }
+.progression-chip:nth-child(6n+4), .prog-common-item:nth-child(6n+4) { --chip-h: 190; }
+.progression-chip:nth-child(6n+5), .prog-common-item:nth-child(6n+5) { --chip-h: 250; }
+.progression-chip:nth-child(6n+6), .prog-common-item:nth-child(6n+6) { --chip-h: 285; }
+
+.progression-chip, .prog-common-item {
+      background: hsl(var(--chip-h, 285) 65% 94%);
+      border-color: hsl(var(--chip-h, 285) 50% 80%);
+}
+
+.progression-chip:hover, .prog-common-item:hover {
+      border-color: hsl(var(--chip-h, 285) 60% 50%);
+}
+
+/* progression builder chords too */
+.prog-chord-btn:nth-child(1) { --chip-h: 340; }
+.prog-chord-btn:nth-child(2) { --chip-h: 25; }
+.prog-chord-btn:nth-child(3) { --chip-h: 55; }
+.prog-chord-btn:nth-child(4) { --chip-h: 145; }
+.prog-chord-btn:nth-child(5) { --chip-h: 190; }
+.prog-chord-btn:nth-child(6) { --chip-h: 250; }
+.prog-chord-btn:nth-child(7) { --chip-h: 285; }
+
+.prog-chord-btn {
+      background: hsl(var(--chip-h, 285) 65% 94%);
+      border-color: hsl(var(--chip-h, 285) 50% 78%);
+      color: hsl(var(--chip-h, 285) 65% 30%);
+}
+
+.prog-chord-btn:hover {
+      border-color: hsl(var(--chip-h, 285) 60% 50%);
+      color: hsl(var(--chip-h, 285) 65% 25%);
+}
+
+/* blog tags: each topic its own color */
+.blog-card:nth-child(6n+1) .blog-tag { --chip-h: 340; }
+.blog-card:nth-child(6n+2) .blog-tag { --chip-h: 190; }
+.blog-card:nth-child(6n+3) .blog-tag { --chip-h: 250; }
+.blog-card:nth-child(6n+4) .blog-tag { --chip-h: 145; }
+.blog-card:nth-child(6n+5) .blog-tag { --chip-h: 25; }
+.blog-card:nth-child(6n+6) .blog-tag { --chip-h: 285; }
+
+.blog-tag {
+      background: hsl(var(--chip-h, 285) 65% 93%);
+      border-color: hsl(var(--chip-h, 285) 50% 70%);
+      color: hsl(var(--chip-h, 285) 60% 32%);
+}
+
+/* dark mode: same rainbow, deeper */
+.dark-mode .key-btn {
+      background: hsl(var(--btn-h, 285) 35% 22%);
+      border-color: hsl(var(--btn-h, 285) 40% 38%);
+}
+
+.dark-mode .key-btn .key-name {
+      color: hsl(var(--btn-h, 285) 70% 80%);
+}
+
+.dark-mode .mode-btn,
+.dark-mode .chord-card,
+.dark-mode .progression-chip,
+.dark-mode .prog-common-item,
+.dark-mode .prog-chord-btn,
+.dark-mode .blog-tag {
+      background: hsl(var(--chip-h, 285) 32% 20%);
+      border-color: hsl(var(--chip-h, 285) 38% 36%);
+}
+
+.dark-mode .chord-card .chord-name,
+.dark-mode .prog-chord-btn,
+.dark-mode .blog-tag {
+      color: hsl(var(--chip-h, 285) 70% 78%);
+}
+
+.dark-mode .scale-note.normal {
+      background: hsl(var(--chip-h, 285) 32% 22%);
+      border-color: hsl(var(--chip-h, 285) 38% 38%);
+      color: hsl(var(--chip-h, 285) 70% 80%);
 }

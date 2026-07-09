@@ -228,14 +228,15 @@ a { color: var(--fg); }
 
 .dark-mode .white-key.root { background: #fff; color: #000; }
 
+/* pressed notes wear their frequency: low C red, up to violet B */
 .white-key.selected, .black-key.selected, .fret-dot.selected {
-      background: var(--pink) !important;
-      border-color: var(--pink-deep) !important;
+      background: hsl(var(--note-h, 320) 85% 46%) !important;
+      border-color: hsl(var(--note-h, 320) 85% 30%) !important;
       color: #fff !important;
 }
 
 .white-key.keyboard-active, .black-key.keyboard-active {
-      background: var(--pink) !important;
+      background: hsl(var(--note-h, 320) 85% 46%) !important;
       color: #fff !important;
 }
 

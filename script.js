@@ -205,6 +205,12 @@ let savedProgressions = [];
 // PITCH HELPERS — pitch-based comparison so enharmonics (D# vs Eb) match
 // ───────────────────────────────────────────
 
+// the visible spectrum spans about one octave of light frequency,
+// so one pitch octave maps to the full red-to-violet sweep
+function noteHue(note) {
+    return noteToPitch(note) * 26;
+}
+
 function noteToPitch(note) {
     const pitchMap = {
         'C': 0, 'B#': 0,
@@ -330,7 +336,15 @@ function updateVisualDisplay() {
     document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(el => {
         el.classList.toggle('selected', selectedNotes.includes(el.textContent.trim()));
     });
-    document.getElementById('notes-display').textContent = selectedNotes.join(' - ');
+    const display = document.getElementById('notes-display');
+    display.innerHTML = '';
+    selectedNotes.forEach((n, i) => {
+        if (i > 0) display.appendChild(document.createTextNode(' '));
+        const s = document.createElement('span');
+        s.textContent = n;
+        s.style.color = `hsl(${noteHue(n)} 85% 40%)`;
+        display.appendChild(s);
+    });
 }
 
 function clearNotes() {
@@ -943,6 +957,7 @@ function generatePiano(numOctaves) {
             const btn = document.createElement('button');
             btn.className = 'white-key';
             btn.textContent = note;
+            btn.style.setProperty('--note-h', noteHue(note));
             btn.onclick = () => toggleNote(note, octaveNum);
             btn.style.width = ww + 'px';
             btn.style.height = wh + 'px';
@@ -954,6 +969,7 @@ function generatePiano(numOctaves) {
             const btn = document.createElement('button');
             btn.className = 'black-key';
             btn.textContent = note;
+            btn.style.setProperty('--note-h', noteHue(note));
             btn.onclick = () => toggleNote(note, octaveNum);
             btn.style.left = (blackOffsets[i] + oct * octaveWidth) + 'px';
             btn.style.width = bw + 'px';
@@ -990,6 +1006,7 @@ function generateGuitar() {
             dot.className = 'fret-dot';
             dot.dataset.fret = fret;
             dot.textContent = note;
+            dot.style.setProperty('--note-h', noteHue(note));
             if (fret === 0) dot.title = `open ${string.open}${string.octave} string`;
             dot.onclick = () => toggleNote(note, octave);
             row.appendChild(dot);

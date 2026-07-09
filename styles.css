@@ -374,8 +374,8 @@ a { color: var(--fg); }
 
 .key-btn .key-name { font-size: 0.95rem; color: var(--fg); line-height: 1.2; }
 .key-btn:hover { border-color: var(--fg); }
-.key-btn.active { border-color: var(--pink); }
-.key-btn.active .key-name { color: var(--pink); }
+.key-btn.active { border-color: #000; border-width: 2px; padding: 3px 8px; }
+.dark-mode .key-btn.active { border-color: #fff; }
 
 .synesthesia-note { display: none; }
 
@@ -454,7 +454,8 @@ a { color: var(--fg); }
 .mode-root { font-size: 0.85rem; }
 .mode-desc { font-size: 0.7rem; color: var(--mut); }
 .mode-btn:hover { border-color: var(--fg); }
-.mode-btn.active { border-color: var(--pink); border-width: 2px; padding: 5px 9px; }
+.mode-btn.active { border-color: #000; border-width: 2px; padding: 5px 9px; }
+.dark-mode .mode-btn.active { border-color: #fff; }
 
 /* chords */
 .chord-type-tabs { display: flex; gap: 14px; margin-bottom: 8px; }
@@ -546,7 +547,8 @@ a { color: var(--fg); }
 }
 
 .prog-key-btn:hover, .prog-mode-btn:hover { border-color: var(--fg); }
-.prog-key-btn.active, .prog-mode-btn.active { border-color: var(--pink); color: var(--pink); }
+.prog-key-btn.active, .prog-mode-btn.active { border-color: #000; border-width: 2px; padding: 3px 9px; }
+.dark-mode .prog-key-btn.active, .dark-mode .prog-mode-btn.active { border-color: #fff; }
 
 .prog-available-chords { display: flex; flex-wrap: wrap; gap: 6px; }
 

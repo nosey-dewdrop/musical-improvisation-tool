@@ -159,6 +159,9 @@ let selectedMode = 'Ionian';
 let currentOctaves = 2;
 let currentChordType = 'triad';
 
+// true after initial load — guards autoscroll on page open
+let appReady = false;
+
 // progression page has its own key/mode state
 let progKey = null;
 let progMode = 'Ionian';
@@ -337,7 +340,12 @@ function updateResults(possibleKeys = []) {
         return;
     }
 
+    // gently lead the eye to the results the first time they appear
+    const firstReveal = resultsDiv.classList.contains('hidden');
     resultsDiv.classList.remove('hidden');
+    if (firstReveal && appReady) {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     document.getElementById('key-count').textContent = possibleKeys.length;
 
     const keysGrid = document.getElementById('keys-grid');
@@ -838,15 +846,16 @@ function generatePiano(numOctaves) {
     // keys shrink as octave count grows
     const keyWidths = { 1: 60, 2: 45, 3: 32 };
     const keyHeights = { 1: 180, 2: 150, 3: 120 };
-    const blackHeights = { 1: 100, 2: 85, 3: 70 };
-    const blackWidths = { 1: 25, 2: 20, 3: 16 };
     const fontSizes = { 1: 14, 2: 12, 3: 10 };
     const blackFontSizes = { 1: 12, 2: 10, 3: 8 };
 
-    const ww = keyWidths[numOctaves] || 32;
-    const wh = keyHeights[numOctaves] || 120;
-    const bw = blackWidths[numOctaves] || 16;
-    const bh = blackHeights[numOctaves] || 70;
+    // on narrow screens, fit the keyboard to the viewport (min 30px keys, then it scrolls)
+    const available = Math.min(document.documentElement.clientWidth, 1180) - 80;
+    const fitted = Math.floor(available / (7 * numOctaves));
+    const ww = Math.max(30, Math.min(keyWidths[numOctaves] || 32, fitted));
+    const wh = Math.round((keyHeights[numOctaves] || 120) * (ww / (keyWidths[numOctaves] || 32)) * 0.5 + (keyHeights[numOctaves] || 120) * 0.5);
+    const bw = Math.max(14, Math.round(ww * 0.44));
+    const bh = Math.round(wh * 0.58);
     const fs = fontSizes[numOctaves] || 10;
     const bfs = blackFontSizes[numOctaves] || 8;
 
@@ -1145,4 +1154,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     generateGuitar();
     loadState();
+    appReady = true;
+});
+
+// rebuild the piano when the viewport changes (rotation, resize)
+let _resizeTimer = null;
+window.addEventListener('resize', () => {
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(() => {
+        generatePiano(currentOctaves);
+        updateVisualDisplay();
+        if (selectedKey) highlightScaleOnInstruments(getCurrentScale(), getCurrentRoot());
+    }, 150);
 });

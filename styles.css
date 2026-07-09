@@ -664,18 +664,68 @@ body.dark-mode .black-key.root {
 }
 
 /* ── results ── */
-.results-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      align-items: start;
+/* one hi-fi console instead of scattered boxes */
+#results {
+      background: var(--card);
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow);
+      overflow: hidden;
 }
 
-#panel-keys { grid-column: 1; grid-row: 1; }
-#chords-section-dynamic { grid-column: 2; grid-row: 1; }
-#now-playing { grid-column: 3; grid-row: 1; }
-#modes-section { grid-column: 1; grid-row: 2; }
-#progressions-section-dynamic { grid-column: 2 / 4; grid-row: 2; }
+#results::before {
+      content: '♪ the console — key · modes · chords · songs ♪';
+      display: block;
+      font-family: var(--font-chrome);
+      font-size: 0.62rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(90deg, var(--accent), var(--pink));
+      text-align: center;
+      padding: 6px 12px;
+}
+
+.results-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      grid-template-areas:
+            "keys keys"
+            "modes modes"
+            "chords player"
+            "prog prog";
+      gap: 0;
+      align-items: stretch;
+}
+
+#panel-keys { grid-area: keys; }
+#modes-section { grid-area: modes; border-top: 1px dashed var(--line-strong); }
+#chords-section-dynamic { grid-area: chords; border-top: 1px dashed var(--line-strong); border-right: 1px dashed var(--line-strong); }
+#now-playing { grid-area: player; border-top: 1px dashed var(--line-strong); }
+#progressions-section-dynamic { grid-area: prog; border-top: 1px dashed var(--line-strong); }
+
+/* console sections: no own frames, just quiet dividers */
+.results-grid .panel {
+      border-top-width: 1px;
+      border-right-width: 1px;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      border-radius: 0;
+      padding: 12px 16px 14px;
+}
+
+.results-grid .panel .panel-title {
+      background: none;
+      color: var(--accent-deep);
+      padding: 0;
+      margin: 0 0 6px;
+      text-align: left;
+}
+
+.results-grid .panel h3 {
+      font-size: 0.95rem;
+      margin: 0 0 8px;
+}
 
 .panel {
       background: var(--card);
@@ -768,12 +818,13 @@ body.dark-mode .black-key.root {
 /* modes */
 .modes-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
       gap: 6px;
 }
 
 .mode-btn {
-      padding: 8px 10px;
+      padding: 6px 9px;
+      font-size: 0.8rem;
       background: var(--card);
       border: 1px solid var(--line-strong);
       border-radius: 2px;
@@ -789,7 +840,7 @@ body.dark-mode .black-key.root {
 }
 
 .mode-desc {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       color: var(--ink-soft);
       margin-top: 2px;
       font-style: italic;
@@ -813,19 +864,37 @@ body.dark-mode .black-key.root {
 
 /* scale info */
 .scale-info-inline {
-      background: var(--paper);
-      padding: 14px;
-      border: 1px solid var(--line);
+      background: #14100b;
+      padding: 12px 14px;
+      border: 1px solid #000;
       border-radius: 2px;
       text-align: left;
-      margin-top: 4px;
+      margin-top: 6px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .scale-info-inline h4 {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: 1rem;
+      font-family: var(--font-chrome);
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
       margin: 0 0 8px;
+      color: hsl(var(--key-h) 85% 70%);
+      text-shadow: 0 0 8px hsl(var(--key-h) 85% 60% / 0.7);
+}
+
+.scale-info-inline .scale-note.normal {
+      background: transparent;
+      border: 1px solid #4a4136;
+      color: #cfc5b2;
+}
+
+.scale-info-inline .scale-note.root-note {
+      box-shadow: 0 0 10px hsl(var(--key-h) 80% 55% / 0.6);
+}
+
+.scale-info-inline .scale-hints {
+      color: #8d8172;
 }
 
 .scale-notes {
@@ -1463,10 +1532,17 @@ body.dark-mode .black-key.root {
           grid-template-columns: 1fr;
       }
 
-      #panel-keys, #chords-section-dynamic, #now-playing,
-      #modes-section, #progressions-section-dynamic {
-          grid-column: auto;
-          grid-row: auto;
+      .results-grid {
+          grid-template-areas:
+                "keys"
+                "modes"
+                "chords"
+                "player"
+                "prog";
+      }
+
+      #chords-section-dynamic {
+          border-right: none;
       }
 
       .selected-notes-bar {

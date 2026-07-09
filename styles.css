@@ -904,18 +904,37 @@ button {
       font-style: italic;
 }
 
-/* ── the ipod: body, screen, click wheel — a real little object ── */
+/* ── the ipod: pink, tilted, earphones on — a real little object ── */
 .dock {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
+      right: 26px;
+      bottom: 20px;
       width: 250px;
-      background: linear-gradient(180deg, #fdfdfe 0%, #eceff4 70%, #dfe3ea 100%);
-      border: 1px solid #c3c6ce;
+      background: linear-gradient(180deg, #ffd9ec 0%, #fbaad4 55%, #f07ab8 100%);
+      border: 1px solid #d4569a;
       border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(30, 20, 40, 0.25), inset 0 1px 0 #fff;
+      box-shadow: 0 12px 30px rgba(173, 20, 87, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.75);
       padding: 12px 12px 10px;
       z-index: 50;
+      transform: rotate(-6deg);
+      transform-origin: 88% 100%;
+      transition: transform 0.25s ease;
+}
+
+.dock:hover {
+      transform: rotate(-2.5deg);
+}
+
+/* vector earphones plugged into the top */
+.earphones {
+      position: absolute;
+      bottom: calc(100% - 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 210px;
+      height: 150px;
+      pointer-events: none;
+      filter: drop-shadow(0 1px 1px rgba(120, 30, 80, 0.25));
 }
 
 .dock-bar {
@@ -923,7 +942,7 @@ button {
       text-align: center;
       padding: 0 0 8px;
       font-size: 0.7rem;
-      color: #6c7078;
+      color: #8c2a5f;
       cursor: pointer;
 }
 
@@ -935,7 +954,7 @@ button {
 }
 
 .dock-screen {
-      border: 2px solid #9aa0ab;
+      border: 2px solid #b34586;
       border-radius: 5px;
       background: #000;
       overflow: hidden;
@@ -954,16 +973,16 @@ button {
       height: 148px;
       margin: 12px auto 2px;
       border-radius: 50%;
-      background: radial-gradient(circle at 50% 42%, #f6f7f9 0%, #e6e8ee 75%, #d8dbe2 100%);
-      border: 1px solid #c8cbd3;
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+      background: radial-gradient(circle at 50% 42%, #ffffff 0%, #fdeef6 70%, #f6d7e8 100%);
+      border: 1px solid #e5aecd;
+      box-shadow: inset 0 1px 3px rgba(173, 20, 87, 0.12);
 }
 
 .wheel-btn {
       position: absolute;
       background: none;
       border: none;
-      color: #8b8f98;
+      color: #c95c9d;
       font-size: 0.62rem;
       cursor: pointer;
       padding: 6px;
@@ -971,7 +990,7 @@ button {
 }
 
 .wheel-btn:hover {
-      color: var(--pink);
+      color: var(--pink-deep);
 }
 
 .wheel-menu { top: 8px; left: 50%; transform: translateX(-50%); }
@@ -987,10 +1006,10 @@ button {
       width: 54px;
       height: 54px;
       border-radius: 50%;
-      border: 1px solid #c8cbd3;
-      background: linear-gradient(180deg, #fff, #e9ebf0);
+      border: 1px solid #e5aecd;
+      background: linear-gradient(180deg, #ffffff, #fbe4f0);
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 2px rgba(173, 20, 87, 0.15);
 }
 
 .wheel-center:active {
@@ -1000,6 +1019,10 @@ button {
 .dock.collapsed {
       width: 170px;
       padding: 8px 12px;
+}
+
+.dock.collapsed .earphones {
+      display: none;
 }
 
 .dock.collapsed .dock-screen,

@@ -279,8 +279,8 @@ function sanitizeNotes(arr) {
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
     document.getElementById('page-' + page).classList.remove('hidden');
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.page === page);
+    document.querySelectorAll('[data-page]').forEach(el => {
+        el.classList.toggle('active', el.dataset.page === page);
     });
     if (page === 'progressions') updateProgressionPage();
     if (page === 'philosophy') showBlogIndex();
@@ -1170,10 +1170,10 @@ function applyTheme(dark) {
 // ───────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', e => {
+    document.querySelectorAll('[data-page]').forEach(el => {
+        el.addEventListener('click', e => {
             e.preventDefault();
-            showPage(link.dataset.page);
+            showPage(el.dataset.page);
         });
     });
 
@@ -1212,6 +1212,34 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('msi_theme', dark ? 'dark' : 'light');
     });
     applyTheme(localStorage.getItem('msi_theme') === 'dark');
+
+    const clockEl = document.getElementById('clock');
+    function tickClock() {
+        clockEl.textContent = new Date().toTimeString().slice(0, 5);
+    }
+    tickClock();
+    setInterval(tickClock, 30000);
+
+    // windows drag by their title bar, like the real thing
+    if (window.matchMedia('(min-width: 820px)').matches) {
+        document.querySelectorAll('.window').forEach(win => {
+            const bar = win.querySelector('.window-bar');
+            let startX = 0, startY = 0, offX = 0, offY = 0, dragging = false;
+            bar.addEventListener('pointerdown', e => {
+                dragging = true;
+                startX = e.clientX - offX;
+                startY = e.clientY - offY;
+                bar.setPointerCapture(e.pointerId);
+            });
+            bar.addEventListener('pointermove', e => {
+                if (!dragging) return;
+                offX = e.clientX - startX;
+                offY = e.clientY - startY;
+                win.style.transform = `translate(${offX}px, ${offY}px)`;
+            });
+            bar.addEventListener('pointerup', () => { dragging = false; });
+        });
+    }
 
     generateGuitar();
     loadState();

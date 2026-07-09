@@ -55,43 +55,24 @@ body {
       font-weight: 400;
       min-height: 100vh;
       margin: 0;
-      padding: 0 24px 220px;
+      padding: 40px 18px 240px;
       color: var(--fg);
-      background: var(--bg);
       line-height: 1.5;
-      transition: background 0.4s ease, color 0.3s ease;
 }
 
-/* y2k sky — quiet gradient + a few pastel sparkles, nothing shouting */
+/* the desktop wallpaper — klimt bauerngarten, ios-safe fixed layer */
 body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: -1;
-      pointer-events: none;
-      background:
-            radial-gradient(3px 3px at 8% 22%, rgba(233, 30, 144, 0.35) 40%, transparent 42%),
-            radial-gradient(2px 2px at 23% 64%, rgba(0, 188, 212, 0.35) 40%, transparent 42%),
-            radial-gradient(3px 3px at 41% 15%, rgba(155, 89, 182, 0.3) 40%, transparent 42%),
-            radial-gradient(2px 2px at 66% 74%, rgba(233, 30, 144, 0.28) 40%, transparent 42%),
-            radial-gradient(2px 2px at 78% 28%, rgba(155, 89, 182, 0.33) 40%, transparent 42%),
-            radial-gradient(3px 3px at 91% 58%, rgba(0, 188, 212, 0.3) 40%, transparent 42%),
-            radial-gradient(2px 2px at 55% 44%, rgba(233, 30, 144, 0.2) 40%, transparent 42%),
-            radial-gradient(2px 2px at 12% 86%, rgba(155, 89, 182, 0.25) 40%, transparent 42%),
-            linear-gradient(180deg, #eef0fb 0%, #faf7f9 42%, #fbeff7 100%);
+      background: url('bg.jpg') center center / cover no-repeat;
 }
 
 body.dark-mode::before {
       background:
-            radial-gradient(3px 3px at 8% 22%, rgba(240, 67, 159, 0.5) 40%, transparent 42%),
-            radial-gradient(2px 2px at 23% 64%, rgba(77, 208, 225, 0.45) 40%, transparent 42%),
-            radial-gradient(3px 3px at 41% 15%, rgba(181, 123, 209, 0.45) 40%, transparent 42%),
-            radial-gradient(2px 2px at 66% 74%, rgba(240, 67, 159, 0.35) 40%, transparent 42%),
-            radial-gradient(2px 2px at 78% 28%, rgba(181, 123, 209, 0.45) 40%, transparent 42%),
-            radial-gradient(3px 3px at 91% 58%, rgba(77, 208, 225, 0.4) 40%, transparent 42%),
-            radial-gradient(2px 2px at 55% 44%, rgba(240, 67, 159, 0.3) 40%, transparent 42%),
-            radial-gradient(2px 2px at 12% 86%, rgba(181, 123, 209, 0.35) 40%, transparent 42%),
-            linear-gradient(180deg, #191330 0%, #1c1624 48%, #241428 100%);
+            linear-gradient(rgba(14, 10, 18, 0.68), rgba(14, 10, 18, 0.68)),
+            url('bg.jpg') center center / cover no-repeat;
 }
 
 .container {
@@ -171,12 +152,12 @@ button {
 
 /* ── intro: one line that anyone understands ── */
 .intro {
-      margin: 34px 0 22px;
+      margin: 22px 0 18px;
       max-width: 640px;
 }
 
 .intro h1 {
-      font-size: 1.9rem;
+      font-size: 1.6rem;
       font-weight: 400;
       letter-spacing: -0.01em;
       line-height: 1.15;
@@ -900,33 +881,36 @@ button {
       font-style: italic;
 }
 
-/* ── the ipod: pink, tilted, earphones on — a real little object ── */
+/* ── the ipod: solid pink plastic on the desk ── */
 .dock {
       position: fixed;
-      right: 26px;
+      right: 22px;
       bottom: 20px;
-      width: 250px;
-      background: linear-gradient(180deg, #ffd9ec 0%, #fbaad4 55%, #f07ab8 100%);
-      border: 1px solid #d4569a;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(173, 20, 87, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.75);
-      padding: 12px 12px 10px;
-      z-index: 50;
-      transform: rotate(-6deg);
-      transform-origin: 88% 100%;
+      width: 224px;
+      padding: 14px 12px 16px;
+      border-radius: 18px;
+      background: linear-gradient(105deg, #ffb7dc 0%, #ff8ec9 45%, #f26bb4 100%);
+      border: 1px solid #c74b93;
+      box-shadow:
+            inset 2px 2px 3px rgba(255, 255, 255, 0.65),
+            inset -3px -4px 8px rgba(160, 30, 100, 0.35),
+            8px 12px 24px rgba(60, 10, 40, 0.35);
+      transform: rotate(-4deg);
+      transform-origin: 50% 100%;
       transition: transform 0.25s ease;
+      z-index: 60;
 }
 
 .dock:hover {
-      transform: rotate(-2.5deg);
+      transform: rotate(0deg);
 }
 
 .dock-bar {
       display: block;
       text-align: center;
       padding: 0 0 8px;
-      font-size: 0.7rem;
-      color: #8c2a5f;
+      font-size: 0.68rem;
+      color: #7e1d55;
       cursor: pointer;
 }
 
@@ -938,10 +922,11 @@ button {
 }
 
 .dock-screen {
-      border: 2px solid #b34586;
-      border-radius: 5px;
+      border: 5px solid #1d1d21;
+      border-radius: 6px;
       background: #000;
       overflow: hidden;
+      box-shadow: inset 0 0 4px #000, 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 #dock-frame {
@@ -953,13 +938,13 @@ button {
 
 .click-wheel {
       position: relative;
-      width: 148px;
-      height: 148px;
-      margin: 12px auto 2px;
+      width: 152px;
+      height: 152px;
+      margin: 14px auto 0;
       border-radius: 50%;
-      background: radial-gradient(circle at 50% 42%, #ffffff 0%, #fdeef6 70%, #f6d7e8 100%);
-      border: 1px solid #e5aecd;
-      box-shadow: inset 0 1px 3px rgba(173, 20, 87, 0.12);
+      background: radial-gradient(circle at 45% 38%, #ffffff 0%, #f6e6f0 65%, #ecd0e1 100%);
+      border: 1px solid #d898bf;
+      box-shadow: inset 0 2px 4px rgba(150, 40, 100, 0.18), 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .wheel-btn {
@@ -987,22 +972,22 @@ button {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 54px;
-      height: 54px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      border: 1px solid #e5aecd;
-      background: linear-gradient(180deg, #ffffff, #fbe4f0);
+      border: 1px solid #d898bf;
+      background: radial-gradient(circle at 45% 35%, #ffffff, #f7dceb);
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(173, 20, 87, 0.15);
+      box-shadow: inset 0 -2px 4px rgba(150, 40, 100, 0.15), 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
 .wheel-center:active {
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 2px 5px rgba(150, 40, 100, 0.3);
 }
 
 .dock.collapsed {
-      width: 170px;
-      padding: 8px 12px;
+      width: 168px;
+      padding: 8px 12px 10px;
 }
 
 .dock.collapsed .dock-screen,
@@ -1012,6 +997,152 @@ button {
 
 .dock.collapsed .dock-bar {
       padding-bottom: 0;
+}
+
+/* ── the os chrome: menubar, desktop icons, windows ── */
+.menubar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 26px;
+      background: rgba(255, 255, 255, 0.93);
+      border-bottom: 1px solid #55505c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.78rem;
+      z-index: 70;
+      color: #221e26;
+}
+
+.dark-mode .menubar {
+      background: rgba(32, 26, 40, 0.93);
+      color: #efe9f2;
+      border-bottom-color: #000;
+}
+
+.menubar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+}
+
+.menubar .theme-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0;
+      line-height: 1;
+}
+
+.desktop-icons {
+      display: flex;
+      gap: 20px;
+      max-width: 1120px;
+      margin: 6px auto 14px;
+}
+
+.dicon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-family: var(--font);
+      font-size: 0.72rem;
+      color: #fff;
+      padding: 4px;
+}
+
+.dicon-img {
+      font-size: 1.7rem;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+}
+
+.dicon-text {
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+      padding: 0 5px;
+}
+
+.dicon.active .dicon-text {
+      background: var(--pink);
+      text-shadow: none;
+}
+
+@media (min-width: 1340px) {
+      .desktop-icons {
+            position: fixed;
+            right: 20px;
+            top: 44px;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0;
+            z-index: 40;
+            max-width: none;
+      }
+}
+
+.window {
+      max-width: 1120px;
+      margin: 0 auto 30px;
+      background: var(--bg);
+      border: 1px solid #221e26;
+      box-shadow: 4px 4px 0 rgba(20, 10, 25, 0.45);
+}
+
+.window-bar {
+      position: relative;
+      height: 25px;
+      border-bottom: 1px solid #221e26;
+      background:
+            repeating-linear-gradient(180deg, transparent 0 4px, hsl(var(--key-h) 45% 62% / 0.55) 4px 5px),
+            linear-gradient(180deg, #ffffff, #f1ecf4);
+      display: flex;
+      align-items: center;
+      cursor: grab;
+      user-select: none;
+}
+
+.window-bar:active {
+      cursor: grabbing;
+}
+
+.dark-mode .window-bar {
+      background:
+            repeating-linear-gradient(180deg, transparent 0 4px, hsl(var(--key-h) 45% 45% / 0.6) 4px 5px),
+            linear-gradient(180deg, #38313f, #2b2533);
+}
+
+.wbox {
+      width: 12px;
+      height: 12px;
+      border: 1px solid #221e26;
+      background: var(--bg);
+      margin-left: 9px;
+      z-index: 1;
+}
+
+.wname {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg);
+      padding: 1px 12px;
+      font-size: 0.75rem;
+      color: var(--fg);
+}
+
+.window-body {
+      padding: 2px 24px 24px;
+}
+
+.window-body .container {
+      max-width: none;
 }
 
 /* ── progressions page ── */
@@ -1367,15 +1498,13 @@ button {
             padding: 0 14px 240px;
       }
 
-      .top-navbar {
-            flex-direction: column;
-            gap: 8px;
-            padding-top: 18px;
+      .desktop-icons {
+            flex-wrap: wrap;
+            gap: 12px;
       }
 
-      .nav-right {
-            flex-wrap: wrap;
-            gap: 14px;
+      .window-body {
+            padding: 2px 12px 18px;
       }
 
       .intro h1 {

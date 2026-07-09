@@ -1,45 +1,68 @@
 /* ═══════════════════════════════════════════
-   MUSIC SCALE DETECTOR — warm music-notebook design
-   cream paper, ink, one terracotta accent (piano felt),
-   sage green for scale notes. tight editorial layout.
+   MUSIC SCALE DETECTOR — klimt garden + synesthesia
+   klimt bauerngarten backdrop, purple/pink soul, SHARP corners,
+   hard offset shadows. find a key and the room re-lights
+   in that key's own color (scriabin heard keys this way).
    ═══════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
-:root {
-      --paper: #faf6ed;
-      --card: #fffdf6;
-      --ink: #2e2921;
-      --ink-soft: #857a69;
-      --line: #ddd3c0;
-      --line-strong: #c9bea9;
-      --accent: #c7502f;
-      --accent-deep: #a03d21;
-      --accent-soft: #f6ded3;
-      --green: #6d8b5b;
-      --green-soft: #e6ecda;
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'Karla', sans-serif;
-      --shadow: 0 1px 2px rgba(46, 41, 33, 0.06), 0 4px 12px rgba(46, 41, 33, 0.05);
+/* SYNESTHESIA — --key-h is set from JS when a key is found.
+   idle color is damla purple; selections are always damla pink. */
+@property --key-h {
+      syntax: '<number>';
+      initial-value: 285;
+      inherits: true;
 }
 
+:root {
+      --key-h: 285;
+      transition: --key-h 0.9s ease;
+
+      --paper: #faf6ed;
+      --card: #ffffff;
+      --ink: #2e2921;
+      --ink-soft: #857a69;
+      --line: #e4dccb;
+      --line-strong: #c9bea9;
+      --pink: #e91e90;
+      --pink-deep: #ad1457;
+      --accent: hsl(var(--key-h) 42% 53%);
+      --accent-deep: hsl(var(--key-h) 50% 38%);
+      --accent-soft: hsl(var(--key-h) 45% 93%);
+      --scale-tint: hsl(var(--key-h) 48% 90%);
+      --scale-strong: hsl(var(--key-h) 45% 50%);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Karla', sans-serif;
+      --shadow: 4px 4px 0 hsl(var(--key-h) 35% 30% / 0.35);
+      --glow: none;
+}
+
+/* dark = the jam room at night: klimt in shadow, spotlight on stage */
 body.dark-mode {
-      --paper: #211d16;
-      --card: #2a251d;
-      --ink: #ece4d3;
-      --ink-soft: #a2957f;
-      --line: #3d3628;
-      --line-strong: #4d4433;
-      --accent: #e0693f;
-      --accent-deep: #c7502f;
-      --accent-soft: #4a3025;
-      --green: #8fae7c;
-      --green-soft: #37402c;
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.25);
+      --paper: #16110d;
+      --card: #201a13;
+      --ink: #f2e9d8;
+      --ink-soft: #a8998a;
+      --line: #382d22;
+      --line-strong: #4b3d2f;
+      --pink: #f0439f;
+      --pink-deep: #c2186b;
+      --accent: hsl(var(--key-h) 62% 62%);
+      --accent-deep: hsl(var(--key-h) 62% 50%);
+      --accent-soft: hsl(var(--key-h) 38% 20%);
+      --scale-tint: hsl(var(--key-h) 32% 25%);
+      --scale-strong: hsl(var(--key-h) 60% 52%);
+      --shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
+      --glow: 0 0 14px hsl(var(--key-h) 75% 55% / 0.45);
 }
 
 * {
       box-sizing: border-box;
+}
+
+html {
+      background: #6f7f56; /* klimt-ish fallback while bg loads */
 }
 
 body {
@@ -48,9 +71,32 @@ body {
       margin: 0;
       padding: 0 20px 48px;
       color: var(--ink);
-      background: var(--paper);
       line-height: 1.5;
-      transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* klimt bauerngarten — fixed layer (iOS-safe, no scroll jank) */
+body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: url('bg.png') center center / cover no-repeat;
+}
+
+body.dark-mode::before {
+      background:
+            linear-gradient(rgba(12, 9, 6, 0.72), rgba(12, 9, 6, 0.72)),
+            url('bg.png') center center / cover no-repeat;
+}
+
+/* the spotlight — key-colored ambient light from above the stage */
+body.dark-mode::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse 90% 55% at 50% -5%, hsl(var(--key-h) 55% 30% / 0.5) 0%, transparent 70%);
 }
 
 .container {
@@ -70,15 +116,17 @@ button {
       font-family: var(--font-body);
 }
 
-/* ── navbar — quiet single row ── */
+/* ── navbar — window bar on the garden ── */
 .top-navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       max-width: 1180px;
-      margin: 0 auto 28px;
-      padding: 18px 0 14px;
-      border-bottom: 1px solid var(--line);
+      margin: 16px auto 22px;
+      padding: 8px 14px;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow);
 }
 
 .nav-brand {
@@ -101,7 +149,7 @@ button {
       font-weight: 600;
       font-size: 0.9rem;
       padding: 8px 12px;
-      border-radius: 8px;
+      border-radius: 2px;
       transition: color 0.15s ease, background 0.15s ease;
 }
 
@@ -133,35 +181,34 @@ button {
       background: var(--accent-soft);
 }
 
-/* ── hero: one calm line + radio aside ── */
+/* ── hero: centered card on the garden ── */
 .header-row {
       display: flex;
-      gap: 24px;
-      margin-bottom: 24px;
-      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
 }
 
 .header {
-      flex: 1;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding: 22px 28px 18px;
+      max-width: 680px;
+      width: 100%;
 }
 
 .header h1 {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 2.4rem;
+      font-size: 2.3rem;
       line-height: 1.1;
-      margin: 0 0 10px;
-      color: var(--ink);
-}
-
-.header h1::after {
-      content: ' ♪';
-      color: var(--accent);
-      font-style: italic;
+      margin: 0 0 8px;
+      color: var(--accent-deep);
 }
 
 .header p {
-      margin: 4px 0;
+      margin: 4px auto;
       color: var(--ink-soft);
       font-size: 1rem;
       max-width: 58ch;
@@ -172,21 +219,59 @@ button {
       font-size: 1.05rem;
 }
 
-/* radio: small, demoted, charming */
+.hero-sub {
+      font-style: italic;
+      font-size: 0.9rem !important;
+      color: var(--accent-deep) !important;
+}
+
+/* five staff lines with a note resting on them */
+.staff-ornament {
+      height: 33px;
+      max-width: 380px;
+      margin: 16px auto 2px;
+      background: repeating-linear-gradient(to bottom, var(--line-strong) 0 1px, transparent 1px 8px);
+      position: relative;
+}
+
+.staff-ornament span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--card);
+      padding: 0 14px;
+      color: var(--pink);
+      font-size: 1.3rem;
+      line-height: 1;
+}
+
+/* ── radio strip at the bottom — the outro ── */
+.radio-strip {
+      display: flex;
+      justify-content: center;
+      margin: 28px 0 4px;
+}
+
 .damla-radio-header {
-      width: 330px;
-      min-width: 330px;
+      width: 100%;
+      max-width: 480px;
+      background: var(--card);
+      border: 2px solid var(--pink);
+      box-shadow: 4px 4px 0 var(--pink-deep);
+      padding: 10px 10px 8px;
 }
 
 .damla-radio-header::before {
-      content: 'damla radio — jam along';
+      content: '♪ damla radio — jam along ♪';
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-soft);
-      margin-bottom: 6px;
+      color: var(--pink);
+      text-align: center;
+      margin-bottom: 8px;
 }
 
 .damla-radio-header iframe {
@@ -194,14 +279,28 @@ button {
       border: none;
       width: 100%;
       height: 152px;
-      border-radius: 12px;
+}
+
+/* ── footer signature ── */
+.site-footer {
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+      font-size: 0.88rem;
+      font-style: italic;
+      margin: 30px auto 0;
+}
+
+.site-footer a {
+      color: #fff;
+      font-weight: 700;
 }
 
 /* ── instrument section ── */
 .instrument-panel {
       background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
+      border: 2px solid var(--accent);
+      border-radius: 2px;
       box-shadow: var(--shadow);
       margin-bottom: 20px;
       text-align: center;
@@ -222,7 +321,7 @@ button {
 .pick-button {
       display: inline-flex;
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       overflow: hidden;
       margin-bottom: 14px;
 }
@@ -247,8 +346,8 @@ button {
 }
 
 .pick.active {
-      background: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      color: #fff;
 }
 
 /* octave selector */
@@ -269,7 +368,7 @@ button {
       padding: 0;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      border-radius: 2px;
       color: var(--ink-soft);
       cursor: pointer;
       font-weight: 700;
@@ -283,9 +382,9 @@ button {
 }
 
 .octave-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent-deep);
+      color: #fff;
 }
 
 /* ── piano — contained, with red felt strip like a real one ── */
@@ -300,7 +399,7 @@ button {
       margin: 0 auto;
       background: var(--ink);
       padding: 0 10px 10px;
-      border-radius: 12px;
+      border-radius: 2px;
       overflow-x: auto;
       box-shadow: var(--shadow);
 }
@@ -311,7 +410,7 @@ button {
       display: block;
       height: 5px;
       background: var(--accent);
-      border-radius: 3px;
+      border-radius: 2px;
       margin: 10px 0 6px;
 }
 
@@ -374,34 +473,40 @@ button {
       background: #3a3428;
 }
 
-/* scale highlight — visible, calm */
+/* scale highlight — keys light up in the key's own color */
 .white-key.scale {
-      background: var(--green-soft);
+      background: var(--scale-tint);
 }
 
 .black-key.scale {
-      background: #46543a;
-      color: #dbe5cd;
+      background: hsl(var(--key-h) 35% 32%);
+      color: hsl(var(--key-h) 35% 85%);
 }
 
-/* root — felt-colored stripe at the bottom of the key */
+/* root — wears the strongest color */
 .white-key.root,
 .black-key.root {
       box-shadow: inset 0 -5px 0 var(--accent);
+}
+
+body.dark-mode .white-key.root,
+body.dark-mode .black-key.root {
+      box-shadow: inset 0 -5px 0 var(--accent), var(--glow);
 }
 
 /* selected — solid accent */
 .white-key.selected,
 .black-key.selected,
 .fret-dot.selected {
-      background: var(--accent) !important;
-      border-color: var(--accent-deep) !important;
+      background: var(--pink) !important;
+      border-color: var(--pink-deep) !important;
       color: #fff !important;
+      box-shadow: var(--glow) !important;
 }
 
 .white-key.keyboard-active,
 .black-key.keyboard-active {
-      background: var(--accent-deep) !important;
+      background: var(--pink) !important;
       color: #fff !important;
       transition: none;
 }
@@ -417,7 +522,7 @@ button {
       margin: 0 auto;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 12px;
+      border-radius: 2px;
       padding: 14px 10px;
       box-shadow: var(--shadow);
 }
@@ -473,8 +578,8 @@ button {
 }
 
 .fret-dot.scale {
-      background: var(--green-soft);
-      border-color: var(--green);
+      background: var(--scale-tint);
+      border-color: var(--scale-strong);
       color: var(--ink);
 }
 
@@ -486,7 +591,7 @@ button {
 
 /* open string marker */
 .fret-dot[data-fret="0"] {
-      border-radius: 7px;
+      border-radius: 2px;
       width: 34px;
       background: var(--ink);
       color: var(--paper);
@@ -494,8 +599,8 @@ button {
 }
 
 .fret-dot[data-fret="0"].scale {
-      background: var(--green);
-      border-color: var(--green);
+      background: var(--scale-strong);
+      border-color: var(--scale-strong);
       color: #fff;
 }
 
@@ -530,7 +635,7 @@ button {
 }
 
 .notes-display {
-      color: var(--accent-deep);
+      color: var(--pink);
       font-weight: 700;
       letter-spacing: 0.04em;
 }
@@ -543,14 +648,14 @@ button {
       color: var(--ink-soft);
       padding: 6px 14px;
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      border-radius: 2px;
       cursor: pointer;
       transition: all 0.15s ease;
 }
 
 .clear-btn:hover {
-      color: var(--accent-deep);
-      border-color: var(--accent);
+      color: var(--pink);
+      border-color: var(--pink);
 }
 
 /* ── results ── */
@@ -569,8 +674,8 @@ button {
 
 .panel {
       background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
+      border: 2px solid var(--accent);
+      border-radius: 2px;
       box-shadow: var(--shadow);
       padding: 16px 18px 18px;
 }
@@ -601,7 +706,7 @@ button {
       padding: 10px 6px;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       cursor: pointer;
       text-align: center;
       color: var(--ink-soft);
@@ -624,13 +729,34 @@ button {
 }
 
 .key-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent-deep);
+      color: #fff;
 }
 
 .key-btn.active .key-name {
-      color: var(--paper);
+      color: #fff;
+}
+
+/* each key button carries its own room color */
+.key-btn::after {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 4px;
+      margin: 7px auto 0;
+      background: hsl(var(--btn-h, 285) 50% 55%);
+}
+
+.key-btn.active::after {
+      background: #fff;
+}
+
+.synesthesia-note {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 10px 2px 0;
 }
 
 /* modes */
@@ -644,7 +770,7 @@ button {
       padding: 10px 12px;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       cursor: pointer;
       text-align: left;
       color: var(--ink);
@@ -669,9 +795,9 @@ button {
 }
 
 .mode-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent-deep);
+      color: #fff;
 }
 
 .mode-btn.active .mode-desc {
@@ -684,7 +810,7 @@ button {
       background: var(--paper);
       padding: 14px;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 2px;
       text-align: left;
       margin-top: 4px;
 }
@@ -707,7 +833,7 @@ button {
       padding: 6px 11px;
       font-weight: 700;
       font-size: 0.9rem;
-      border-radius: 8px;
+      border-radius: 2px;
       animation: notePop 0.25s ease backwards;
 }
 
@@ -724,9 +850,9 @@ button {
 }
 
 .scale-note.selected-note {
-      background: var(--green);
-      border: 1px solid var(--green);
-      color: #fff;
+      background: var(--card);
+      border: 2px solid var(--pink);
+      color: var(--pink);
 }
 
 .scale-note:nth-child(1) { animation-delay: 0s; }
@@ -753,7 +879,7 @@ button {
 .chord-type-tabs {
       display: inline-flex;
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      border-radius: 2px;
       overflow: hidden;
       margin-bottom: 12px;
 }
@@ -774,8 +900,8 @@ button {
 }
 
 .chord-type-btn.active {
-      background: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      color: #fff;
 }
 
 .chords-grid {
@@ -787,7 +913,7 @@ button {
 .chord-card {
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       padding: 10px 6px;
       text-align: center;
       cursor: pointer;
@@ -838,7 +964,7 @@ button {
 .progression-chip {
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       padding: 8px 14px;
       font-size: 0.9rem;
       font-weight: 700;
@@ -861,8 +987,8 @@ button {
 /* ── progression planner page ── */
 .prog-panel {
       background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
+      border: 2px solid var(--accent);
+      border-radius: 2px;
       box-shadow: var(--shadow);
       padding: 22px 24px;
 }
@@ -893,7 +1019,7 @@ button {
       padding: 14px;
       background: var(--paper);
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 2px;
 }
 
 .prog-key-row {
@@ -916,7 +1042,7 @@ button {
       padding: 5px 12px;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      border-radius: 2px;
       color: var(--ink-soft);
       font-weight: 600;
       font-size: 0.8rem;
@@ -930,9 +1056,9 @@ button {
 }
 
 .prog-key-btn.active, .prog-mode-btn.active {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent-deep);
+      color: #fff;
 }
 
 .prog-available-chords {
@@ -945,7 +1071,7 @@ button {
       padding: 10px 16px;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       color: var(--ink);
       font-family: var(--font-display);
       font-weight: 600;
@@ -968,7 +1094,7 @@ button {
       min-height: 52px;
       background: var(--paper);
       border: 1.5px dashed var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       padding: 12px;
       margin-bottom: 10px;
 }
@@ -980,20 +1106,20 @@ button {
 }
 
 .prog-slot {
-      background: var(--accent);
+      background: var(--pink);
       color: #fff;
       padding: 8px 15px;
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 1rem;
       border: none;
-      border-radius: 9px;
+      border-radius: 2px;
       cursor: pointer;
       transition: all 0.15s ease;
 }
 
 .prog-slot:hover {
-      background: var(--accent-deep);
+      background: var(--pink-deep);
 }
 
 .prog-arrow {
@@ -1010,7 +1136,7 @@ button {
       padding: 8px 18px;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 9px;
+      border-radius: 2px;
       color: var(--ink-soft);
       font-weight: 700;
       font-size: 0.85rem;
@@ -1024,9 +1150,9 @@ button {
 }
 
 .prog-action-btn.save-btn {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent-deep);
+      color: #fff;
 }
 
 .prog-action-btn.save-btn:hover {
@@ -1040,7 +1166,7 @@ button {
       justify-content: space-between;
       padding: 9px 14px;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 2px;
       margin-bottom: 6px;
 }
 
@@ -1053,7 +1179,7 @@ button {
 .saved-prog-delete {
       background: none;
       border: 1px solid var(--line-strong);
-      border-radius: 7px;
+      border-radius: 2px;
       color: var(--ink-soft);
       cursor: pointer;
       font-weight: 700;
@@ -1071,7 +1197,7 @@ button {
       display: inline-block;
       background: var(--card);
       border: 1px solid var(--line-strong);
-      border-radius: 10px;
+      border-radius: 2px;
       padding: 8px 14px;
       margin: 4px 6px 4px 0;
       font-weight: 700;
@@ -1267,7 +1393,7 @@ button {
 
 .player-tracks::-webkit-scrollbar-thumb {
       background: var(--line-strong);
-      border-radius: 4px;
+      border-radius: 2px;
 }
 
 /* ── pages ── */

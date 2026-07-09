@@ -162,6 +162,22 @@ let currentChordType = 'triad';
 // true after initial load — guards autoscroll on page open
 let appReady = false;
 
+// ───────────────────────────────────────────
+// SYNESTHESIA — every key re-lights the room in its own color
+// (hues walk the circle of fifths; idle = damla purple)
+// ───────────────────────────────────────────
+
+const IDLE_HUE = 285;
+const keyHues = {
+    'C': 355, 'G': 25, 'D': 50, 'A': 90, 'E': 150, 'B': 200,
+    'F#': 230, 'Db': 260, 'Ab': 285, 'Eb': 310, 'Bb': 330, 'F': 5
+};
+
+function applyKeyColor(key) {
+    const hue = keyHues[key] !== undefined ? keyHues[key] : IDLE_HUE;
+    document.documentElement.style.setProperty('--key-h', hue);
+}
+
 // progression page has its own key/mode state
 let progKey = null;
 let progMode = 'Ionian';
@@ -287,6 +303,7 @@ function clearNotes() {
     selectedNotes = [];
     selectedKey = null;
     selectedMode = 'Ionian';
+    applyKeyColor(null);
     updateVisualDisplay();
     document.querySelectorAll('.white-key, .black-key, .fret-dot').forEach(el => {
         el.classList.remove('scale', 'root');
@@ -353,6 +370,7 @@ function updateResults(possibleKeys = []) {
     possibleKeys.forEach(key => {
         const btn = document.createElement('button');
         btn.className = 'key-btn' + (key === selectedKey ? ' active' : '');
+        btn.style.setProperty('--btn-h', keyHues[key]);
         const name = document.createElement('div');
         name.className = 'key-name';
         name.textContent = key;
@@ -363,6 +381,8 @@ function updateResults(possibleKeys = []) {
         btn.onclick = () => selectKey(key);
         keysGrid.appendChild(btn);
     });
+
+    applyKeyColor(selectedKey);
 
     if (selectedKey) {
         updateModes();
@@ -821,6 +841,7 @@ function loadState() {
         findKeys();
     } else {
         document.getElementById('results').classList.add('hidden');
+        applyKeyColor(null);
     }
 }
 

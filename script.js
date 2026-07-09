@@ -205,10 +205,13 @@ let savedProgressions = [];
 // PITCH HELPERS — pitch-based comparison so enharmonics (D# vs Eb) match
 // ───────────────────────────────────────────
 
-// the visible spectrum spans about one octave of light frequency,
-// so one pitch octave maps to the full red-to-violet sweep
+// the visible spectrum spans about one octave of light frequency.
+// naturals sit on the classic rainbow (C red, D orange, E yellow,
+// F green, G cyan, A blue, B violet), sharps take the in-between hues
+const PITCH_HUES = [0, 15, 30, 43, 55, 110, 148, 185, 208, 230, 255, 280];
+
 function noteHue(note) {
-    return noteToPitch(note) * 26;
+    return PITCH_HUES[noteToPitch(note)];
 }
 
 function noteToPitch(note) {

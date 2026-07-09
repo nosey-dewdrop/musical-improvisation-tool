@@ -1231,7 +1231,7 @@ document.addEventListener('DOMContentLoaded', function () {
     applyTheme(localStorage.getItem('msi_theme') === 'dark');
 
     // rainbow headings: every letter gets its own color, flat
-    const RAINBOW = ['var(--r1)', 'var(--r2)', 'var(--r3)', 'var(--r4)', 'var(--r5)', 'var(--r6)', 'var(--r7)'];
+    const RAINBOW = ['#e40303', '#ff8c00', '#d9a300', '#008026', '#00a8c9', '#004dff', '#750787'];
     document.querySelectorAll('.rainbow').forEach(el => {
         const text = el.textContent;
         el.textContent = '';

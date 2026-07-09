@@ -342,7 +342,8 @@ a { color: var(--fg); }
       top: 14px;
 }
 
-.rail-label { font-size: 0.8rem; color: var(--mut); }
+.rail-label { font-size: 1.05rem; color: #000; }
+.dark-mode .rail-label { color: #fff; }
 
 .key-current {
       background: var(--fg);
@@ -391,7 +392,8 @@ a { color: var(--fg); }
 
 .strip > * { min-width: 0; }
 
-.strip-label { font-size: 1rem; color: var(--fg); padding-top: 1px; }
+.strip-label { font-size: 1.15rem; color: #000; padding-top: 0; }
+.dark-mode .strip-label { color: #fff; }
 
 #results .panel {
       display: grid;
@@ -407,10 +409,12 @@ a { color: var(--fg); }
 #results .panel .panel-title {
       grid-column: 1;
       grid-row: 1 / span 9;
-      font-size: 1rem;
-      color: var(--fg);
-      padding-top: 1px;
+      font-size: 1.15rem;
+      color: #000;
+      padding-top: 0;
 }
+
+.dark-mode #results .panel .panel-title { color: #fff; }
 
 #results .panel h3 { display: none; }
 
@@ -708,8 +712,8 @@ a { color: var(--fg); }
       width: 224px;
       padding: 14px 12px 16px;
       border-radius: 18px;
-      background: linear-gradient(105deg, #ffb7dc 0%, #ff8ec9 45%, #f26bb4 100%);
-      border: 1px solid #c74b93;
+      background: linear-gradient(105deg, #ff8fce 0%, #f857ae 45%, #e91e90 100%);
+      border: 1px solid #ad1457;
       box-shadow:
             inset 2px 2px 3px rgba(255, 255, 255, 0.65),
             inset -3px -4px 8px rgba(160, 30, 100, 0.35),

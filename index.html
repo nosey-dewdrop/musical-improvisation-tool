@@ -8,27 +8,23 @@
     <meta name="description" content="Pick the notes you hear on piano or guitar · find the key, explore its modes, get diatonic chords and songs to jam along with.">
     <title>Music Scale Detector</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=17">
-    <script src="script.js?v=17" defer></script>
+    <link rel="stylesheet" href="styles.css?v=18">
+    <script src="script.js?v=18" defer></script>
 </head>
 
 <body>
-      <div class="menubar">
-            <span class="menubar-title">♪ damla's music room · musical-scale-impromptu</span>
-            <span class="menubar-right">
+      <nav class="plainnav">
+            <span class="brand">musical-scale-impromptu</span>
+            <span class="plainnav-links">
+                  <a href="#" class="active" data-page="detector">scale detector</a>
+                  <a href="#" data-page="progressions">progressions</a>
+                  <a href="#" data-page="philosophy">theory blog</a>
                   <button class="theme-btn" id="theme-toggle" aria-label="toggle dark mode">🌙</button>
-                  <span id="clock">--:--</span>
             </span>
-      </div>
-
-      <div class="desktop-icons">
-            <button class="dicon active" data-page="detector"><span class="dicon-img">🎹</span><span class="dicon-text">scale-detector.app</span></button>
-            <button class="dicon" data-page="progressions"><span class="dicon-img">📊</span><span class="dicon-text">progressions.xls</span></button>
-            <button class="dicon" data-page="philosophy"><span class="dicon-img">📖</span><span class="dicon-text">theory-blog.txt</span></button>
-      </div>
+      </nav>
 
       <div class="page" id="page-detector">
-      <div class="window"><div class="window-bar"><span class="wbox" aria-hidden="true"></span><span class="wname">scale-detector.app</span></div><div class="window-body">
+      
       <div class="container">
 
             <header class="intro">
@@ -107,13 +103,13 @@
 
             </div>
 
-            <footer class="site-footer">planned 3 years ago with my music teacher · made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <span id="build-tag">v17</span></footer>
+            <footer class="site-footer">planned 3 years ago with my music teacher · made with ♥ by damla · <a href="https://github.com/damlahelloworld/musical-improvisation-tool">damlahelloworld</a> · <span id="build-tag">v18</span></footer>
 
       </div>
-      </div></div></div> <!-- /page-detector -->
+      </div> <!-- /page-detector -->
 
       <div class="page hidden" id="page-progressions">
-      <div class="window"><div class="window-bar"><span class="wbox" aria-hidden="true"></span><span class="wname">progressions.xls</span></div><div class="window-body">
+      
             <div class="container">
                   <div class="prog-panel">
                         <h2>🎵 chord progression planner</h2>
@@ -158,10 +154,10 @@
                         </div>
                   </div>
             </div>
-      </div></div></div> <!-- /page-progressions -->
+      </div> <!-- /page-progressions -->
 
       <div class="page hidden" id="page-philosophy">
-      <div class="window"><div class="window-bar"><span class="wbox" aria-hidden="true"></span><span class="wname">theory-blog.txt</span></div><div class="window-body">
+      
             <div class="container">
 
                   <div id="blog-index">
@@ -380,7 +376,7 @@
                   </div>
                   </div> <!-- /post -->
             </div>
-      </div></div></div> <!-- /page-philosophy -->
+      </div> <!-- /page-philosophy -->
 
 
       <div class="dock" id="dock">

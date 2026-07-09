@@ -390,7 +390,7 @@ a { color: var(--fg); }
 
 .strip > * { min-width: 0; }
 
-.strip-label { font-size: 0.8rem; color: var(--mut); padding-top: 3px; }
+.strip-label { font-size: 1rem; color: var(--fg); padding-top: 1px; }
 
 #results .panel {
       display: grid;
@@ -406,9 +406,9 @@ a { color: var(--fg); }
 #results .panel .panel-title {
       grid-column: 1;
       grid-row: 1 / span 9;
-      font-size: 0.8rem;
-      color: var(--mut);
-      padding-top: 3px;
+      font-size: 1rem;
+      color: var(--fg);
+      padding-top: 1px;
 }
 
 #results .panel h3 { display: none; }
@@ -689,7 +689,14 @@ a { color: var(--fg); }
 .dark-mode .philosophy-content h3 { color: var(--pink); }
 
 /* ── footer ── */
-.site-footer { color: var(--mut); font-size: 0.78rem; margin: 32px 0 0; }
+.site-footer {
+      color: var(--mut);
+      font-size: 0.82rem;
+      margin: 32px 0 0;
+      text-align: center;
+      display: grid;
+      gap: 3px;
+}
 .site-footer a { color: var(--mut); }
 
 /* ── our ipod: the one object allowed on the desk ── */

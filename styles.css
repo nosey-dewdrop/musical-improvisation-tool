@@ -1,18 +1,22 @@
 /* ═══════════════════════════════════════════
    ★ Y2K AESTHETIC — Music Scale Detector ★
-   2000s internet pencereleri + Klimt renkleri
-
-   klimt bauerngarten renk paleti:
-   #9b59b6  koyu yeşil (panel border)
-   #6a1b9a  yeşil (shadow)
-   #00bcd4  turuncu (accent/active)
-   #e91e90  kırmızı (selected notes)
-   #00bcd4  hardal sarı (secondary)
-   #9b59b6  mor çiçek (mode buttons)
-   #fff     beyaz (panel bg)
+   2000s internet windows + Klimt Bauerngarten background
+   hard offset shadows, 3px borders, window title bars
    ═══════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+      --purple: #9b59b6;        /* panel borders, primary accent */
+      --purple-deep: #6a1b9a;   /* purple hard shadow */
+      --purple-ink: #4a0e6a;    /* pressed purple shadow */
+      --cyan: #00bcd4;          /* secondary accent, keys */
+      --cyan-deep: #00838f;     /* cyan hard shadow */
+      --pink: #e91e90;          /* selected notes, chords */
+      --pink-deep: #ad1457;     /* pink hard shadow */
+      --font-body: 'Quicksand', sans-serif;
+      --font-chrome: 'Silkscreen', 'Courier New', monospace;
+}
 
 * {
       box-sizing: border-box;
@@ -49,30 +53,31 @@ body {
       font-style: italic;
       padding: 0;
       background: #fff;
-      border: 3px solid #9b59b6;
-      box-shadow: 5px 5px 0px #6a1b9a;
+      border: 3px solid var(--purple);
+      box-shadow: 5px 5px 0px var(--purple-deep);
       overflow: hidden;
       margin-bottom: 15px;
 }
 
 .header::before {
-      content: 'musical-scale-impromptu';
+      content: '♪ musical-scale-impromptu ♪';
       display: block;
-      background: linear-gradient(90deg, #9b59b6, #6a1b9a);
+      background: linear-gradient(90deg, var(--purple), var(--purple-deep));
       color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-family: var(--font-chrome);
+      font-size: 0.6rem;
+      font-weight: 400;
       font-style: normal;
-      letter-spacing: 2px;
-      padding: 5px 12px;
+      letter-spacing: 1px;
+      padding: 6px 12px;
       text-align: center;
 }
 
 /* ── iPod-style Y2K müzik çalar (results grid içinde) ── */
 .ipod-panel {
       background: linear-gradient(180deg, #e8e8e8, #d0d0d0) !important;
-      border: 3px solid #9b59b6 !important;
-      box-shadow: 5px 5px 0px #6a1b9a !important;
+      border: 3px solid var(--purple) !important;
+      box-shadow: 5px 5px 0px var(--purple-deep) !important;
       padding: 0 !important;
       display: flex;
       flex-direction: column;
@@ -108,13 +113,13 @@ body {
 .player-header {
       background: linear-gradient(180deg, #4a4a4a, #2a2a2a);
       color: #0f0;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      padding: 6px 10px;
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      padding: 7px 10px;
       text-align: center;
       text-transform: uppercase;
-      font-family: 'Courier New', monospace;
+      font-family: var(--font-chrome);
       text-shadow: 0 0 6px rgba(0, 255, 0, 0.5);
 }
 
@@ -138,7 +143,7 @@ body {
 }
 
 .player-fallback:hover {
-      color: #e91e90;
+      color: var(--pink);
       text-decoration: underline;
 }
 
@@ -170,13 +175,13 @@ body {
 
 .player-track.playing {
       background: linear-gradient(90deg, rgba(233, 30, 144, 0.15), rgba(155, 89, 182, 0.15));
-      border-left: 3px solid #e91e90;
+      border-left: 3px solid var(--pink);
 }
 
 .track-art {
       width: 32px;
       height: 32px;
-      background: linear-gradient(135deg, #9b59b6, #e91e90);
+      background: linear-gradient(135deg, var(--purple), var(--pink));
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -210,7 +215,7 @@ body {
 .track-play-btn {
       width: 22px;
       height: 22px;
-      background: linear-gradient(135deg, #e91e90, #9b59b6);
+      background: linear-gradient(135deg, var(--pink), var(--purple));
       color: #fff;
       border-radius: 50%;
       display: flex;
@@ -236,7 +241,7 @@ body {
 .header h1 {
       font-size: 2rem;
       margin-bottom: 6px;
-      color: #9b59b6;
+      color: var(--purple);
       font-weight: 700;
 }
 
@@ -249,8 +254,8 @@ body {
 /* ── instrument panel — tek kutu ── */
 .instrument-panel {
       background: #fff;
-      border: 3px solid #00bcd4;
-      box-shadow: 5px 5px 0px #00838f;
+      border: 3px solid var(--cyan);
+      box-shadow: 5px 5px 0px var(--cyan-deep);
       margin-bottom: 15px;
       overflow: hidden;
       text-align: center;
@@ -274,22 +279,22 @@ body {
 .pick {
       padding: 8px 24px;
       background: #fff;
-      border: 3px solid #9b59b6;
-      color: #9b59b6;
+      border: 3px solid var(--purple);
+      color: var(--purple);
       cursor: pointer;
       font-family: 'Quicksand', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #6a1b9a;
+      box-shadow: 3px 3px 0px var(--purple-deep);
 }
 
 .pick::before { display: none; }
 
 .pick.active {
-      background: #9b59b6;
+      background: var(--purple);
       color: #fff;
-      box-shadow: 2px 2px 0px #4a0e6a;
+      box-shadow: 2px 2px 0px var(--purple-ink);
 }
 
 .pick:hover {
@@ -355,7 +360,7 @@ body {
 
 .white-key:hover {
       background: #fff3e0;
-      color: #00bcd4;
+      color: var(--cyan);
 }
 
 .black-keys {
@@ -411,7 +416,7 @@ body {
       max-width: 800px;
       margin: 12px auto;
       background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-      border: 3px solid #00bcd4;
+      border: 3px solid var(--cyan);
       padding: 12px 8px;
       overflow: visible;
       box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
@@ -450,7 +455,7 @@ body {
       height: 22px;
       border-radius: 50%;
       background: rgba(255,255,255,0.9);
-      border: 2px solid #00bcd4;
+      border: 2px solid var(--cyan);
       cursor: pointer;
       font-size: 9px;
       font-weight: bold;
@@ -468,14 +473,14 @@ body {
 
 .fret-dot[data-fret="0"] {
       left: 10px;
-      background: #00bcd4;
+      background: var(--cyan);
       color: white;
       border-radius: 4px;
       width: 35px;
       height: 22px;
       font-weight: bold;
       font-family: 'Quicksand', sans-serif;
-      border: 2px solid #00838f;
+      border: 2px solid var(--cyan-deep);
       box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
@@ -495,24 +500,24 @@ body {
 
 .fret-dot:hover {
       background: #e0f7fa;
-      color: #00838f;
+      color: var(--cyan-deep);
       transform: translateY(-50%) scale(1.15);
-      border-color: #00bcd4;
+      border-color: var(--cyan);
 }
 
 .fret-dot[data-fret="0"]:hover {
-      background: #00838f;
+      background: var(--cyan-deep);
 }
 
 /* keyboard press efekti */
 .white-key.keyboard-active {
-      background: #00bcd4 !important;
+      background: var(--cyan) !important;
       color: #fff !important;
       transition: none;
 }
 
 .black-key.keyboard-active {
-      background: #00bcd4 !important;
+      background: var(--cyan) !important;
       color: #fff !important;
       transition: none;
 }
@@ -520,11 +525,11 @@ body {
 /* selected notes */
 .white-key.selected,
 .black-key.selected, .fret-dot.selected {
-      background: #e91e90 !important;
+      background: var(--pink) !important;
       color: white !important;
       font-family: 'Quicksand', sans-serif;
       font-style: italic;
-      border-color: #ad1457 !important;
+      border-color: var(--pink-deep) !important;
 }
 
 /* scale/root highlight SADECE scale-notes display'de, tuşlarda değil */
@@ -540,8 +545,8 @@ body {
       justify-content: center;
       gap: 8px;
       background: #fff;
-      border: 3px solid #9b59b6;
-      box-shadow: 5px 5px 0px #6a1b9a;
+      border: 3px solid var(--purple);
+      box-shadow: 5px 5px 0px var(--purple-deep);
       padding: 10px 20px;
       margin-bottom: 15px;
       font-size: 1.1rem;
@@ -550,7 +555,7 @@ body {
 }
 
 .notes-display {
-      color: #e91e90;
+      color: var(--pink);
       font-weight: bold;
       margin: 0 8px;
 }
@@ -560,16 +565,16 @@ body {
       font-size: 0.8rem;
       font-weight: 700;
       background: #fff;
-      color: #e91e90;
+      color: var(--pink);
       padding: 4px 14px;
-      border: 2px solid #e91e90;
+      border: 2px solid var(--pink);
       cursor: pointer;
       transition: all 0.2s ease;
       margin-left: auto;
 }
 
 .clear-btn:hover {
-      background: #e91e90;
+      background: var(--pink);
       color: #fff;
 }
 
@@ -589,26 +594,26 @@ body {
 
 .panel {
       background: #fff;
-      border: 3px solid #9b59b6;
-      box-shadow: 5px 5px 0px #6a1b9a;
+      border: 3px solid var(--purple);
+      box-shadow: 5px 5px 0px var(--purple-deep);
       padding: 0 15px 15px;
       overflow: hidden;
 }
 
 .panel-title {
-      background: linear-gradient(90deg, #9b59b6, #00bcd4);
+      background: linear-gradient(90deg, var(--purple), var(--cyan));
       color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      font-family: 'Quicksand', sans-serif;
-      letter-spacing: 2px;
-      padding: 5px 12px;
+      font-size: 0.6rem;
+      font-weight: 400;
+      font-family: var(--font-chrome);
+      letter-spacing: 1px;
+      padding: 6px 12px;
       text-align: center;
       margin: 0 -15px 10px;
 }
 
 .panel h3 {
-      color: #9b59b6;
+      color: var(--purple);
       font-weight: 700;
       text-align: center;
       margin-bottom: 10px;
@@ -625,14 +630,14 @@ body {
 .key-btn {
       padding: 12px 8px;
       background: #fff;
-      border: 2px solid #00bcd4;
+      border: 2px solid var(--cyan);
       cursor: pointer;
       text-align: center;
-      color: #00bcd4;
+      color: var(--cyan);
       font-weight: bold;
       font-family: 'Quicksand', sans-serif;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #00838f;
+      box-shadow: 3px 3px 0px var(--cyan-deep);
 }
 
 .key-btn::before { display: none; }
@@ -640,13 +645,13 @@ body {
 .key-btn:hover {
       background: #fff3e0;
       transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0px #00838f;
+      box-shadow: 4px 4px 0px var(--cyan-deep);
 }
 
 .key-btn.active {
-      background: #00bcd4;
+      background: var(--cyan);
       color: #fff;
-      box-shadow: 2px 2px 0px #00838f;
+      box-shadow: 2px 2px 0px var(--cyan-deep);
 }
 
 /* modes — sağlı sollu grid results içinde */
@@ -660,14 +665,14 @@ body {
 .mode-btn {
       padding: 10px;
       background: #fff;
-      border: 2px solid #9b59b6;
+      border: 2px solid var(--purple);
       cursor: pointer;
       text-align: center;
-      color: #9b59b6;
+      color: var(--purple);
       font-weight: bold;
       font-family: 'Quicksand', sans-serif;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #6a1b9a;
+      box-shadow: 3px 3px 0px var(--purple-deep);
 }
 
 .mode-desc {
@@ -684,16 +689,16 @@ body {
 }
 
 .mode-btn.active {
-      background: #9b59b6;
+      background: var(--purple);
       color: #fff;
-      box-shadow: 2px 2px 0px #4a0e6a;
+      box-shadow: 2px 2px 0px var(--purple-ink);
 }
 
 /* scale info — inside keys panel */
 .scale-info-inline {
       background: #fafafa;
       padding: 12px;
-      border: 2px solid #9b59b6;
+      border: 2px solid var(--purple);
       text-align: center;
       margin-top: 12px;
 }
@@ -719,18 +724,18 @@ body {
 }
 
 .scale-note.normal {
-      background: #9b59b6;
-      border: 1px solid #6a1b9a;
+      background: var(--purple);
+      border: 1px solid var(--purple-deep);
 }
 
 .scale-note.root-note {
-      background: #e91e90;
-      border: 1px solid #ad1457;
+      background: var(--pink);
+      border: 1px solid var(--pink-deep);
 }
 
 .scale-note.selected-note {
-      background: #00bcd4;
-      border: 1px solid #00838f;
+      background: var(--cyan);
+      border: 1px solid var(--cyan-deep);
 }
 
 /* ── chord type tabs ── */
@@ -744,8 +749,8 @@ body {
 .chord-type-btn {
       padding: 5px 16px;
       background: #fff;
-      border: 2px solid #e91e90;
-      color: #e91e90;
+      border: 2px solid var(--pink);
+      color: var(--pink);
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 0.8rem;
@@ -754,7 +759,7 @@ body {
 }
 
 .chord-type-btn.active {
-      background: #e91e90;
+      background: var(--pink);
       color: #fff;
 }
 
@@ -772,16 +777,16 @@ body {
 
 .chord-card {
       background: #fff;
-      border: 2px solid #e91e90;
+      border: 2px solid var(--pink);
       padding: 10px 6px;
       text-align: center;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #ad1457;
+      box-shadow: 3px 3px 0px var(--pink-deep);
 }
 
 .chord-card:hover {
       transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0px #ad1457;
+      box-shadow: 4px 4px 0px var(--pink-deep);
 }
 
 .chord-degree {
@@ -794,7 +799,7 @@ body {
 .chord-name {
       font-size: 1.1rem;
       font-weight: 700;
-      color: #e91e90;
+      color: var(--pink);
       margin: 2px 0;
 }
 
@@ -821,19 +826,19 @@ body {
 
 .progression-chip {
       background: #fff;
-      border: 2px solid #00bcd4;
+      border: 2px solid var(--cyan);
       padding: 6px 16px;
       font-size: 0.85rem;
       font-weight: 700;
-      color: #00bcd4;
+      color: var(--cyan);
       font-family: 'Quicksand', sans-serif;
       cursor: default;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #00838f;
+      box-shadow: 3px 3px 0px var(--cyan-deep);
 }
 
 .progression-chip:hover {
-      background: #00bcd4;
+      background: var(--cyan);
       color: #fff;
       transform: translate(-1px, -1px);
 }
@@ -852,21 +857,21 @@ body {
       justify-content: space-between;
       align-items: center;
       background: #fff;
-      border: 3px solid #9b59b6;
+      border: 3px solid var(--purple);
       padding: 0;
       margin: 0 0 15px;
-      box-shadow: 5px 5px 0px #6a1b9a;
+      box-shadow: 5px 5px 0px var(--purple-deep);
       font-family: 'Quicksand', sans-serif;
       overflow: hidden;
 }
 
 .nav-brand {
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: #9b59b6;
-      letter-spacing: 2px;
-      padding: 10px 18px;
-      font-style: italic;
+      font-family: var(--font-chrome);
+      font-weight: 400;
+      font-size: 0.7rem;
+      color: var(--purple);
+      letter-spacing: 1px;
+      padding: 12px 18px;
 }
 
 .nav-right {
@@ -877,7 +882,7 @@ body {
 
 .nav-link {
       text-decoration: none;
-      color: #9b59b6;
+      color: var(--purple);
       font-weight: 700;
       font-size: 0.9rem;
       padding: 10px 20px;
@@ -890,7 +895,7 @@ body {
 }
 
 .nav-link.active {
-      border-bottom-color: #9b59b6;
+      border-bottom-color: var(--purple);
       background: #f3e5f5;
 }
 
@@ -908,21 +913,113 @@ body {
       background: #f3e5f5;
 }
 
-/* pages */
-.page { }
+/* pages — soft fade-up on switch */
+.page {
+      animation: pageIn 0.25s ease both;
+}
+
+@keyframes pageIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+}
+
+/* JS-built element styles (replaces old inline styles) */
+.key-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+}
+
+.mode-root {
+      font-weight: bold;
+}
+
+.prog-arrow {
+      color: #999;
+      font-weight: 700;
+}
+
+/* ── micro-interactions: Y2K buttons physically press down ── */
+.key-btn:active, .mode-btn:active, .pick:active, .octave-btn:active,
+.prog-chord-btn:active, .chord-type-btn:active, .clear-btn:active,
+.prog-action-btn:active, .prog-key-btn:active, .prog-mode-btn:active,
+.prog-common-item:active, .chord-card:active, .prog-slot:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+}
+
+.white-key:active, .black-key:active, .fret-dot:active {
+      filter: brightness(0.85);
+}
+
+/* keyboard accessibility — dashed Y2K focus ring */
+.key-btn:focus-visible, .mode-btn:focus-visible, .pick:focus-visible,
+.octave-btn:focus-visible, .prog-chord-btn:focus-visible, .chord-type-btn:focus-visible,
+.clear-btn:focus-visible, .prog-action-btn:focus-visible, .prog-key-btn:focus-visible,
+.prog-mode-btn:focus-visible, .white-key:focus-visible, .black-key:focus-visible,
+.fret-dot:focus-visible, .nav-link:focus-visible, .theme-btn:focus-visible,
+.saved-prog-delete:focus-visible {
+      outline: 2px dashed var(--pink);
+      outline-offset: 2px;
+}
+
+::selection {
+      background: var(--pink);
+      color: #fff;
+}
+
+/* scale notes pop in one by one */
+.scale-note {
+      animation: notePop 0.25s ease backwards;
+}
+
+.scale-note:nth-child(1) { animation-delay: 0s; }
+.scale-note:nth-child(2) { animation-delay: 0.04s; }
+.scale-note:nth-child(3) { animation-delay: 0.08s; }
+.scale-note:nth-child(4) { animation-delay: 0.12s; }
+.scale-note:nth-child(5) { animation-delay: 0.16s; }
+.scale-note:nth-child(6) { animation-delay: 0.2s; }
+.scale-note:nth-child(7) { animation-delay: 0.24s; }
+
+@keyframes notePop {
+      from { opacity: 0; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1); }
+}
+
+/* Y2K chunky scrollbar for the track list */
+.player-tracks::-webkit-scrollbar {
+      width: 10px;
+}
+
+.player-tracks::-webkit-scrollbar-track {
+      background: #e0e0e0;
+}
+
+.player-tracks::-webkit-scrollbar-thumb {
+      background: var(--purple);
+      border: 2px solid #e0e0e0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+      .page, .scale-note, .player-vinyl {
+            animation: none !important;
+      }
+      * {
+            transition-duration: 0.01ms !important;
+      }
+}
 
 /* ── progression planner page ── */
 .prog-panel {
       background: #fff;
-      border: 3px solid #9b59b6;
-      box-shadow: 5px 5px 0px #6a1b9a;
+      border: 3px solid var(--purple);
+      box-shadow: 5px 5px 0px var(--purple-deep);
       padding: 20px;
       overflow: hidden;
 }
 
 .prog-panel h2 {
       text-align: center;
-      color: #9b59b6;
+      color: var(--purple);
       font-style: italic;
       margin-bottom: 8px;
 }
@@ -935,7 +1032,7 @@ body {
 }
 
 .prog-panel h3 {
-      color: #9b59b6;
+      color: var(--purple);
       font-style: italic;
       text-decoration: underline;
       margin: 16px 0 10px;
@@ -945,7 +1042,7 @@ body {
       margin-bottom: 16px;
       padding: 12px;
       background: #fafafa;
-      border: 2px solid #9b59b6;
+      border: 2px solid var(--purple);
 }
 
 .prog-key-row {
@@ -961,14 +1058,14 @@ body {
 .prog-key-row span {
       min-width: 50px;
       font-family: 'Quicksand', sans-serif;
-      color: #9b59b6;
+      color: var(--purple);
 }
 
 .prog-key-btn, .prog-mode-btn {
       padding: 5px 12px;
       background: #fff;
-      border: 2px solid #9b59b6;
-      color: #9b59b6;
+      border: 2px solid var(--purple);
+      color: var(--purple);
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 0.8rem;
@@ -977,7 +1074,7 @@ body {
 }
 
 .prog-key-btn.active, .prog-mode-btn.active {
-      background: #9b59b6;
+      background: var(--purple);
       color: #fff;
 }
 
@@ -996,18 +1093,18 @@ body {
 .prog-chord-btn {
       padding: 10px 16px;
       background: #fff;
-      border: 2px solid #00bcd4;
-      color: #00bcd4;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #00838f;
+      box-shadow: 3px 3px 0px var(--cyan-deep);
 }
 
 .prog-chord-btn:hover {
-      background: #00bcd4;
+      background: var(--cyan);
       color: #fff;
       transform: translate(-1px, -1px);
 }
@@ -1033,21 +1130,21 @@ body {
 }
 
 .prog-slot {
-      background: #9b59b6;
+      background: var(--purple);
       color: #fff;
       padding: 8px 16px;
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 1rem;
-      border: 2px solid #6a1b9a;
+      border: 2px solid var(--purple-deep);
       cursor: pointer;
       transition: all 0.15s ease;
-      box-shadow: 2px 2px 0px #6a1b9a;
+      box-shadow: 2px 2px 0px var(--purple-deep);
 }
 
 .prog-slot:hover {
-      background: #e91e90;
-      border-color: #ad1457;
+      background: var(--pink);
+      border-color: var(--pink-deep);
 }
 
 .prog-actions {
@@ -1058,8 +1155,8 @@ body {
 .prog-action-btn {
       padding: 8px 18px;
       background: #fff;
-      border: 2px solid #00bcd4;
-      color: #00bcd4;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 0.85rem;
@@ -1068,17 +1165,17 @@ body {
 }
 
 .prog-action-btn:hover {
-      background: #00bcd4;
+      background: var(--cyan);
       color: #fff;
 }
 
 .prog-action-btn.save-btn {
-      border-color: #e91e90;
-      color: #e91e90;
+      border-color: var(--pink);
+      color: var(--pink);
 }
 
 .prog-action-btn.save-btn:hover {
-      background: #e91e90;
+      background: var(--pink);
       color: #fff;
 }
 
@@ -1094,14 +1191,14 @@ body {
 
 .saved-prog-chords {
       font-weight: 700;
-      color: #9b59b6;
+      color: var(--purple);
       font-size: 0.95rem;
 }
 
 .saved-prog-delete {
       background: none;
-      border: 2px solid #e91e90;
-      color: #e91e90;
+      border: 2px solid var(--pink);
+      color: var(--pink);
       cursor: pointer;
       font-weight: 700;
       font-size: 0.8rem;
@@ -1109,27 +1206,27 @@ body {
 }
 
 .saved-prog-delete:hover {
-      background: #e91e90;
+      background: var(--pink);
       color: #fff;
 }
 
 .prog-common-item {
       display: inline-block;
       background: #fff;
-      border: 2px solid #9b59b6;
+      border: 2px solid var(--purple);
       padding: 6px 14px;
       margin: 4px;
       font-weight: 700;
       font-family: 'Quicksand', sans-serif;
       font-size: 0.85rem;
-      color: #9b59b6;
+      color: var(--purple);
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 2px 2px 0px #6a1b9a;
+      box-shadow: 2px 2px 0px var(--purple-deep);
 }
 
 .prog-common-item:hover {
-      background: #9b59b6;
+      background: var(--purple);
       color: #fff;
 }
 
@@ -1157,7 +1254,7 @@ body {
 }
 
 .philosophy-content h3 {
-      color: #9b59b6;
+      color: var(--purple);
       margin: 16px 0 8px;
       font-style: italic;
       text-decoration: underline;
@@ -1176,23 +1273,23 @@ body {
       align-items: center;
       padding: 10px 14px;
       background: #fff;
-      border: 2px solid #9b59b6;
+      border: 2px solid var(--purple);
       text-decoration: none;
       color: inherit;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #6a1b9a;
+      box-shadow: 3px 3px 0px var(--purple-deep);
       font-family: 'Quicksand', sans-serif;
 }
 
 .song-item:hover {
       background: #f3e5f5;
       transform: translate(-1px, -1px);
-      box-shadow: 4px 4px 0px #6a1b9a;
+      box-shadow: 4px 4px 0px var(--purple-deep);
 }
 
 .song-title {
       font-weight: 700;
-      color: #9b59b6;
+      color: var(--purple);
       font-size: 0.95rem;
       flex: 1;
 }
@@ -1205,7 +1302,7 @@ body {
 }
 
 .song-play {
-      background: #e91e90;
+      background: var(--pink);
       color: #fff;
       width: 28px;
       height: 28px;
@@ -1261,18 +1358,18 @@ body {
 .octave-btn {
       padding: 4px 14px;
       background: #fff;
-      border: 2px solid #00bcd4;
-      color: #00bcd4;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
       cursor: pointer;
       font-family: 'Quicksand', sans-serif;
       font-weight: 700;
       font-size: 0.9rem;
       transition: all 0.2s ease;
-      box-shadow: 2px 2px 0px #00838f;
+      box-shadow: 2px 2px 0px var(--cyan-deep);
 }
 
 .octave-btn.active {
-      background: #00bcd4;
+      background: var(--cyan);
       color: #fff;
 }
 
@@ -1284,14 +1381,14 @@ body {
 .theme-btn {
       padding: 6px 18px;
       background: rgba(255,255,255,0.85);
-      border: 2px solid #9b59b6;
-      color: #9b59b6;
+      border: 2px solid var(--purple);
+      color: var(--purple);
       cursor: pointer;
       font-size: 13px;
       font-family: 'Quicksand', sans-serif;
       font-weight: 700;
       transition: all 0.2s ease;
-      box-shadow: 3px 3px 0px #6a1b9a;
+      box-shadow: 3px 3px 0px var(--purple-deep);
 }
 
 .theme-btn:hover {
@@ -1322,62 +1419,62 @@ body.dark-mode {
 .dark-mode .theme-btn {
       background: #1a1a1a;
       color: #ce93d8;
-      border-color: #9b59b6;
-      box-shadow: 3px 3px 0px #4a0e6a;
+      border-color: var(--purple);
+      box-shadow: 3px 3px 0px var(--purple-ink);
 }
 
 .dark-mode .pick {
       background: #1a1a1a;
       color: #ce93d8;
-      border-color: #9b59b6;
-      box-shadow: 3px 3px 0px #4a0e6a;
+      border-color: var(--purple);
+      box-shadow: 3px 3px 0px var(--purple-ink);
 }
 .dark-mode .pick:hover { background: #2a2a2a; }
-.dark-mode .pick.active { background: #9b59b6; color: #fff; }
+.dark-mode .pick.active { background: var(--purple); color: #fff; }
 
 .dark-mode .piano-container { background: #0a0a0a; border-color: #222; }
 
 .dark-mode .guitar-strings { background: #111; border-color: #333; }
 .dark-mode .string-line { background: #555; }
-.dark-mode .fret-dot { background: #2a2a2a; border-color: #9b59b6; color: #ccc; }
-.dark-mode .fret-dot[data-fret="0"] { background: #6a1b9a; color: #fff; }
+.dark-mode .fret-dot { background: #2a2a2a; border-color: var(--purple); color: #ccc; }
+.dark-mode .fret-dot[data-fret="0"] { background: var(--purple-deep); color: #fff; }
 .dark-mode .fret-dot:hover { background: #3a3a3a; color: #fff; }
 
 .dark-mode .results h3 { color: #ce93d8; }
 .dark-mode .notes-display { color: #ef9a9a; }
-.dark-mode .clear-btn { background: #1a1a1a; color: #ef9a9a; border-color: #e91e90; }
-.dark-mode .clear-btn:hover { background: #e91e90; color: #fff; }
+.dark-mode .clear-btn { background: #1a1a1a; color: #ef9a9a; border-color: var(--pink); }
+.dark-mode .clear-btn:hover { background: var(--pink); color: #fff; }
 
-.dark-mode .key-btn { background: #1a1a1a; border-color: #00bcd4; color: #ffb74d; box-shadow: 3px 3px 0px #00838f; }
+.dark-mode .key-btn { background: #1a1a1a; border-color: var(--cyan); color: #ffb74d; box-shadow: 3px 3px 0px var(--cyan-deep); }
 .dark-mode .key-btn:hover { background: #2a2a2a; }
-.dark-mode .key-btn.active { background: #00bcd4; color: #fff; }
+.dark-mode .key-btn.active { background: var(--cyan); color: #fff; }
 
-.dark-mode .mode-btn { background: #1a1a1a; border-color: #9b59b6; color: #ce93d8; box-shadow: 3px 3px 0px #4a0e6a; }
+.dark-mode .mode-btn { background: #1a1a1a; border-color: var(--purple); color: #ce93d8; box-shadow: 3px 3px 0px var(--purple-ink); }
 .dark-mode .mode-btn:hover { background: #2a2a2a; }
-.dark-mode .mode-btn.active { background: #9b59b6; color: #fff; }
+.dark-mode .mode-btn.active { background: var(--purple); color: #fff; }
 .dark-mode .mode-desc { color: #777; }
 
-.dark-mode .scale-info { background: #1a1a1a; border-color: #9b59b6; }
+.dark-mode .scale-info { background: #1a1a1a; border-color: var(--purple); }
 
-.dark-mode .chord-card { background: #1a1a1a; border-color: #e91e90; box-shadow: 3px 3px 0px #6a0e3a; }
+.dark-mode .chord-card { background: #1a1a1a; border-color: var(--pink); box-shadow: 3px 3px 0px #6a0e3a; }
 .dark-mode .chord-name { color: #ef9a9a; }
 .dark-mode .chord-degree, .dark-mode .chord-quality, .dark-mode .chord-notes-display { color: #777; }
 
-.dark-mode .progression-chip { background: #1a1a1a; border-color: #00bcd4; color: #ffd54f; box-shadow: 3px 3px 0px #00838f; }
-.dark-mode .progression-chip:hover { background: #00bcd4; color: #fff; }
+.dark-mode .progression-chip { background: #1a1a1a; border-color: var(--cyan); color: #ffd54f; box-shadow: 3px 3px 0px var(--cyan-deep); }
+.dark-mode .progression-chip:hover { background: var(--cyan); color: #fff; }
 .dark-mode .progression-label { color: #666; }
 
 .dark-mode .panel { background: #1a1a1a; color: #ddd; }
 .dark-mode .panel h3 { color: #ce93d8; }
-.dark-mode .selected-notes-bar { background: #1a1a1a; color: #ddd; border-color: #9b59b6; }
-.dark-mode .scale-info-inline { background: #111; border-color: #9b59b6; }
+.dark-mode .selected-notes-bar { background: #1a1a1a; color: #ddd; border-color: var(--purple); }
+.dark-mode .scale-info-inline { background: #111; border-color: var(--purple); }
 .dark-mode .chord-type-btn { background: #1a1a1a; }
-.dark-mode .chord-type-btn.active { background: #e91e90; }
-.dark-mode .prog-panel { background: #1a1a1a; color: #ddd; border-color: #9b59b6; }
+.dark-mode .chord-type-btn.active { background: var(--pink); }
+.dark-mode .prog-panel { background: #1a1a1a; color: #ddd; border-color: var(--purple); }
 .dark-mode .prog-panel h2, .dark-mode .prog-panel h3 { color: #ce93d8; }
 .dark-mode .progression-slots { background: #111; border-color: #444; }
-.dark-mode .progression-bar { background: #1a1a1a; border-color: #9b59b6; box-shadow: 5px 5px 0px #4a0e6a; }
-.dark-mode .prog-slot { background: #6a1b9a; border-color: #4a0e6a; }
+.dark-mode .progression-bar { background: #1a1a1a; border-color: var(--purple); box-shadow: 5px 5px 0px var(--purple-ink); }
+.dark-mode .prog-slot { background: var(--purple-deep); border-color: var(--purple-ink); }
 .dark-mode .progression-empty { color: #666; }
 .dark-mode .prog-action-btn { background: #1a1a1a; }
 .dark-mode .saved-prog-item { border-color: #333; }
@@ -1391,23 +1488,108 @@ body.dark-mode {
 .dark-mode .track-title { color: #ddd; }
 .dark-mode .track-artist { color: #666; }
 
-.dark-mode .song-item { background: #1a1a1a; border-color: #9b59b6; box-shadow: 3px 3px 0px #4a0e6a; }
+.dark-mode .song-item { background: #1a1a1a; border-color: var(--purple); box-shadow: 3px 3px 0px var(--purple-ink); }
 .dark-mode .song-item:hover { background: #2a2a2a; }
 .dark-mode .song-title { color: #ce93d8; }
 .dark-mode .song-artist { color: #777; }
 
-.dark-mode .octave-btn { background: #1a1a1a; border-color: #00bcd4; color: #4dd0e1; box-shadow: 2px 2px 0px #004d40; }
-.dark-mode .octave-btn.active { background: #00bcd4; color: #fff; }
+.dark-mode .octave-btn { background: #1a1a1a; border-color: var(--cyan); color: #4dd0e1; box-shadow: 2px 2px 0px #004d40; }
+.dark-mode .octave-btn.active { background: var(--cyan); color: #fff; }
 .dark-mode .octave-selector span { color: #bbb; }
+
+/* dark mode — navbar */
+.dark-mode .top-navbar { background: #1a1a1a; }
+.dark-mode .nav-brand { color: #ce93d8; }
+.dark-mode .nav-link { color: #ce93d8; }
+.dark-mode .nav-link:hover, .dark-mode .nav-link.active { background: #2a2a2a; }
+.dark-mode .top-navbar .theme-btn { background: #1a1a1a; border-left-color: #333; }
+.dark-mode .top-navbar .theme-btn:hover { background: #2a2a2a; }
+
+/* dark mode — instrument panel wrapper */
+.dark-mode .instrument-panel { background: #1a1a1a; color: #ddd; }
+.dark-mode .instrument-panel .selected-notes-bar { border-top-color: #333; }
+
+/* dark mode — progression page leftovers */
+.dark-mode .prog-key-select { background: #111; border-color: var(--purple); }
+.dark-mode .prog-key-row span { color: #ce93d8; }
+.dark-mode .prog-key-btn, .dark-mode .prog-mode-btn { background: #1a1a1a; color: #ce93d8; }
+.dark-mode .prog-key-btn:hover, .dark-mode .prog-mode-btn:hover { background: #2a2a2a; }
+.dark-mode .prog-key-btn.active, .dark-mode .prog-mode-btn.active { background: var(--purple); color: #fff; }
+.dark-mode .prog-chord-btn { background: #1a1a1a; }
+.dark-mode .prog-common-item { background: #1a1a1a; color: #ce93d8; box-shadow: 2px 2px 0px var(--purple-ink); }
+.dark-mode .prog-common-item:hover { background: var(--purple); color: #fff; }
+.dark-mode .prog-hint { color: #666; }
+.dark-mode .prog-arrow { color: #666; }
+
+/* dark mode — philosophy page */
+.dark-mode .philosophy-content { color: #bbb; }
+.dark-mode .philosophy-content h3 { color: #ce93d8; }
+
+/* dark mode — scrollbar */
+.dark-mode .player-tracks::-webkit-scrollbar-track { background: #222; }
+.dark-mode .player-tracks::-webkit-scrollbar-thumb { border-color: #222; }
 
 /* ── mobile ── */
 @media (max-width: 768px) {
+      body {
+          padding: 10px;
+      }
+
       .container {
           padding: 0 10px;
       }
 
+      /* navbar wraps instead of overflowing */
+      .top-navbar {
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+      .nav-brand {
+          padding: 10px 12px 4px;
+      }
+
+      .nav-right {
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+      .nav-link {
+          padding: 8px 12px;
+          font-size: 0.8rem;
+      }
+
+      /* header + radio stack vertically */
+      .header-row {
+          flex-direction: column;
+      }
+
+      .header-row .header {
+          min-height: 0;
+      }
+
+      .damla-radio-header {
+          width: 100%;
+          min-width: 0;
+      }
+
+      .damla-radio-header iframe {
+          height: 250px;
+      }
+
       .results-grid {
           grid-template-columns: 1fr;
+      }
+
+      /* single column — let panels flow in DOM order */
+      #panel-keys, #chords-section-dynamic, #now-playing,
+      #modes-section, #progressions-section-dynamic {
+          grid-column: auto;
+          grid-row: auto;
+      }
+
+      .selected-notes-bar {
+          flex-wrap: wrap;
       }
 
       .guitar-strings {

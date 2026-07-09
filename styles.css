@@ -15,11 +15,11 @@
       --key-h: 285;
       transition: --key-h 0.9s ease;
 
-      --bg: #faf8fb;
-      --fg: #221e26;
-      --mut: #8d8494;
-      --hair: #e2dbe6;
-      --hair-strong: #c5bacb;
+      --bg: #fbfaf7;
+      --fg: #000000;
+      --mut: #4d4a52;
+      --hair: #b8b2bd;
+      --hair-strong: #6e6876;
       --pink: #e91e90;
       --pink-deep: #ad1457;
       --purple: #9b59b6;
@@ -32,11 +32,11 @@
 }
 
 body.dark-mode {
-      --bg: #1b1622;
-      --fg: #efe9f2;
-      --mut: #97899f;
-      --hair: #372e40;
-      --hair-strong: #4f4459;
+      --bg: #17141b;
+      --fg: #f4f0f7;
+      --mut: #aaa2b2;
+      --hair: #443c4d;
+      --hair-strong: #6a6173;
       --pink: #f0439f;
       --purple: #b57bd1;
       --cyan: #4dd0e1;
@@ -1006,15 +1006,15 @@ button {
       left: 0;
       right: 0;
       height: 26px;
-      background: rgba(255, 255, 255, 0.93);
-      border-bottom: 1px solid #55505c;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #000;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 12px;
       font-size: 0.78rem;
       z-index: 70;
-      color: #221e26;
+      color: #000;
 }
 
 .dark-mode .menubar {
@@ -1091,17 +1091,17 @@ button {
       max-width: 1120px;
       margin: 0 auto 30px;
       background: var(--bg);
-      border: 1px solid #221e26;
-      box-shadow: 4px 4px 0 rgba(20, 10, 25, 0.45);
+      border: 1px solid #000;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55);
 }
 
 .window-bar {
       position: relative;
       height: 25px;
-      border-bottom: 1px solid #221e26;
+      border-bottom: 1px solid #000;
       background:
-            repeating-linear-gradient(180deg, transparent 0 4px, hsl(var(--key-h) 45% 62% / 0.55) 4px 5px),
-            linear-gradient(180deg, #ffffff, #f1ecf4);
+            repeating-linear-gradient(180deg, transparent 0 4px, rgba(0, 0, 0, 0.8) 4px 5px),
+            linear-gradient(180deg, #ffffff, #efece7);
       display: flex;
       align-items: center;
       cursor: grab;
@@ -1114,14 +1114,14 @@ button {
 
 .dark-mode .window-bar {
       background:
-            repeating-linear-gradient(180deg, transparent 0 4px, hsl(var(--key-h) 45% 45% / 0.6) 4px 5px),
-            linear-gradient(180deg, #38313f, #2b2533);
+            repeating-linear-gradient(180deg, transparent 0 4px, rgba(0, 0, 0, 0.9) 4px 5px),
+            linear-gradient(180deg, #3a363f, #29252e);
 }
 
 .wbox {
       width: 12px;
       height: 12px;
-      border: 1px solid #221e26;
+      border: 1px solid #000;
       background: var(--bg);
       margin-left: 9px;
       z-index: 1;
@@ -1578,6 +1578,21 @@ button {
 
 
 /* ═══ y2k candy — juicy jelly chips, glossy like an imac g3 ═══ */
+
+.mode-btn:nth-child(1), .chord-card:nth-child(1), .scale-note:nth-child(1), .prog-chord-btn:nth-child(1) { --chip-h: 335; }
+.mode-btn:nth-child(2), .chord-card:nth-child(2), .scale-note:nth-child(2), .prog-chord-btn:nth-child(2) { --chip-h: 15; }
+.mode-btn:nth-child(3), .chord-card:nth-child(3), .scale-note:nth-child(3), .prog-chord-btn:nth-child(3) { --chip-h: 42; }
+.mode-btn:nth-child(4), .chord-card:nth-child(4), .scale-note:nth-child(4), .prog-chord-btn:nth-child(4) { --chip-h: 145; }
+.mode-btn:nth-child(5), .chord-card:nth-child(5), .scale-note:nth-child(5), .prog-chord-btn:nth-child(5) { --chip-h: 192; }
+.mode-btn:nth-child(6), .chord-card:nth-child(6), .scale-note:nth-child(6), .prog-chord-btn:nth-child(6) { --chip-h: 248; }
+.mode-btn:nth-child(7), .chord-card:nth-child(7), .scale-note:nth-child(7), .prog-chord-btn:nth-child(7) { --chip-h: 283; }
+
+.progression-chip:nth-child(6n+1), .prog-common-item:nth-child(6n+1) { --chip-h: 335; }
+.progression-chip:nth-child(6n+2), .prog-common-item:nth-child(6n+2) { --chip-h: 15; }
+.progression-chip:nth-child(6n+3), .prog-common-item:nth-child(6n+3) { --chip-h: 145; }
+.progression-chip:nth-child(6n+4), .prog-common-item:nth-child(6n+4) { --chip-h: 192; }
+.progression-chip:nth-child(6n+5), .prog-common-item:nth-child(6n+5) { --chip-h: 248; }
+.progression-chip:nth-child(6n+6), .prog-common-item:nth-child(6n+6) { --chip-h: 283; }
 
 /* the jelly recipe: saturated fill, glossy top light, soft candy shadow */
 .key-btn, .mode-btn, .chord-card, .scale-note.normal,

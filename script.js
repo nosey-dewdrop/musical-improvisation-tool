@@ -770,6 +770,10 @@ function saveState() {
 }
 
 function loadState() {
+    // phones default to 1 octave so the piano fits without endless scrolling
+    const defaultOctaves = window.matchMedia('(max-width: 600px)').matches ? 1 : 2;
+    currentOctaves = defaultOctaves;
+
     const saved = localStorage.getItem('msi_state');
     if (saved) {
         try {
@@ -777,7 +781,7 @@ function loadState() {
             selectedNotes = sanitizeNotes(state.selectedNotes);
             selectedKey = majorScales[state.selectedKey] ? state.selectedKey : null;
             selectedMode = modes[state.selectedMode] ? state.selectedMode : 'Ionian';
-            currentOctaves = [1, 2, 3].includes(state.octaves) ? state.octaves : 2;
+            currentOctaves = [1, 2, 3].includes(state.octaves) ? state.octaves : defaultOctaves;
             currentProgression = sanitizeProgression(state.currentProgression);
         } catch (e) {
             // corrupt state — start fresh
@@ -1096,7 +1100,6 @@ function playSong(spId, trackEl) {
     iframe.title = 'Spotify player';
     iframe.loading = 'lazy';
     iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media');
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
     videoDiv.appendChild(iframe);
 }
 

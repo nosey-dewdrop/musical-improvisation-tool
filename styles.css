@@ -28,7 +28,17 @@ body {
       margin: 0;
       padding: 20px;
       color: #333;
-      background: url('bg.png') center center / cover no-repeat fixed;
+      background: #7a8c5e; /* klimt-ish fallback while bg loads */
+}
+
+/* fixed background as its own layer — background-attachment: fixed
+   is unsupported on iOS Safari and causes scroll jank */
+body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url('bg.png') center center / cover no-repeat;
 }
 
 .container {
@@ -60,7 +70,7 @@ body {
 }
 
 .header::before {
-      content: '♪ musical-scale-impromptu ♪';
+      content: '♪ find your scale ♪';
       display: block;
       background: linear-gradient(90deg, var(--purple), var(--purple-deep));
       color: #fff;
@@ -239,8 +249,8 @@ body {
 }
 
 .header h1 {
-      font-size: 2rem;
-      margin-bottom: 6px;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
       color: var(--purple);
       font-weight: 700;
 }
@@ -249,6 +259,10 @@ body {
       color: #666;
       font-size: 0.95rem;
       font-style: italic;
+      margin: 6px 0;
+      max-width: 60ch;
+      margin-left: auto;
+      margin-right: auto;
 }
 
 /* ── instrument panel — tek kutu ── */
@@ -895,7 +909,10 @@ body {
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
+      justify-content: center;
       border-right: 2px solid #eee;
+      flex: 1;
+      text-align: center;
 }
 
 .nav-link:hover {
@@ -913,15 +930,14 @@ body {
 
 .top-navbar .theme-btn {
       padding: 0;
-      width: 46px;
+      width: 56px;
+      flex: 0 0 56px;
       border: none;
-      border-left: 2px solid #eee;
       box-shadow: none;
       background: #fff;
       font-size: 1.05rem;
       cursor: pointer;
       align-self: stretch;
-      margin-left: auto;
 }
 
 .top-navbar .theme-btn:hover {
@@ -1334,7 +1350,7 @@ body {
       display: flex;
       gap: 15px;
       margin-bottom: 15px;
-      align-items: stretch;
+      align-items: flex-start; /* radio window hugs its content, no stretching */
 }
 
 .header-row .header {
@@ -1382,8 +1398,7 @@ body {
       display: block;
       border: none;
       width: 100%;
-      height: 352px;
-      flex: 1;
+      height: 152px;
 }
 
 /* ── octave selector ── */
@@ -1440,10 +1455,14 @@ body {
 
 /* ── dark mode ── */
 body.dark-mode {
+      background: #1a1a1a;
+      color: #ddd;
+}
+
+body.dark-mode::before {
       background:
             linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-            url('bg.png') center center / cover no-repeat fixed;
-      color: #ddd;
+            url('bg.png') center center / cover no-repeat;
 }
 
 .dark-mode .header,
@@ -1607,10 +1626,6 @@ body.dark-mode {
           min-width: 0;
       }
 
-      .damla-radio-header iframe {
-          height: 250px;
-      }
-
       .results-grid {
           grid-template-columns: 1fr;
       }
@@ -1633,20 +1648,21 @@ body.dark-mode {
           overflow-x: auto;
       }
 
+      /* touch targets: dots must stay comfortably tappable */
       .guitar-string {
           min-width: 500px !important;
-          height: 25px !important;
+          height: 38px !important;
       }
 
       .fret-dot {
-          width: 15px !important;
-          height: 15px !important;
-          font-size: 8px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 9px !important;
       }
 
       .fret-dot[data-fret="0"] {
-          width: 25px !important;
-          height: 15px !important;
+          width: 34px !important;
+          height: 26px !important;
       }
 
       .fret-dot[data-fret="0"] { left: 2% !important; }

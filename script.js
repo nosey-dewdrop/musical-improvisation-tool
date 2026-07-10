@@ -1571,6 +1571,10 @@ document.addEventListener('DOMContentLoaded', function () {
     ytTag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(ytTag);
 
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => { /* offline is a bonus, not a must */ });
+    }
+
     buildBackdrop();
     initSprinkles();
 

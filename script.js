@@ -1374,6 +1374,10 @@ const RADIO_IDS = [
     '-JJAXwAaA2w'  // the bitter end
 ];
 
+// damla's full "exit music" playlist on youtube — the real radyodamla
+const RADIO_PLAYLIST = 'PLGbffQaTd0iA';
+let radioFellBack = false;
+
 window.onYouTubeIframeAPIReady = function () {
     ytPlayer = new YT.Player('yt-player', {
         width: '100%',
@@ -1382,7 +1386,7 @@ window.onYouTubeIframeAPIReady = function () {
         events: {
             onReady: function () {
                 ytReady = true;
-                ytPlayer.cuePlaylist(RADIO_IDS);
+                ytPlayer.cuePlaylist({ list: RADIO_PLAYLIST, listType: 'playlist' });
             },
             onStateChange: function (e) {
                 if (e.data === YT.PlayerState.PLAYING) {
@@ -1391,9 +1395,18 @@ window.onYouTubeIframeAPIReady = function () {
                         '♪ ' + (data && data.title ? data.title.toLowerCase() : 'radyodamla');
                 }
             },
-            // a dead or blocked video never stops the radio
+            // a dead or blocked video never stops the radio;
+            // if the playlist itself will not load, fall back to the mini station
             onError: function () {
-                try { ytPlayer.nextVideo(); } catch (err) { /* noop */ }
+                try {
+                    const pl = ytPlayer.getPlaylist();
+                    if ((!pl || pl.length === 0) && !radioFellBack) {
+                        radioFellBack = true;
+                        ytPlayer.cuePlaylist(RADIO_IDS);
+                    } else {
+                        ytPlayer.nextVideo();
+                    }
+                } catch (err) { /* noop */ }
             }
         }
     });

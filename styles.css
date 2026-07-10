@@ -16,7 +16,7 @@
       --font: Helvetica, Arial, sans-serif;
 }
 
-body.dark-mode {
+.dark-mode {
       --bg: #131313;
       --fg: #f2f2f2;
       --mut: #a5a5a5;
@@ -49,13 +49,17 @@ body.dark-mode {
 
 * { box-sizing: border-box; }
 
+html {
+      background: var(--bg);
+}
+
 body {
       font-family: var(--font);
       font-weight: 400;
       margin: 0;
       padding: 0 20px 240px;
       color: var(--fg);
-      background: var(--bg);
+      background: transparent;
       line-height: 1.5;
       font-size: 15px;
 }
@@ -914,3 +918,38 @@ a { color: var(--fg); }
 .ear-intro { margin: 0 0 10px; font-size: 0.9rem; color: var(--mut); }
 #ear-options { margin-top: 10px; }
 .ear-msg { margin-top: 8px; font-size: 0.9rem; }
+
+
+/* tiny notes living in the background, damla's rainbow, very quiet */
+.backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+}
+
+.backdrop span {
+      position: absolute;
+      user-select: none;
+}
+
+/* sprinkles falling from the cursor */
+.sprinkle {
+      position: fixed;
+      z-index: 90;
+      pointer-events: none;
+      font-size: 11px;
+      user-select: none;
+      animation: sprinkleFall 0.9s ease-in forwards;
+}
+
+@keyframes sprinkleFall {
+      from { opacity: 0.85; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(48px); }
+}
+
+.curriculum-path {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 4px 0 0;
+}

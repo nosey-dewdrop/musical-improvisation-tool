@@ -1270,6 +1270,48 @@ function runExample() {
 }
 
 // ───────────────────────────────────────────
+// BACKDROP + SPRINKLES — tiny notes in damla's rainbow
+// ───────────────────────────────────────────
+
+function buildBackdrop() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const layer = document.createElement('div');
+    layer.className = 'backdrop';
+    const GLYPHS = ['♪', '♫', '♩', '♬', '•'];
+    for (let i = 0; i < 26; i++) {
+        const s = document.createElement('span');
+        s.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        s.style.left = (Math.random() * 100) + 'vw';
+        s.style.top = (Math.random() * 100) + 'vh';
+        s.style.color = PITCH_COLORS[Math.floor(Math.random() * PITCH_COLORS.length)];
+        s.style.fontSize = (10 + Math.random() * 9) + 'px';
+        s.style.opacity = (0.13 + Math.random() * 0.12).toFixed(2);
+        s.style.transform = 'rotate(' + Math.round(Math.random() * 40 - 20) + 'deg)';
+        layer.appendChild(s);
+    }
+    document.body.appendChild(layer);
+}
+
+let _lastSprinkle = 0;
+
+function initSprinkles() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.addEventListener('mousemove', e => {
+        const now = performance.now();
+        if (now - _lastSprinkle < 90) return;
+        _lastSprinkle = now;
+        const p = document.createElement('span');
+        p.className = 'sprinkle';
+        p.textContent = Math.random() < 0.5 ? '♪' : '•';
+        p.style.left = (e.clientX + Math.random() * 18 - 9) + 'px';
+        p.style.top = (e.clientY + 6) + 'px';
+        p.style.color = PITCH_COLORS[Math.floor(Math.random() * PITCH_COLORS.length)];
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 900);
+    });
+}
+
+// ───────────────────────────────────────────
 // QWERTY KEYBOARD — plays notes without selecting them
 // ───────────────────────────────────────────
 
@@ -1447,6 +1489,7 @@ function dockTogglePlay() {
 
 function applyTheme(dark) {
     document.body.classList.toggle('dark-mode', dark);
+    document.documentElement.classList.toggle('dark-mode', dark);
     document.getElementById('theme-toggle').textContent = dark ? '☀️' : '🌙';
 }
 
@@ -1527,6 +1570,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const ytTag = document.createElement('script');
     ytTag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(ytTag);
+
+    buildBackdrop();
+    initSprinkles();
 
     generateGuitar();
     loadState();

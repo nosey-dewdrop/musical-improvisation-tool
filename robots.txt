@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nosey-dewdrop.github.io/musical-improvisation-tool/sitemap.xml
+Sitemap: https://musicimprov.noseydewdrop.com/sitemap.xml
